@@ -1,9 +1,10 @@
 import os
 import openai
+from api_key import API_key
 
 def getResponse(user_prompt):
 
-  openai.api_key = "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"
+  openai.api_key = API_key
 
   prompt = user_prompt
 
