@@ -21,6 +21,7 @@ is_up = True
 down_count = 0
 up_count = 0
 rep_count = 0
+heel_pos = 0
 cap = cv2.VideoCapture(0)
 with mp_pose.Pose(
     min_detection_confidence=0.5,
@@ -52,44 +53,32 @@ with mp_pose.Pose(
         # Extract pose landmarks
         landmarks = results.pose_landmarks.landmark
 
-        # pushup test
-
         left_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value])
-        left_elbow = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value])
-        left_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
+        left_hip = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
+        left_heel = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value])
 
-        left_angle = find_angle(left_shoulder, left_elbow, left_wrist)
-
+        left_angle = find_angle(left_shoulder, left_hip, left_heel)
 
         right_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value])
-        right_elbow = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
-        right_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
+        right_hip = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value])
+        right_heel = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value])
 
-        right_angle = find_angle(right_shoulder, right_elbow, right_wrist)
+        right_angle = find_angle(right_shoulder, right_hip, right_heel)
 
         if (landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].z < landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].z):
             test_angle = left_angle
         else:
             test_angle = right_angle
 
-
-        if (test_angle <= 90):
-            down_count += 1
-            if (down_count >= 4):
-                up_count = 0
-                is_up = False
-        else:
+        if (test_angle < 100):
             up_count += 1
-            if (up_count >= 5):
-                down_count = 0
+            if (up_count >= 4):
                 if (is_up == False):
                     rep_count += 1
                     print(rep_count)
                 is_up = True
 
 
-
     if cv2.waitKey(16) & 0xFF == 27: # ctrl c i think to quit
       break
 cap.release()
-
