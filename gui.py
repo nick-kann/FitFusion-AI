@@ -16,7 +16,11 @@ class App:
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
 
-        SettingsButton = tk.Button(root)
+        homeFrame = tk.Frame(root)
+        homeFrame["bg"] = "#00ffff"
+        homeFrame.pack(fill="both", expand=True)
+
+        SettingsButton = tk.Button(homeFrame)
         SettingsButton["bg"] = "#6b6b6b"
         ft = tkFont.Font(family='Arial', size=10)
         SettingsButton["font"] = ft
@@ -26,7 +30,7 @@ class App:
         SettingsButton.place(x=530, y=10, width=50, height=50)
         SettingsButton["command"] = self.GButton_396_command
 
-        DropDownButton = tk.Button(root)
+        DropDownButton = tk.Button(homeFrame)
         DropDownButton["bg"] = "#6b6b6b"
         ft = tkFont.Font(family='Arial', size=10)
         DropDownButton["font"] = ft
@@ -36,7 +40,7 @@ class App:
         DropDownButton.place(x=20, y=10, width=70, height=25)
         DropDownButton["command"] = self.GButton_795_command
 
-        AIMessageBoard = tk.Message(root)
+        AIMessageBoard = tk.Message(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
         AIMessageBoard["font"] = ft
         AIMessageBoard["fg"] = "#cec9c3"
@@ -44,7 +48,7 @@ class App:
         AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
         AIMessageBoard.place(x=490, y=70, width=81, height=363)
 
-        CurrentWorkoutLabel = tk.Label(root)
+        CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
         CurrentWorkoutLabel["font"] = ft
         CurrentWorkoutLabel["fg"] = "#cec9c3"
