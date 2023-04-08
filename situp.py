@@ -21,8 +21,10 @@ is_up = True
 down_count = 0
 up_count = 0
 rep_count = 0
-down_heel = [0, 0]
+up_angle = 130
+down_angle = 165
 cap = cv2.VideoCapture(0)
+frame_count = cv2.CAP_PROP_FPS
 with mp_pose.Pose(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5) as pose:
@@ -67,24 +69,21 @@ with mp_pose.Pose(
 
         if (landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].z < landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].z):
             test_angle = left_angle
-            test_heel = left_heel
         else:
             test_angle = right_angle
-            test_heel = right_heel
 
-        if (test_angle < 130):
+        if (test_angle <= up_angle):
             up_count += 1
-            if (up_count >= 4):
+            if (up_count >= int(frame_count / 2)):
                 if (is_up == False):
                     rep_count += 1
                     print(rep_count)
                 is_up = True
                 down_count = 0
-        if (test_angle > 165):
+        if (test_angle >= up_angle):
             down_count += 1
-            if (down_count >= 4):
+            if (down_count >= int(frame_count / 2)):
                 is_up = False
-                heel_pos = test_heel
             up_count = 0
 
     if cv2.waitKey(5) & 0xFF == 27: # esc to quit
