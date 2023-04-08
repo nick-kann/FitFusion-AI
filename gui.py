@@ -6,6 +6,7 @@ class App:
     def __init__(self, root):
         # setting title
         root.title("undefined")
+        App._root = root
         # setting window size
         width = 600
         height = 500
@@ -17,6 +18,7 @@ class App:
         root.resizable(width=False, height=False)
 
         homeFrame = tk.Frame(root)
+        App._homeFrame = homeFrame
         homeFrame["bg"] = "#00ffff"
         homeFrame.pack(fill="both", expand=True)
 
@@ -28,7 +30,7 @@ class App:
         SettingsButton["justify"] = "center"
         SettingsButton["text"] = "Settings"
         SettingsButton.place(x=530, y=10, width=50, height=50)
-        SettingsButton["command"] = self.GButton_396_command
+        SettingsButton["command"] = self.SettingsButton_command
 
         DropDownButton = tk.Button(homeFrame)
         DropDownButton["bg"] = "#6b6b6b"
@@ -38,7 +40,7 @@ class App:
         DropDownButton["justify"] = "center"
         DropDownButton["text"] = "Button"
         DropDownButton.place(x=20, y=10, width=70, height=25)
-        DropDownButton["command"] = self.GButton_795_command
+        DropDownButton["command"] = self.DropDownButton_command
 
         AIMessageBoard = tk.Message(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
@@ -56,10 +58,15 @@ class App:
         CurrentWorkoutLabel["text"] = "label"
         CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
 
-    def GButton_396_command(self):
-        print("command")
+    def SettingsButton_command(self):
+        settingsFrame = tk.Frame(App._root)
+        settingsFrame["bg"] = "#20dfff"
+        App._homeFrame.pack_forget()
+        settingsFrame.pack(fill="both", expand=True)
 
-    def GButton_795_command(self):
+        print("settings command")
+
+    def DropDownButton_command(self):
         print("command")
 
 
