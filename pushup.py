@@ -78,9 +78,9 @@ with mp_pose.Pose(
             if (down_count >= 4):
                 up_count = 0
                 is_up = False
-        else:
+        if (test_angle >= 160):
             up_count += 1
-            if (up_count >= 5):
+            if (up_count >= 4):
                 down_count = 0
                 if (is_up == False):
                     rep_count += 1
@@ -89,7 +89,7 @@ with mp_pose.Pose(
 
 
 
-    if cv2.waitKey(16) & 0xFF == 27: # ctrl c i think to quit
+    if cv2.waitKey(5) & 0xFF == 27: # esc to quit
       break
 cap.release()
 
