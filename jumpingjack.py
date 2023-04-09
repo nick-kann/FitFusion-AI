@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import imageio
+import json
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -20,6 +21,7 @@ def find_angle(a, b, c):
 
 
 def start(goal):
+    goal = int(goal)
     # For webcam input:
     is_up = False
     is_mid = False
@@ -134,17 +136,15 @@ def start(goal):
             font_scale = 2
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_thickness = 10
-            goal_text = "Pushups remaining: " + str(goal)
+            goal_text = "Jumping jacks remaining: " + str(goal)
             text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                 font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
 
-            font_scale = 2
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_thickness = 5
-            goal_text = "Pushups remaining: " + str(goal)
             text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
             text_size_x, text_size_y = text_size
 
