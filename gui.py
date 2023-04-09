@@ -787,7 +787,7 @@ class App:
         print(x_axis)
         # print(len(x_axis))
         # print(x_axis)
-
+        # asdf
         fig, ax = plt.subplots()
         ax.set_ylim(0, max(y_axis))
         ax.set_xlim(0, len(results_arr))

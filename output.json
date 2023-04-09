@@ -29,8 +29,8 @@
       "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
     }
   },
-  "diet_plan": {
-    "foods_to_eat": ["lean proteins such as chicken, fish, and tofu", "complex carbohydrates such as brown rice, quinoa, and sweet potatoes", "fruits and vegetables", "healthy fats such as avocado, nuts, and olive oil"],
-    "foods_to_avoid": ["processed foods", "sugary drinks and snacks", "fried foods", "excessive amounts of red meat"]
+  "food_recommendations": {
+    "eat": ["lean protein", "fruits and vegetables", "whole grains", "healthy fats"],
+    "avoid": ["processed foods", "sugary drinks", "highly refined carbohydrates", "trans fats"]
   }
 }
