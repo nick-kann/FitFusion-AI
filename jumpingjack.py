@@ -26,6 +26,7 @@ rep_count = 0
 
 gif = imageio.mimread('./countdown_images/jumpingjacks_visual.gif', memtest=False)
 gif_frame = 0
+start_text_frames = 0
 
 cap = cv2.VideoCapture(0)
 
@@ -74,7 +75,7 @@ with mp_pose.Pose(
         font = cv2.FONT_HERSHEY_SIMPLEX
         font_thickness = 24
 
-        countdown_text = str(countdown) if countdown > 0 else "start!"
+        countdown_text = str(countdown)
         text_size, _ = cv2.getTextSize(countdown_text, font, font_scale, font_thickness)
         text_size_x, text_size_y = text_size
 
@@ -83,7 +84,7 @@ with mp_pose.Pose(
 
         frames += 1
         if frames >= fps:
-            if countdown <= 0:
+            if countdown <= 1:
                 countdown_complete = True
                 print("start!")
             else:
@@ -106,7 +107,22 @@ with mp_pose.Pose(
                             cv2.FONT_HERSHEY_SIMPLEX,
                             1, (0, 0, 0), 3, cv2.LINE_AA)
 
-    cv2.imshow('the gif!', image)
+    if countdown_complete and start_text_frames != -1:
+        start_text_frames += 1
+        font_scale = 4
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_thickness = 14
+
+        countdown_text = "Start!"
+        text_size, _ = cv2.getTextSize(countdown_text, font, font_scale, font_thickness)
+        text_size_x, text_size_y = text_size
+
+        image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                            font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+        if start_text_frames >= (fps // 2):
+            start_text_frames = -1
+
+    cv2.imshow('Main image', image)
 
     gif_frame += 1
     if gif_frame >= len(gif):
