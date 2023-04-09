@@ -216,6 +216,9 @@ class App:
         CurrentWorkoutLabel["text"] = "label"
         CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
 
+        # DELETE
+        #self.ShowResultsPage()
+
     def TrainerButton_command(self):
 
         BG_GRAY = "#ABB2B9"
@@ -551,22 +554,93 @@ class App:
     def DropDownButton_command(self):
         print("command")
         goal = App._workout_GoalEntry.get()
+        App._goal_val = goal
         exercise = self.__comboDd__.get()
         match exercise:
             case "situp":
                 situp.start(goal)
+                App._exercise = 1
+                self.ShowResultsPage()
             case "pushup":
                 pushup.start(goal)
-                print("ended")
+                App._exercise = 0
+                self.ShowResultsPage()
+                print("push ups ended")
             case "squat":
                 squat.start(goal)
+                App._exercise = 3
+                self.ShowResultsPage()
             case "jumpingjack":
                 jumpingjack.start(goal)
+                App._exercise = 2
+                self.ShowResultsPage()
             case _:
                 pass
 
     def ShowChoice(self):
         print(self)
+
+    def ShowResultsPage(self):
+        resultsFrame = tk.Frame(App._root)
+        resultsFrame["bg"] = "#20dfff"
+        App._homeFrame.pack_forget()
+        resultsFrame.pack(fill="both", expand=True)
+        App._restultsFrame = resultsFrame
+
+        ResultsLabel = tk.Label(resultsFrame)
+        ft = tkFont.Font(family='Times', size=10)
+        ResultsLabel["font"] = ft
+        # ResultsLabel["fg"] = "#333333"
+        ResultsLabel["justify"] = "center"
+        ResultsLabel.place(x = 440 - 800/2, y=20, width=800, height=660)
+
+
+        # results, goal
+        with open('results.json', 'r') as f:
+            data = json.load(f)
+        results = data[App._exercise][len(data[App._exercise])-2]
+        t_goal = data[App._exercise][len(data[App._exercise])-1]
+
+
+        GoalHeader = tk.Label(ResultsLabel)
+        ft = tkFont.Font(family='Times', size=30, weight="bold")
+        GoalHeader["font"] = ft
+        GoalHeader["justify"] = "left"
+        GoalHeader["anchor"] = "w"
+        #GoalHeader["text"] = "Goal: " + str(App._goal_val)
+        GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
+        GoalHeader.place(x=20, y=20, width=200, height = 30)
+
+        
+        ResultsHeader = tk.Label(ResultsLabel)
+        ft = tkFont.Font(family='Times', size=30, weight="bold")
+        ResultsHeader["font"] = ft
+        ResultsHeader["justify"] = "left"
+        ResultsHeader["anchor"] = "w"
+        #ResultsHeader["text"] = "Results:  " + str(App._results_val)
+        ResultsHeader["text"] = "Results: " + str(results) + " reps."
+        ResultsHeader.place(x=20, y=100, width=200, height = 30)
+
+        message = ""
+        if results <= 0.8 * t_goal:
+            #print(results < 0.8 * t_goal)
+            message = "Not quite enough- more work is needed!"
+        elif results>= 1.2 * t_goal:
+            message = "Nice! You exceeded your goal."
+        else:
+            message = "Nice! You met your goal."
+
+
+        MessageHeader = tk.Label(ResultsLabel)
+        ft = tkFont.Font(family='Times', size=20)
+        MessageHeader["font"] = ft
+        MessageHeader["justify"] = "left"
+        MessageHeader["anchor"] = "w"
+        MessageHeader["text"] = message
+        MessageHeader["wraplength"] = 250
+        MessageHeader.place(x=20, y=160, width=300, height = 100)
+
+        
 
     def CloseButton_command(self):
         App._settingsFrame.pack_forget()
@@ -575,6 +649,8 @@ class App:
     def CloseButtonTrainer_command(self):
         App._trainerFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
+
+
 
     def SaveButton_command(self):
         # print(self._v_goal.get())
