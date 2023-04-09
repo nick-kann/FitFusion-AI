@@ -9,6 +9,8 @@ import situp
 import pushup
 import jumpingjack
 
+from ask_trainer import initialize
+
 
 class App:
     saveData = ""
@@ -217,13 +219,39 @@ class App:
         # CloseButton["fg"] = "#ffffff"
         CloseButton["justify"] = "center"
         CloseButton["text"] = "close"
-        CloseButton.place(x=20, y=600, width=80, height=50)
+        CloseButton.place(x=100, y=600, width=80, height=50)
         CloseButton["command"] = self.CloseButtonTrainer_command
 
-        e = tk.Entry(trainerFrame, bg="#2C3E50", fg=TEXT_COLOR, font=FONT, width=55)
-        e.place(x = 70, y = 600, width=80, height=50)
-        e.grid(row=2, column=0)
+        lable1 = tk.Label(trainerFrame, bg=BG_COLOR, fg=TEXT_COLOR, text="Welcome", font=FONT_BOLD, pady=10, width=20, height=1)
+        lable1.place(x=440 - 70/2, y=20, width = 70, height = 30)
 
+        txt = tk.Text(trainerFrame, bg=BG_COLOR, fg=TEXT_COLOR, font=FONT, width=60)
+        txt.place(x = 100, y=60, width = 670, height = 540)
+        App._txt = txt
+
+        send = tk.Button(trainerFrame, text="Send", font=FONT_BOLD, bg=BG_GRAY,
+              command=self.send_command)
+        send.place(x=100+620, y=600, width = 50, height = 50)
+
+        e = tk.Entry(trainerFrame, bg="#2C3E50", fg=TEXT_COLOR, font=FONT, width=55)
+        e.place(x = 180, y = 600, width=540, height=50)
+        e.focus()
+        App._e = e
+
+
+    def send_command(self):
+        send = "You -> " + App._e.get()
+        App._txt.insert(tk.END, "\n" + send)
+
+        user_q = App._e.get().lower()
+
+        response = initialize(user_q)
+
+        App._e.delete(0, tk.END)
+
+        App._txt.insert(tk.END, "\n" + "Bot -> " + response)
+
+        pass
 
     def SettingsButton_command(self):
 
