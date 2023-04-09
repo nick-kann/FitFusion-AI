@@ -1,7 +1,6 @@
 weight: 45
 height: 45
 goal: 4
-current_amount_workout: 1 
 experience: 1
 time_available: 2 
 location: 1

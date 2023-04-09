@@ -68,7 +68,6 @@ input:
 weight
 height
 goal (cardio: 1, weight loss: 2, muscle toning: 3, ab development: 4, bicep muscle development: 5, leg muscle development: 6, general muscle developement: 7)
-current_amount_workout (scale of 1-3)
 experience (scale of 1-3)
 time available 
 gym or at home (1 for gym, 2 at home)
