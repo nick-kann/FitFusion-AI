@@ -26,7 +26,7 @@ class App:
         SettingsButton["bg"] = "#6b6b6b"
         ft = tkFont.Font(family='Arial', size=10)
         SettingsButton["font"] = ft
-        SettingsButton["fg"] = "#ffffff"
+        #SettingsButton["fg"] = "#ffffff"
         SettingsButton["justify"] = "center"
         SettingsButton["text"] = "Settings"
         SettingsButton.place(x=530, y=10, width=50, height=50)
@@ -36,7 +36,7 @@ class App:
         DropDownButton["bg"] = "#6b6b6b"
         ft = tkFont.Font(family='Arial', size=10)
         DropDownButton["font"] = ft
-        DropDownButton["fg"] = "#ffffff"
+        #DropDownButton["fg"] = "#ffffff"
         DropDownButton["justify"] = "center"
         DropDownButton["text"] = "Button"
         DropDownButton.place(x=20, y=10, width=70, height=25)
@@ -45,7 +45,7 @@ class App:
         AIMessageBoard = tk.Message(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
         AIMessageBoard["font"] = ft
-        AIMessageBoard["fg"] = "#cec9c3"
+        #AIMessageBoard["fg"] = "#cec9c3"
         AIMessageBoard["justify"] = "center"
         AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
         AIMessageBoard.place(x=490, y=70, width=81, height=363)
@@ -53,7 +53,7 @@ class App:
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
         CurrentWorkoutLabel["font"] = ft
-        CurrentWorkoutLabel["fg"] = "#cec9c3"
+        #CurrentWorkoutLabel["fg"] = "#cec9c3"
         CurrentWorkoutLabel["justify"] = "center"
         CurrentWorkoutLabel["text"] = "label"
         CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
@@ -68,14 +68,14 @@ class App:
         WeightEntry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         WeightEntry["font"] = ft
-        WeightEntry["fg"] = "#333333"
+        #WeightEntry["fg"] = "#333333"
         WeightEntry["justify"] = "center"
         WeightEntry.place(x=170,y=50,width=100,height=30)
 
         WeightLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
         WeightLabel["font"] = ft
-        WeightLabel["fg"] = "#333333"
+        #WeightLabel["fg"] = "#333333"
         WeightLabel["justify"] = "center"
         WeightLabel["text"] = "Weight:"
         WeightLabel.place(x=20,y=50,width=150,height=30)
@@ -84,14 +84,14 @@ class App:
         HeightEntry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         HeightEntry["font"] = ft
-        HeightEntry["fg"] = "#333333"
+        #HeightEntry["fg"] = "#333333"
         HeightEntry["justify"] = "center"
         HeightEntry.place(x=170,y=120,width=100,height=30)
 
         HeightLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
         HeightLabel["font"] = ft
-        HeightLabel["fg"] = "#333333"
+        #HeightLabel["fg"] = "#333333"
         HeightLabel["justify"] = "center"
         HeightLabel["text"] = "Height:"
         HeightLabel.place(x=20,y=120,width=150,height=30)
@@ -139,7 +139,7 @@ class App:
         GoalLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
         GoalLabel["font"] = ft
-        GoalLabel["fg"] = "#333333"
+        #GoalLabel["fg"] = "#333333"
         GoalLabel["justify"] = "center"
         GoalLabel["text"] = "Goal:"
         GoalLabel.place(x=20,y=190,width=150,height=90)
