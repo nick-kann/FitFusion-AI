@@ -4,6 +4,14 @@ from tkinter import *
 root = Tk()
 root.title("Chatbot")
 
+width = 600
+height = 700
+screenwidth = root.winfo_screenwidth()
+screenheight = root.winfo_screenheight()
+alignstr = '%dx%d+%d+%d' % (width, height,
+                            (screenwidth - width) / 2, (screenheight - height) / 2)
+root.geometry(alignstr)
+
 BG_GRAY = "#ABB2B9"
 BG_COLOR = "#17202A"
 TEXT_COLOR = "#EAECEE"

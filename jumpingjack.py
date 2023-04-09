@@ -17,7 +17,7 @@ def find_angle(a, b, c):
     cosine_angle = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     angle = np.arccos(cosine_angle)
     return np.degrees(angle)
-    
+
 def start():
     # For webcam input:
     is_up = False
