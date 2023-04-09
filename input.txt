@@ -1,6 +1,6 @@
 weight: 2
 height: 2
-goal: 3
+goal: 4
 experience: 3
 time_available: 3
 location: 2

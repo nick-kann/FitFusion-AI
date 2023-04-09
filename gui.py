@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.font as tkFont
 import os
 import json
+from tkinter import simpledialog
 
 
 class App:
@@ -37,6 +38,16 @@ class App:
         SettingsButton["text"] = "Settings"
         SettingsButton.place(x=App._width-(600 - 530 + 9), y=10, width=50, height=50)
         SettingsButton["command"] = self.SettingsButton_command
+
+        TrainerButton = tk.Button(homeFrame)
+        TrainerButton["bg"] = "#6b6b6b"
+        ft = tkFont.Font(family='Arial', size=10)
+        TrainerButton["font"] = ft
+        # SettingsButton["fg"] = "#ffffff"
+        TrainerButton["justify"] = "center"
+        TrainerButton["text"] = "AI Trainer"
+        TrainerButton.place(x=480, y=600, width=100, height=50)
+        TrainerButton["command"] = self.TrainerButton_command
 
         DropDownButton = tk.Button(homeFrame)
         DropDownButton["bg"] = "#6b6b6b"
@@ -171,6 +182,11 @@ class App:
         CurrentWorkoutLabel["justify"] = "center"
         CurrentWorkoutLabel["text"] = "label"
         CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
+
+    def TrainerButton_command(self):
+        pass
+
+
 
     def SettingsButton_command(self):
 
