@@ -134,10 +134,11 @@ class App:
         # AIMessageBoard["fg"] = "#cec9c3"
         # AIMessageBoard["justify"] = "center"
         # AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        #AIMessageBoard.place(x=10, y=70, width=860, height=520)
+        # AIMessageBoard.place(x=10, y=70, width=860, height=520)
 
         canvas.create_window((0, 0), window=AIMessageBoard, anchor=tk.NW)
-        scrollbar = tk.Scrollbar(homeFrame, orient=tk.VERTICAL, command=canvas.yview)
+        scrollbar = tk.Scrollbar(
+            homeFrame, orient=tk.VERTICAL, command=canvas.yview)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         canvas.configure(yscrollcommand=scrollbar.set)
 
@@ -155,9 +156,9 @@ class App:
 
         # Print the weeks and their workout plans
         # for i, week in enumerate(weeks):
-            #print(f"Week {i+1}:")
+            # print(f"Week {i+1}:")
             # for day, workout in week.items():
-            #print(f"\t{day}: {workout}")
+            # print(f"\t{day}: {workout}")
 
         print(weeks[0]['Monday'])
         week1_days = weeks[0].keys()
@@ -698,27 +699,23 @@ class App:
         GoalHeader["font"] = ft
         GoalHeader["justify"] = "left"
         GoalHeader["anchor"] = "w"
-        #GoalHeader["text"] = "Goal: " + str(App._goal_val)
+        # GoalHeader["text"] = "Goal: " + str(App._goal_val)
         GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
         GoalHeader.place(x=20, y=20, width=200, height=30)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
         ResultsHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
         ResultsHeader["font"] = ft
         ResultsHeader["justify"] = "left"
         ResultsHeader["anchor"] = "w"
-        #ResultsHeader["text"] = "Results:  " + str(App._results_val)
+        # ResultsHeader["text"] = "Results:  " + str(App._results_val)
         ResultsHeader["wraplength"] = 250
         ResultsHeader["text"] = "Results: " + str(results) + " reps."
         ResultsHeader.place(x=20, y=100, width=200, height=30)
 
         message = ""
         if results <= 0.8 * t_goal:
-            #print(results < 0.8 * t_goal)
+            # print(results < 0.8 * t_goal)
             message = "Not quite enough- more work is needed!"
         elif results >= 1.2 * t_goal:
             message = "Nice! You exceeded your goal."
@@ -766,24 +763,21 @@ class App:
         for i in range(0, len(results_arr)):
             y_axis.append(results_arr[i]/goals_arr[i]*100)
 
-<<<<<<< HEAD
         # print(len(x_axis))
         # print(x_axis)
 
         exercise_dict = {0: "push-ups", 1: "sit-ups",
                          2: "jumping jacks", 3: "squats"}
-=======
         print(y_axis)
         print(x_axis)
-        #print(len(x_axis))
-        #print(x_axis)
-
+        # print(len(x_axis))
+        # print(x_axis)
 
         fig, ax = plt.subplots()
         ax.set_ylim(0, 100)
         ax.set_xlim(0, len(results_arr))
-        exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
->>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
+        exercise_dict = {0: "push-ups", 1: "sit-ups",
+                         2: "jumping jacks", 3: "squats"}
 
         plt.scatter(x_axis, y_axis)
         plt.plot(x_axis, y_axis)
@@ -794,15 +788,11 @@ class App:
 
         plt.savefig("graph1.png")
 
-<<<<<<< HEAD
         test = ImageTk.PhotoImage(Image.open(
             "graph1.png").resize((450, 400), Image.ANTIALIAS))
-=======
 
-
-        test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
-
->>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
+        test = ImageTk.PhotoImage(Image.open(
+            "graph1.png").resize((450, 400), Image.ANTIALIAS))
 
         label1 = tk.Label(resultsFrame, image=test)
         label1['bg'] = "#333033"
