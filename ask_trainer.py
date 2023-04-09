@@ -13,7 +13,6 @@ def getResponse(user_prompt):
         messages=[
             {"role": "user", "content": user_prompt}
         ],
-
         temperature = 1
 
     )
@@ -23,8 +22,8 @@ def getResponse(user_prompt):
 
 
 
-question = "What can I do to get better form?"
-user_prompt = "You are to act as my personal trainer. I will ask you a question about fitness and exercise, and you will respond with a helpful answer. If my question is not about fitness and exercise, you will respond with \"I'm your personal trainer so I can only answer your fitness related questions.\" The question is: " + question
+question = "What's the best potato chips to buy?"
+user_prompt = "You are to act as my personal trainer. I will ask you a question about fitness and exercise, and you will respond with a helpful answer. If my question is not about fitness and exercise, you will respond with \"As your personal trainer, I can only answer your fitness related questions.\" Limit your response to 2 to 3 sentences. The question is: " + question
 print(user_prompt)
 
 workout_suggestion = getResponse(user_prompt)
