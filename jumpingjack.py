@@ -138,13 +138,15 @@ with mp_pose.Pose(
         left_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value])
         right_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value])
 
-        if (left_wrist[1] > nose[1] and right_wrist[1] > nose[1]):
+        print(left_wrist, right_wrist)
+
+        if (left_wrist[1] < nose[1] and right_wrist[1] < nose[1]):
             up_count += 1
             if up_count > int(fps / 3):
                 is_up = True
                 down_count = 0
 
-        if (left_wrist[1] < left_shoulder[1] and right_wrist[1] < right_shoulder[1]):
+        if (left_wrist[1] > left_shoulder[1] and right_wrist[1] > right_shoulder[1]):
             down_count += 1
             if down_count > int(fps / 3):
                 if (is_up == True):
