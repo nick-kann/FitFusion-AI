@@ -4,6 +4,10 @@
 ## 📝 Overview 📝
 Fitfusion is an AI-powered fitness project that offers a personalized workout schedule and plan based on your characteristics. To enhance each workout, it provides a tracker that uses computer vision to ensure proper form and keeps a record of your workout results so you can track your progress over time. It also includes a personalized AI trainer to answer your fitness questions. Achieve your fitness goals with our cutting-edge technology.
 
+## 🎯 Initiative 🎯
+
+[**Google Slides**](https://docs.google.com/presentation/d/1OXqh9sOShfV5hX5ayfGW8IWrVRSj2gcLwSxL_Wa3PYU/edit?usp=sharing)
+
 ## 🎬 Demo 🎬 
 
 
