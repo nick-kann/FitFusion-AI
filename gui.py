@@ -380,7 +380,7 @@ class App:
         # WeightLabel.place(x=labelEntry_x, y=weight_y,
         #                   width=generalLabelWidth, height=generalHeight)
         WeightLabel = ctk.CTkLabel(
-            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Weight: ")
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Weight (lbs): ")
         WeightLabel.place(x=labelEntry_x, y=weight_y)
         # WeightEntry.lift()
         # WeightEntry.focus()
@@ -409,7 +409,7 @@ class App:
         # HeightLabel.place(x=labelEntry_x, y=weight_y + 50,
         #                   width=150, height=generalHeight)
         HeightLabel = ctk.CTkLabel(
-            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Height: ")
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Height (ft): ")
         HeightLabel.place(x=labelEntry_x, y=weight_y+50)
         HeightEntry.lift()
 
@@ -530,7 +530,7 @@ class App:
         #                 width=generalLabelWidth, height=generalHeight)
 
         TimeLabel = ctk.CTkLabel(
-            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Time per day: ")
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Time per day (hrs): ")
         TimeLabel.place(x=labelEntry_x, y=weight_y+340)
         locations = [("gym", 1),
                      ("home", 2)
@@ -593,7 +593,7 @@ class App:
         # DaysLabel.place(x=labelEntry_x, y=weight_y + 490,
         #                 width=generalLabelWidth, height=generalHeight)
         DaysLabel = ctk.CTkLabel(
-            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Days per week: ")
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Max days per week: ")
         DaysLabel.place(x=labelEntry_x, y=weight_y+490)
         DaysEntry.lift()
 
