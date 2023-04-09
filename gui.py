@@ -557,6 +557,7 @@ class App:
                 situp.start(goal)
             case "pushup":
                 pushup.start(goal)
+                print("ended")
             case "squat":
                 squat.start(goal)
             case "jumpingjack":
