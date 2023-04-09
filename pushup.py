@@ -76,6 +76,7 @@ def start():
         cv2.flip(image, 1)
 
         if start_countdown and not countdown_complete:
+
             font_scale = 7
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_thickness = 24
