@@ -165,7 +165,9 @@ def start(goal):
                 font_scale = 2
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 font_thickness = 10
-                goal_text = "Squats remaining: " + str(goal)
+                goal_text = "Squats remaining: " + str(goal) if goal > 0 else "Goal completed!"
+                if goal < 0:
+                    goal_text = goal_text + " +" + str(-1 * goal)
                 text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
 
