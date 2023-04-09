@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import imageio
-
+import json
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -21,6 +21,7 @@ def find_angle(a, b, c):
     return np.degrees(angle)
 
 def start(goal):
+    goal = int(goal)
     # For webcam input:
     is_up = True
     is_mid = False
@@ -162,10 +163,8 @@ def start(goal):
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                 font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
 
-            font_scale = 2
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_thickness = 5
-            goal_text = "Pushups remaining: " + str(goal)
             text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
             text_size_x, text_size_y = text_size
 
@@ -250,6 +249,13 @@ def start(goal):
 
 
         if cv2.waitKey(5) & 0xFF == 27: # esc to quit
+          with open('results.json', 'r') as f:
+              data = json.load(f)
+              data[0].append(rep_count)
+              data[0].append(goal)
+
+          with open('results.json', 'w') as f:
+              json.dump(data, f)
           break
     cap.release()
     cv2.destroyAllWindows()
