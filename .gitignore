@@ -1,3 +1,5 @@
 
 api_key.py
 .DS_Store
+*.pyc
+*.pyc
