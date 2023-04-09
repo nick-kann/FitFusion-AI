@@ -67,10 +67,52 @@ class App:
             weeks.append(week)
 
         # Print the weeks and their workout plans
-        for i, week in enumerate(weeks):
-            print(f"Week {i+1}:")
-            for day, workout in week.items():
-                print(f"\t{day}: {workout}")
+        #for i, week in enumerate(weeks):
+            #print(f"Week {i+1}:")
+            #for day, workout in week.items():
+                #print(f"\t{day}: {workout}")
+                
+
+        print(weeks[0]['Monday'])
+        week1_days = weeks[0].keys()
+
+        Week1Label = tk.Label(AIMessageBoard)
+        ft = tkFont.Font(family='Arial', size=15, weight="bold")
+        Week1Label["font"] = ft
+        Week1Label["justify"] = "center"
+        Week1Label["text"] = "Week 1"
+        Week1Label.pack(fill="both", expand=True)
+
+        if 'Monday' in week1_days:
+            Week1Monday= tk.Label(AIMessageBoard)
+            ft = tkFont.Font(family='Arial', size=10)
+            Week1Monday["font"] = ft
+            Week1Monday["text"] = weeks[0]['Monday']
+            Week1Monday["wraplength"] = 100
+            Week1Monday["justify"] = "center"
+            Week1Monday.pack(fill="both", expand=True)
+
+
+        Week2Label = tk.Label(AIMessageBoard)
+        ft = tkFont.Font(family='Arial', size=15, weight="bold")
+        Week2Label["font"] = ft
+        Week2Label["justify"] = "center"
+        Week2Label["text"] = "Week 2"
+        Week2Label.pack(fill="both", expand=True)
+
+        Week3Label = tk.Label(AIMessageBoard)
+        ft = tkFont.Font(family='Arial', size=15, weight="bold")
+        Week3Label["font"] = ft
+        Week3Label["justify"] = "center"
+        Week3Label["text"] = "Week 3"
+        Week3Label.pack(fill="both", expand=True)
+
+        Week4Label = tk.Label(AIMessageBoard)
+        ft = tkFont.Font(family='Arial', size=15, weight="bold")
+        Week4Label["font"] = ft
+        Week4Label["justify"] = "center"
+        Week4Label["text"] = "Week 4"
+        Week4Label.pack(fill="both", expand=True)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
