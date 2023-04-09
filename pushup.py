@@ -172,6 +172,15 @@ def start(goal):
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
+        length = width * 3 / 4 * percentage / 100
+        top_left = (int((width - length) / 2), int(18 / 20 * height))
+        bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
+        color = (0, 255, 0)
+        thickness = -1
+
+        if length > 0:
+            image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
+
         cv2.imshow('Main image', image)
 
         gif_frame +=2
@@ -203,9 +212,9 @@ def start(goal):
             else:
                 test_angle = right_angle
 
-            # percentage = (1 - (test_angle - down_angle) / (up_angle - down_angle)) * 100
-            # percentage = max(percentage, 0)
-            # percentage = min(percentage, 100)
+            percentage = (1 - (test_angle - down_angle) / (up_angle - down_angle)) * 100
+            percentage = max(percentage, 0)
+            percentage = min(percentage, 100)
 
             if test_angle <= down_angle:
                 down_count += 1
