@@ -92,16 +92,19 @@ class App:
         Week1Label["font"] = ft
         Week1Label["justify"] = "center"
         Week1Label["text"] = "Week 1"
-        Week1Label.pack(fill="both", expand=True)
 
-        if 'Monday' in week1_days:
-            Week1Monday= tk.Label(AIMessageBoard)
+        Week1Content = tk.Frame(AIMessageBoard)
+        #Week1Content.grid(row = 1, column = 0, sticky = tk.W, pady = 2)
+        ind = 0
+        for weekday in week1_days:
+            weekday_l= tk.Label(Week1Content)
             ft = tkFont.Font(family='Arial', size=10)
-            Week1Monday["font"] = ft
-            Week1Monday["text"] = weeks[0]['Monday']
-            Week1Monday["wraplength"] = 100
-            Week1Monday["justify"] = "center"
-            Week1Monday.pack(fill="both", expand=True)
+            weekday_l["font"] = ft
+            weekday_l["text"] = weekday +": " + weeks[0][weekday]
+            weekday_l["wraplength"] = 250
+            weekday_l["justify"] = "left"
+            weekday_l.grid(row = ind, column = 0, sticky = tk.W, pady = 2)
+            ind += 1
 
 
         Week2Label = tk.Label(AIMessageBoard)
@@ -109,21 +112,24 @@ class App:
         Week2Label["font"] = ft
         Week2Label["justify"] = "center"
         Week2Label["text"] = "Week 2"
-        Week2Label.pack(fill="both", expand=True)
-
         Week3Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
         Week3Label["font"] = ft
         Week3Label["justify"] = "center"
         Week3Label["text"] = "Week 3"
-        Week3Label.pack(fill="both", expand=True)
 
         Week4Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
         Week4Label["font"] = ft
         Week4Label["justify"] = "center"
         Week4Label["text"] = "Week 4"
-        Week4Label.pack(fill="both", expand=True)
+
+
+        Week1Label.grid(row = 0, column = 0, sticky = tk.W, pady = 2)
+        Week1Content.grid(row = 2, column = 0, sticky = tk.W, pady = 2)
+        Week2Label.grid(row = 3, column = 0, sticky = tk.W, pady = 2)
+        Week3Label.grid(row = 4, column = 0, sticky = tk.W, pady = 2)
+        Week4Label.grid(row = 5, column = 0, sticky = tk.W, pady = 2)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)

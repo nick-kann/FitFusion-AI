@@ -18,10 +18,16 @@ def find_angle(a, b, c):
 
 # For webcam input:
 is_up = True
+is_mid = False
 down_count = 0
 up_count = 0
+mid_count = 0
 rep_count = 0
 up_angle = 160
+up_distance = 1
+mid_distance = 0
+half_rep = False
+half_rep_percent = 0
 cap = cv2.VideoCapture(0)
 frame_count = cv2.CAP_PROP_FPS
 with mp_pose.Pose(
@@ -74,20 +80,34 @@ with mp_pose.Pose(
             test_knee = right_knee
             test_angle = right_angle
 
-        if test_knee[1] < test_hip[1]:
+        if test_knee[1] <= test_hip[1]:
             down_count += 1
-            if down_count >= int(frame_count / 3):
+            if down_count >= int(frame_count / 4):
                 is_up = False
                 up_count = 0
 
         if test_angle >= up_angle:
             up_count += 1
-            if up_count >= int(frame_count / 3):
+            if up_count >= int(frame_count / 4):
                 if is_up is False:
                     rep_count += 1
                     print(rep_count)
+                if is_up is True and is_mid is True:
+                    half_rep = True
+                    half_rep_percent = (1 - mid_distance / up_distance) * 100
                 is_up = True
                 down_count = 0
+                is_mid = False
+                mid_count = 0
+                up_distance = test_knee[1] - test_hip[1]
+                mid_distance = up_distance
+
+        if test_angle < up_angle and test_knee[1] > test_hip[1]:
+            mid_distance = min(mid_distance, test_knee[1] - test_hip[1])
+            mid_count += 1
+            if mid_count >= int(frame_count / 4):
+                is_mid = True
+                up_count = 0
 
     if cv2.waitKey(5) & 0xFF == 27: # esc to quit
       break
