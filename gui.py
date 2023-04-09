@@ -2,6 +2,12 @@ import tkinter as tk
 import tkinter.font as tkFont
 import os
 import json
+from tkinter import simpledialog
+from tkinter import ttk
+# import squat
+import situp
+import pushup
+import jumpingjack
 
 
 class App:
@@ -12,8 +18,10 @@ class App:
         root.title("undefined")
         App._root = root
         # setting window size
-        width = 600
-        height = 700
+        App._width = 880
+        App._height = 700
+        width = App._width
+        height = App._height
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height,
@@ -33,8 +41,28 @@ class App:
         # SettingsButton["fg"] = "#ffffff"
         SettingsButton["justify"] = "center"
         SettingsButton["text"] = "Settings"
-        SettingsButton.place(x=530, y=10, width=50, height=50)
+        SettingsButton.place(x=App._width-(600 - 530 + 9),
+                             y=10, width=50, height=50)
         SettingsButton["command"] = self.SettingsButton_command
+
+        options = ['squat', 'situp', 'pushup', 'jumpingjack']
+
+        # create a Combobox widget and add it to the window
+        combo = ttk.Combobox(homeFrame, values=options)
+        combo.place(x=450, y=20, width=30, height=15)
+        combo.pack()
+        combo.set(options[0])
+        print(combo.get())
+        self.__comboDd__ = combo
+        TrainerButton = tk.Button(homeFrame)
+        TrainerButton["bg"] = "#6b6b6b"
+        ft = tkFont.Font(family='Arial', size=10)
+        TrainerButton["font"] = ft
+        # SettingsButton["fg"] = "#ffffff"
+        TrainerButton["justify"] = "center"
+        TrainerButton["text"] = "AI Trainer"
+        TrainerButton.place(x=App._width - 130, y=App._height - 85, width=100, height=50)
+        TrainerButton["command"] = self.TrainerButton_command
 
         DropDownButton = tk.Button(homeFrame)
         DropDownButton["bg"] = "#6b6b6b"
@@ -52,7 +80,7 @@ class App:
         # AIMessageBoard["fg"] = "#cec9c3"
         # AIMessageBoard["justify"] = "center"
         # AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        AIMessageBoard.place(x=310, y=70, width=260, height=500)
+        AIMessageBoard.place(x=310, y=70, width=540, height=520)
 
         # Load data from JSON file
         with open("output.json") as f:
@@ -67,14 +95,16 @@ class App:
             weeks.append(week)
 
         # Print the weeks and their workout plans
-        #for i, week in enumerate(weeks):
+        # for i, week in enumerate(weeks):
             #print(f"Week {i+1}:")
-            #for day, workout in week.items():
-                #print(f"\t{day}: {workout}")
-                
+            # for day, workout in week.items():
+            #print(f"\t{day}: {workout}")
 
         print(weeks[0]['Monday'])
         week1_days = weeks[0].keys()
+        week2_days = weeks[1].keys()
+        week3_days = weeks[2].keys()
+        week4_days = weeks[3].keys()
 
         Week1Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
@@ -83,29 +113,52 @@ class App:
         Week1Label["text"] = "Week 1"
 
         Week1Content = tk.Frame(AIMessageBoard)
-        #Week1Content.grid(row = 1, column = 0, sticky = tk.W, pady = 2)
         ind = 0
         for weekday in week1_days:
-            weekday_l= tk.Label(Week1Content)
+            weekday_l = tk.Label(Week1Content)
             ft = tkFont.Font(family='Arial', size=10)
             weekday_l["font"] = ft
-            weekday_l["text"] = weekday +": " + weeks[0][weekday]
+            weekday_l["text"] = weekday + ": " + weeks[0][weekday]
             weekday_l["wraplength"] = 250
             weekday_l["justify"] = "left"
-            weekday_l.grid(row = ind, column = 0, sticky = tk.W, pady = 2)
+            weekday_l.grid(row=ind, column=0, sticky=tk.W, pady=2)
             ind += 1
-
 
         Week2Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
         Week2Label["font"] = ft
         Week2Label["justify"] = "center"
         Week2Label["text"] = "Week 2"
+
+        Week2Content = tk.Frame(AIMessageBoard)
+        ind = 0
+        for weekday in week2_days:
+            weekday_l = tk.Label(Week2Content)
+            ft = tkFont.Font(family='Arial', size=10)
+            weekday_l["font"] = ft
+            weekday_l["text"] = weekday + ": " + weeks[1][weekday]
+            weekday_l["wraplength"] = 250
+            weekday_l["justify"] = "left"
+            weekday_l.grid(row=ind, column=0, sticky=tk.W, pady=2)
+            ind += 1
+
         Week3Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
         Week3Label["font"] = ft
         Week3Label["justify"] = "center"
         Week3Label["text"] = "Week 3"
+
+        Week3Content = tk.Frame(AIMessageBoard)
+        ind = 0
+        for weekday in week3_days:
+            weekday_l = tk.Label(Week3Content)
+            ft = tkFont.Font(family='Arial', size=10)
+            weekday_l["font"] = ft
+            weekday_l["text"] = weekday + ": " + weeks[2][weekday]
+            weekday_l["wraplength"] = 250
+            weekday_l["justify"] = "left"
+            weekday_l.grid(row=ind, column=1, sticky=tk.W, pady=2)
+            ind += 1
 
         Week4Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
@@ -113,12 +166,26 @@ class App:
         Week4Label["justify"] = "center"
         Week4Label["text"] = "Week 4"
 
+        Week4Content = tk.Frame(AIMessageBoard)
+        ind = 0
+        for weekday in week4_days:
+            weekday_l = tk.Label(Week4Content)
+            ft = tkFont.Font(family='Arial', size=10)
+            weekday_l["font"] = ft
+            weekday_l["text"] = weekday + ": " + weeks[3][weekday]
+            weekday_l["wraplength"] = 250
+            weekday_l["justify"] = "left"
+            weekday_l.grid(row=ind, column=1, sticky=tk.W, pady=2)
+            ind += 1
 
-        Week1Label.grid(row = 0, column = 0, sticky = tk.W, pady = 2)
-        Week1Content.grid(row = 2, column = 0, sticky = tk.W, pady = 2)
-        Week2Label.grid(row = 3, column = 0, sticky = tk.W, pady = 2)
-        Week3Label.grid(row = 4, column = 0, sticky = tk.W, pady = 2)
-        Week4Label.grid(row = 5, column = 0, sticky = tk.W, pady = 2)
+        Week1Label.grid(row=0, column=0, sticky=tk.W, pady=2)
+        Week1Content.grid(row=1, column=0, sticky=tk.W, pady=2)
+        Week2Label.grid(row=2, column=0, sticky=tk.W, pady=2)
+        Week2Content.grid(row=3, column=0, sticky=tk.W, pady=2)
+        Week3Label.grid(row=0, column=1, sticky=tk.W, pady=2)
+        Week3Content.grid(row=1, column=1, sticky=tk.W, pady=2)
+        Week4Label.grid(row=2, column=1, sticky=tk.W, pady=2)
+        Week4Content.grid(row=3, column=1, sticky=tk.W, pady=2)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
@@ -127,6 +194,9 @@ class App:
         CurrentWorkoutLabel["justify"] = "center"
         CurrentWorkoutLabel["text"] = "label"
         CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
+
+    def TrainerButton_command(self):
+        pass
 
     def SettingsButton_command(self):
 
@@ -382,7 +452,7 @@ class App:
         # SaveButton["fg"] = "#ffffff"
         SaveButton["justify"] = "center"
         SaveButton["text"] = "save"
-        SaveButton.place(x=labelEntry_x + 340 + 140,
+        SaveButton.place(x=App._width - (600 - (labelEntry_x + 340 + 140)),
                          y=weight_y + 550, width=80, height=50)
         SaveButton["command"] = self.SaveButton_command
 
@@ -406,6 +476,18 @@ class App:
 
     def DropDownButton_command(self):
         print("command")
+        exercise = self.__comboDd__.get()
+        match exercise:
+            case "situp":
+                situp.start()
+            case "pushup":
+                pushup.start(4)
+            case "squat":
+                print("nick sucks")
+            case "jumpingjack":
+                jumpingjack.start()
+            case _:
+                pass
 
     def ShowChoice(self):
         print(self)
