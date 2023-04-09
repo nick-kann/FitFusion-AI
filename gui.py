@@ -678,7 +678,7 @@ class App:
         resultsFrame["bg"] = "#36393e"
         App._homeFrame.pack_forget()
         resultsFrame.pack(fill="both", expand=True)
-        App._restultsFrame = resultsFrame
+        App._resultsFrame = resultsFrame
 
         ResultsLabel = tk.Label(resultsFrame)
         ft = tkFont.Font(family='Times', size=10)
@@ -690,8 +690,13 @@ class App:
         # results, goal
         with open('results.json', 'r') as f:
             data = json.load(f)
-        results = data[App._exercise][len(data[App._exercise])-2]
-        t_goal = data[App._exercise][len(data[App._exercise])-1]
+
+        results = "N/A"
+        t_goal = "N/A"
+        if(len(data[App._exercise])!=0):
+            results = data[App._exercise][len(data[App._exercise])-2]
+            t_goal = data[App._exercise][len(data[App._exercise])-1]
+
 
         GoalHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
@@ -702,10 +707,6 @@ class App:
         GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
         GoalHeader.place(x=20, y=20, width=200, height=30)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
         ResultsHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
         ResultsHeader["font"] = ft
@@ -766,13 +767,12 @@ class App:
         for i in range(0, len(results_arr)):
             y_axis.append(results_arr[i]/goals_arr[i]*100)
 
-<<<<<<< HEAD
         # print(len(x_axis))
         # print(x_axis)
 
         exercise_dict = {0: "push-ups", 1: "sit-ups",
                          2: "jumping jacks", 3: "squats"}
-=======
+
         print(y_axis)
         print(x_axis)
         #print(len(x_axis))
@@ -783,7 +783,7 @@ class App:
         ax.set_ylim(0, 100)
         ax.set_xlim(0, len(results_arr))
         exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
->>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
+
 
         plt.scatter(x_axis, y_axis)
         plt.plot(x_axis, y_axis)
@@ -794,15 +794,15 @@ class App:
 
         plt.savefig("graph1.png")
 
-<<<<<<< HEAD
+
         test = ImageTk.PhotoImage(Image.open(
             "graph1.png").resize((450, 400), Image.ANTIALIAS))
-=======
+
 
 
         test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
 
->>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
+
 
         label1 = tk.Label(resultsFrame, image=test)
         label1['bg'] = "#333033"
