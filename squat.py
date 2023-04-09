@@ -199,6 +199,7 @@ def start(goal):
                     if is_up is False:
                         rep_count += 1
                         print(rep_count)
+                        half_rep = False
                     if is_up is True and is_mid is True:
                         half_rep = True
                         half_rep_percent = (1 - mid_distance / up_distance) * 100

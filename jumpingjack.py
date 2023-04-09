@@ -245,6 +245,6 @@ def start(goal):
                     down_count = 0
 
         if cv2.waitKey(5) & 0xFF == 27: # esc to quit
-        break
+            break
     cap.release()
     cv2.destroyAllWindows()
