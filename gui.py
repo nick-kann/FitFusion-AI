@@ -196,7 +196,34 @@ class App:
         CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
 
     def TrainerButton_command(self):
-        pass
+
+        BG_GRAY = "#ABB2B9"
+        BG_COLOR = "#17202A"
+        TEXT_COLOR = "#EAECEE"
+
+        FONT = "Helvetica 14"
+        FONT_BOLD = "Helvetica 13 bold"
+
+        trainerFrame = tk.Frame(App._root)
+        trainerFrame["bg"] = "#20dfff"
+        App._homeFrame.pack_forget()
+        trainerFrame.pack(fill="both", expand=True)
+        App._trainerFrame = trainerFrame
+
+        CloseButton = tk.Button(trainerFrame)
+        CloseButton["bg"] = "#6b6b6b"
+        ft = tkFont.Font(family='Arial', size=10)
+        CloseButton["font"] = ft
+        # CloseButton["fg"] = "#ffffff"
+        CloseButton["justify"] = "center"
+        CloseButton["text"] = "close"
+        CloseButton.place(x=20, y=600, width=80, height=50)
+        CloseButton["command"] = self.CloseButtonTrainer_command
+
+        e = tk.Entry(trainerFrame, bg="#2C3E50", fg=TEXT_COLOR, font=FONT, width=55)
+        e.place(x = 70, y = 600, width=80, height=50)
+        e.grid(row=2, column=0)
+
 
     def SettingsButton_command(self):
 
@@ -494,6 +521,10 @@ class App:
 
     def CloseButton_command(self):
         App._settingsFrame.pack_forget()
+        App._homeFrame.pack(fill="both", expand=True)
+    
+    def CloseButtonTrainer_command(self):
+        App._trainerFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
 
     def SaveButton_command(self):
