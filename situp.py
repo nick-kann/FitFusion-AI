@@ -222,6 +222,13 @@ def start(goal):
                     down_count = 0
 
         if cv2.waitKey(5) & 0xFF == 27: # esc to quit
+          with open('results.json', 'r') as f:
+              data = json.load(f)
+              data[1].append(rep_count)
+              data[1].append(goal)
+
+          with open('results.json', 'w') as f:
+              json.dump(data, f)
           break
     cap.release()
     cv2.destroyAllWindows()

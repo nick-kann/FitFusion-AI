@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import imageio
-
+import json
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -172,6 +172,15 @@ def start(goal):
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
+        length = width * 3 / 4 * percentage / 100
+        top_left = (int((width - length) / 2), int(18 / 20 * height))
+        bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
+        color = (0, 255, 0)
+        thickness = -1
+
+        if length > 0:
+            image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
+
         cv2.imshow('Main image', image)
 
         gif_frame +=2
@@ -203,9 +212,9 @@ def start(goal):
             else:
                 test_angle = right_angle
 
-            # percentage = (1 - (test_angle - down_angle) / (up_angle - down_angle)) * 100
-            # percentage = max(percentage, 0)
-            # percentage = min(percentage, 100)
+            percentage = (1 - (test_angle - down_angle) / (up_angle - down_angle)) * 100
+            percentage = max(percentage, 0)
+            percentage = min(percentage, 100)
 
             if test_angle <= down_angle:
                 down_count += 1
@@ -241,6 +250,13 @@ def start(goal):
 
 
         if cv2.waitKey(5) & 0xFF == 27: # esc to quit
+          with open('results.json', 'r') as f:
+              data = json.load(f)
+              data[0].append(rep_count)
+              data[0].append(goal)
+
+          with open('results.json', 'w') as f:
+              json.dump(data, f)
           break
     cap.release()
     cv2.destroyAllWindows()

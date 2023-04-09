@@ -178,7 +178,7 @@ def start(goal):
                                     font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
             cv2.imshow('Main image', image)
-            
+
             gif_frame += 0.25
             if gif_frame >= len(gif):
                 gif_frame = 0
@@ -246,6 +246,13 @@ def start(goal):
                         up_count = 0
 
             if cv2.waitKey(5) & 0xFF == 27:  # esc to quit
+                with open('results.json', 'r') as f:
+                    data = json.load(f)
+                    data[3].append(rep_count)
+                    data[3].append(goal)
+
+                with open('results.json', 'w') as f:
+                    json.dump(data, f)
                 break
     cap.release()
     cv2.destroyAllWindows()
