@@ -8,9 +8,7 @@ width = 880
 height = 700
 screenwidth = root.winfo_screenwidth()
 screenheight = root.winfo_screenheight()
-alignstr = '%dx%d+%d+%d' % (width, height,
-                            (screenwidth - width) / 2, (screenheight - height) / 2)
-root.geometry(alignstr)
+root.geometry('880x700')
 
 BG_GRAY = "#ABB2B9"
 BG_COLOR = "#17202A"
@@ -60,6 +58,7 @@ def send():
 
 lable1 = Label(root, bg=BG_COLOR, fg=TEXT_COLOR, text="Welcome", font=FONT_BOLD, pady=10, width=20, height=1).grid(
     row=0)
+lable1.pack()
 
 txt = Text(root, bg=BG_COLOR, fg=TEXT_COLOR, font=FONT, width=60)
 txt.grid(row=1, column=0, columnspan=2)
