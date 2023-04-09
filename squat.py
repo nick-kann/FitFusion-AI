@@ -17,7 +17,7 @@ def find_angle(a, b, c):
     return np.degrees(angle)
 
 # For webcam input:
-is_up = False
+is_up = True
 down_count = 0
 up_count = 0
 rep_count = 0
@@ -53,28 +53,40 @@ with mp_pose.Pose(
         # Extract pose landmarks
         landmarks = results.pose_landmarks.landmark
 
-        nose = landmark_coord(landmarks[mp_pose.PoseLandmark.NOSE.value])
-        left_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
-        right_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
-        left_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value])
-        right_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value])
+        left_hip = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
+        left_knee = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
+        left_heel = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value])
+        left_angle = find_angle(left_hip, left_knee, left_heel)
 
-        print(left_wrist, right_wrist)
+        right_hip = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value])
+        right_knee = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
+        right_heel = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value])
+        right_angle = find_angle(right_hip, right_knee, right_heel)
 
-        if (left_wrist[1] < nose[1] and right_wrist[1] < nose[1]):
-            up_count += 1
-            if up_count > int(frame_count / 3):
-                is_up = True
-                down_count = 0
+        if (landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].z <
+                landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].z):
+            test_hip = left_hip
+            test_knee = left_knee
+            test_angle = left_angle
+        else:
+            test_hip = right_hip
+            test_knee = right_knee
+            test_angle = right_angle
 
-        if (left_wrist[1] > left_shoulder[1] and right_wrist[1] > right_shoulder[1]):
+        if test_knee[1] < test_hip[1]:
             down_count += 1
-            if down_count > int(frame_count / 3):
-                if (is_up == True):
-                    rep_count += 1
-                    print(rep_count)
+            if down_count >= int(frame_count / 3):
                 is_up = False
                 up_count = 0
+
+        if test_angle >= 160:
+            up_count += 1
+            if up_count >= int(frame_count / 3):
+                if is_up is False:
+                    rep_count += 1
+                    print(rep_count)
+                is_up = True
+                down_count = 0
 
     if cv2.waitKey(5) & 0xFF == 27: # esc to quit
       break
