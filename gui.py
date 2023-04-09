@@ -682,7 +682,7 @@ class App:
 
 
         GoalHeader = tk.Label(ResultsLabel)
-        ft = tkFont.Font(family='Times', size=30, weight="bold")
+        ft = tkFont.Font(family='Times', size=20, weight="bold")
         GoalHeader["font"] = ft
         GoalHeader["justify"] = "left"
         GoalHeader["anchor"] = "w"
@@ -692,11 +692,12 @@ class App:
 
         
         ResultsHeader = tk.Label(ResultsLabel)
-        ft = tkFont.Font(family='Times', size=30, weight="bold")
+        ft = tkFont.Font(family='Times', size=20, weight="bold")
         ResultsHeader["font"] = ft
         ResultsHeader["justify"] = "left"
         ResultsHeader["anchor"] = "w"
         #ResultsHeader["text"] = "Results:  " + str(App._results_val)
+        ResultsHeader["wraplength"] = 250
         ResultsHeader["text"] = "Results: " + str(results) + " reps."
         ResultsHeader.place(x=20, y=100, width=200, height = 30)
 
@@ -751,10 +752,13 @@ class App:
         plt.grid(True)
         plt.savefig("graph1.png")
 
+
+
         test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
         
 
         label1 = tk.Label(image=test)
+        label1['bg'] = "#333033"
         label1.image = test
 
         # Position image
