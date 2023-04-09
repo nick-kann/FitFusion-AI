@@ -175,7 +175,7 @@ def start(goal):
         length = width * 3 / 4 * percentage / 100
         top_left = (int((width - length) / 2), int(18 / 20 * height))
         bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
-        color = (0, 255, 0)
+        color = (0, int(255 * percentage / 100), 0)
         thickness = -1
 
         if length > 0:
