@@ -50,7 +50,7 @@ class App:
         #AIMessageBoard["fg"] = "#cec9c3"
         AIMessageBoard["justify"] = "center"
         AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        AIMessageBoard.place(x=490, y=70, width=81, height=363)
+        AIMessageBoard.place(x=310, y=70, width=260, height=500)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
@@ -110,6 +110,8 @@ class App:
         WeightLabel["justify"] = "center"
         WeightLabel["text"] = "Weight:"
         WeightLabel.place(x=labelEntry_x,y=weight_y,width=generalLabelWidth,height=generalHeight)
+        WeightEntry.lift()
+        WeightEntry.focus()
 
         HeightEntry=tk.Entry(settingsFrame)
         HeightEntry["borderwidth"] = "1px"
@@ -129,6 +131,7 @@ class App:
         HeightLabel["justify"] = "center"
         HeightLabel["text"] = "Height:"
         HeightLabel.place(x=labelEntry_x,y=weight_y + 50,width=150,height=generalHeight)
+        HeightEntry.lift()
 
         # r_button_options = {1: "cardio",
    	    #  2: "muscle toning",
@@ -178,7 +181,6 @@ class App:
         GoalLabel["justify"] = "center"
         GoalLabel["text"] = "Goal:"
         GoalLabel.place(x=labelEntry_x,y=weight_y + 110,width=150,height=90)
-
         
 
         ExpLabel=tk.Label(settingsFrame)
@@ -269,6 +271,7 @@ class App:
         LocationLabel["text"] = "Location:"
         LocationLabel.place(x=labelEntry_x,y=weight_y + 400,width=generalLabelWidth,height=generalHeight*2)
 
+
         DaysEntry=tk.Entry(settingsFrame)
         DaysEntry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
@@ -287,7 +290,7 @@ class App:
         DaysLabel["justify"] = "center"
         DaysLabel["text"] = "Days per week:"
         DaysLabel.place(x=labelEntry_x,y=weight_y + 490,width=generalLabelWidth,height=generalHeight)
-
+        DaysEntry.lift()
 
 
         CloseButton = tk.Button(settingsFrame)
@@ -310,6 +313,10 @@ class App:
         SaveButton.place(x=labelEntry_x + 340 + 140, y=weight_y + 550, width=80, height=50)
         SaveButton["command"] = self.SaveButton_command
 
+        WeightEntry.lift()
+        HeightEntry.lift()
+        TimeEntry.lift()
+        DaysEntry.lift()
 
         print("settings command")
         # intializing values from file
