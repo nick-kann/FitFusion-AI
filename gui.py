@@ -125,14 +125,21 @@ class App:
 
         App._workout_GoalEntry = GoalEntry
 
-        AIMessageBoard = tk.Frame(homeFrame)
+        canvas = tk.Canvas(homeFrame)
+        canvas.place(x=10, y=70, width=860, height=520)
+
+        AIMessageBoard = tk.Frame(canvas)
         ft = tkFont.Font(family='Arial', size=10)
         # AIMessageBoard["font"] = ft
         # AIMessageBoard["fg"] = "#cec9c3"
         # AIMessageBoard["justify"] = "center"
         # AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        AIMessageBoard.place(
-            x=10, y=70, width=860, height=520)
+        #AIMessageBoard.place(x=10, y=70, width=860, height=520)
+
+        canvas.create_window((0, 0), window=AIMessageBoard, anchor=tk.NW)
+        scrollbar = tk.Scrollbar(homeFrame, orient=tk.VERTICAL, command=canvas.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        canvas.configure(yscrollcommand=scrollbar.set)
 
         # Load data from JSON file
         with open("output.json") as f:
@@ -245,6 +252,10 @@ class App:
         # CurrentWorkoutLabel["fg"] = "#cec9c3"
         CurrentWorkoutLabel["justify"] = "center"
         CurrentWorkoutLabel["text"] = "label"
+
+        AIMessageBoard.update_idletasks()
+        canvas.configure(scrollregion=canvas.bbox("all"))
+
         # CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
 
         # DELETE
