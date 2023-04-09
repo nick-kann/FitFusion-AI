@@ -165,7 +165,7 @@ def start(goal):
 
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
-            
+
         cv2.imshow('Main image', image)
 
         gif_frame += 2
