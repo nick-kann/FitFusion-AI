@@ -146,8 +146,11 @@ def start(goal):
                 text_size, _ = cv2.getTextSize(
                     countdown_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
-
-                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2),
+                                    font,
+                                    font_scale, (0, 0, 0), font_thickness + 8, cv2.LINE_AA)
+                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2),
+                                    font,
                                     font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
                 if start_text_frames >= (fps // 2):
                     start_text_frames = -1
