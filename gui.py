@@ -8,6 +8,7 @@ from tkinter import ttk
 import situp
 import pushup
 import jumpingjack
+import squat
 
 from ask_trainer import initialize
 
@@ -72,9 +73,27 @@ class App:
         DropDownButton["font"] = ft
         # DropDownButton["fg"] = "#ffffff"
         DropDownButton["justify"] = "center"
-        DropDownButton["text"] = "Button"
-        DropDownButton.place(x=20, y=10, width=70, height=25)
+        DropDownButton["text"] = "Start Rep"
+        DropDownButton.place(x=20, y=10, width=100, height=25)
         DropDownButton["command"] = self.DropDownButton_command
+
+        GoalLabel = tk.Label(homeFrame)
+        ft = tkFont.Font(family='Times', size=10)
+        GoalLabel["font"] = ft
+        # GoalLabel["fg"] = "#333333"
+        GoalLabel["justify"] = "center"
+        GoalLabel["text"] = "Goal (# of reps):"
+        GoalLabel.place(x=340, y=30, width=130, height=30)
+
+        GoalEntry = tk.Entry(homeFrame)
+        ft = tkFont.Font(family='Times', size=10)
+        GoalEntry["borderwidth"] = "1px"
+        GoalEntry["font"] = ft
+        GoalEntry["justify"] = "center"
+        GoalEntry.insert(0, 30)
+        GoalEntry.place(x=470, y=30, width=70, height=30)
+
+        App._workout_GoalEntry = GoalEntry
 
         AIMessageBoard = tk.Frame(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
@@ -531,16 +550,18 @@ class App:
 
     def DropDownButton_command(self):
         print("command")
+        goal = App._workout_GoalEntry.get()
         exercise = self.__comboDd__.get()
         match exercise:
             case "situp":
-                situp.start()
+                situp.start(goal)
             case "pushup":
-                pushup.start(4)
+                pushup.start(goal)
+                print("ended")
             case "squat":
-                print("nick sucks")
+                squat.start(goal)
             case "jumpingjack":
-                jumpingjack.start()
+                jumpingjack.start(goal)
             case _:
                 pass
 
