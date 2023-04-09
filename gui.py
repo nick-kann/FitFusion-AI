@@ -297,6 +297,9 @@ class App:
         e.focus()
         App._e = e
 
+        scrollbar = Scrollbar(txt)
+        scrollbar.place(relheight=1, relx=0.974)
+
     def send_command(self):
         send = "You -> " + App._e.get()
         App._txt.insert(tk.END, "\n" + send)
@@ -688,6 +691,10 @@ class App:
         GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
         GoalHeader.place(x=20, y=20, width=200, height=30)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
         ResultsHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
         ResultsHeader["font"] = ft
@@ -748,24 +755,43 @@ class App:
         for i in range(0, len(results_arr)):
             y_axis.append(results_arr[i]/goals_arr[i]*100)
 
+<<<<<<< HEAD
         # print(len(x_axis))
         # print(x_axis)
 
         exercise_dict = {0: "push-ups", 1: "sit-ups",
                          2: "jumping jacks", 3: "squats"}
+=======
+        print(y_axis)
+        print(x_axis)
+        #print(len(x_axis))
+        #print(x_axis)
+
+
+        fig, ax = plt.subplots()
+        ax.set_ylim(0, 100)
+        ax.set_xlim(0, len(results_arr))
+        exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
+>>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
 
         plt.scatter(x_axis, y_axis)
+        plt.plot(x_axis, y_axis)
         plt.xlabel(f"Workout number")
         plt.ylabel(f"Percent of goal completed")
 
         plt.grid(True)
-        fig, ax = plt.subplots()
-        ax.set_ylim(0, 100)
 
         plt.savefig("graph1.png")
 
+<<<<<<< HEAD
         test = ImageTk.PhotoImage(Image.open(
             "graph1.png").resize((450, 400), Image.ANTIALIAS))
+=======
+
+
+        test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
+
+>>>>>>> 37c8a75df44717f8cc283e6ef831eb77ef699cc3
 
         label1 = tk.Label(resultsFrame, image=test)
         label1['bg'] = "#333033"
