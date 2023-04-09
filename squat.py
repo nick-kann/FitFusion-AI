@@ -163,8 +163,10 @@ def start(goal):
                     percent_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
 
+                iimage = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
+                                font_scale, (0, 0, 0), font_thickness + 6, cv2.LINE_AA)
                 image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
-                                    font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
             if start_countdown:
                 font_scale = 2
                 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -176,15 +178,10 @@ def start(goal):
                 text_size_x, text_size_y = text_size
 
                 image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                                    font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
-
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                font_thickness = 5
-                text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
-                text_size_x, text_size_y = text_size
+                                    font_scale, (0, 0, 0), 7, cv2.LINE_AA)
 
                 image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                                    font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+                                    font_scale, (255, 255, 255), 3, cv2.LINE_AA)
 
             length = width * 3 / 4 * percentage / 100
             top_left = (int((width - length) / 2), int(18 / 20 * height))
@@ -195,6 +192,16 @@ def start(goal):
             if length > 0:
                 image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
 
+            escape_text = "Hold esc to finish"
+            text_size, _ = cv2.getTextSize(escape_text, cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+            text_size_x, text_size_y = text_size
+
+            image = cv2.putText(image, escape_text, (1, int(1.5 * text_size_y)),
+                                cv2.FONT_HERSHEY_SIMPLEX,
+                                1, (0, 0, 0), 5, cv2.LINE_AA)
+            image = cv2.putText(image, escape_text, (1, int(1.5 * text_size_y)),
+                                cv2.FONT_HERSHEY_SIMPLEX,
+                                1, (255, 255, 255), 2, cv2.LINE_AA)
             cv2.imshow('Main image', image)
 
             gif_frame += 0.25
