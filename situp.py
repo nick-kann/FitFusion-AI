@@ -91,6 +91,9 @@ def start(goal):
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                                font_scale, (0, 0, 0), font_thickness + 8, cv2.LINE_AA)
+
+            image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
             frames += 1
@@ -113,13 +116,13 @@ def start(goal):
 
             image = cv2.addWeighted(image, 0.5, gif_image, 0.5, 0)
 
-            countdown_text = "Press space to start the countdown"
-            text_size, _ = cv2.getTextSize(countdown_text, cv2.FONT_HERSHEY_SIMPLEX, 1, 3)
+            countdown_text = "Press space to start the countdown!"
+            text_size, _ = cv2.getTextSize(countdown_text, cv2.FONT_HERSHEY_SIMPLEX, 2, 3)
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height - (4 * text_size_y)) // 2),
                                 cv2.FONT_HERSHEY_SIMPLEX,
-                                1, (0, 0, 0), 3, cv2.LINE_AA)
+                                2, (0, 0, 0), 3, cv2.LINE_AA)
 
         if countdown_complete and start_text_frames != -1:
             start_text_frames += 1
