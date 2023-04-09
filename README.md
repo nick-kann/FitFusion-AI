@@ -30,7 +30,7 @@ With our cutting-edge technology and personalized approach to fitness, FitFusion
 </p>
 
 ```
-git clone https://github.com/butter-my-toast/yelp-guru/ 
+git clone https://github.com/butter-my-toast/la-hacks/ 
 ```
 <p>
   <b>2.</b> Install the dependencies
