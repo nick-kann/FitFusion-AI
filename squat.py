@@ -31,10 +31,11 @@ def start(goal):
     mid_count = 0
     rep_count = 0
     up_angle = 160
-    up_distance = 1
+    up_distance = -1
     mid_distance = 0
     half_rep = False
     half_rep_percent = 0
+    percentage = 0
 
     gif = imageio.mimread('./countdown_images/squat_visual.gif')
 
@@ -177,6 +178,15 @@ def start(goal):
                 image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                     font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
+            length = width * 3 / 4 * percentage / 100
+            top_left = (int((width - length) / 2), int(18 / 20 * height))
+            bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
+            color = (0, 255, 0)
+            thickness = -1
+
+            if length > 0:
+                image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
+
             cv2.imshow('Main image', image)
             
             gif_frame += 0.25
@@ -221,6 +231,7 @@ def start(goal):
 
                 if test_angle >= up_angle:
                     up_count += 1
+                    up_distance = test_knee[1] - test_hip[1]
                     if up_count >= int(fps / 6):
                         if is_up is False:
                             rep_count += 1
@@ -234,7 +245,6 @@ def start(goal):
                         down_count = 0
                         is_mid = False
                         mid_count = 0
-                        up_distance = test_knee[1] - test_hip[1]
                         mid_distance = up_distance
 
                 if test_angle < up_angle and test_knee[1] > test_hip[1]:
@@ -244,6 +254,10 @@ def start(goal):
                     if mid_count >= int(fps / 6):
                         is_mid = True
                         up_count = 0
+
+                percentage = (1 - ((test_knee[1] - test_hip[1]) / up_distance)) * 100
+                percentage = max(percentage, 0)
+                percentage = min(percentage, 100)
 
             if cv2.waitKey(5) & 0xFF == 27:  # esc to quit
                 break
