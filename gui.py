@@ -242,10 +242,10 @@ class App:
         Week1Content.grid(row=1, column=0, sticky=tk.W, pady=2)
         Week2Label.grid(row=0, column=1, sticky=tk.W, pady=2)
         Week2Content.grid(row=1, column=1, sticky=tk.W, pady=2)
-        Week3Label.grid(row=0, column=2, sticky=tk.W, pady=2)
-        Week3Content.grid(row=1, column=2, sticky=tk.W, pady=2)
-        Week4Label.grid(row=0, column=3, sticky=tk.W, pady=2)
-        Week4Content.grid(row=1, column=3, sticky=tk.W, pady=2)
+        Week3Label.grid(row=2, column=0, sticky=tk.W, pady=2)
+        Week3Content.grid(row=3, column=0, sticky=tk.W, pady=2)
+        Week4Label.grid(row=2, column=1, sticky=tk.W, pady=2)
+        Week4Content.grid(row=3, column=1, sticky=tk.W, pady=2)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
@@ -694,10 +694,9 @@ class App:
 
         results = "N/A"
         t_goal = "N/A"
-        if(len(data[App._exercise])!=0):
+        if(len(data[App._exercise]) != 0):
             results = data[App._exercise][len(data[App._exercise])-2]
             t_goal = data[App._exercise][len(data[App._exercise])-1]
-
 
         GoalHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
@@ -782,8 +781,8 @@ class App:
         fig, ax = plt.subplots()
         ax.set_ylim(0, 100)
         ax.set_xlim(0, len(results_arr))
-        exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
-
+        exercise_dict = {0: "push-ups", 1: "sit-ups",
+                         2: "jumping jacks", 3: "squats"}
 
         plt.scatter(x_axis, y_axis)
         plt.plot(x_axis, y_axis)
