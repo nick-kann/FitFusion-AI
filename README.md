@@ -51,30 +51,28 @@ python gui.py
 ```
 
 ## 🛠️ Technologies used 🛠️
-  Computer Vision: <b>[OpenCV](https://github.com/opencv/opencv/blob/4.x/LICENSE)</b> \
-  Infrastructure for computer vision application \
-  \
-  Pose Estimation: <b>[MediaPipe](https://github.com/google/mediapipe/blob/master/LICENSE)</b> \
-  Used to get the specific landmarks on a human body \
-  \
-  NLP Model: <b>[OpenAI's GPT3.5-Turbo](https://openai.com/product)</b> \
-  Used for planning workouts and as a personal trainer \
-  \
-  GIF Reader: <b>[imageio](https://github.com/imageio/imageio/blob/master/LICENSE)</b> \
-  Used to convert GIFs into a list of images  \
-  \
-  Linear Algebra Computation: <b>[numpy](https://github.com/numpy/numpy/blob/main/LICENSE.txt)</b> \
-  Used to perform linear algebra computations behind the scenes for machine learning models and for our rep checker \
-  \
-  Frontend: <b>[Tkinter](https://github.com/PacktPublishing/Python-GUI-Programming-with-Tkinter/blob/master/LICENSE)</b> \
-  Used for our frontend framework \
-  \
-  Graphing: <b>[matplotlib](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)</b> \
+  Computer Vision: <b>[OpenCV](https://github.com/opencv/opencv/blob/4.x/LICENSE)</b> 
+  Infrastructure for computer vision application 
+  
+  Pose Estimation: <b>[MediaPipe](https://github.com/google/mediapipe/blob/master/LICENSE)</b> 
+  Used to get the specific landmarks on a human body 
+  
+  NLP Model: <b>[OpenAI's GPT3.5-Turbo](https://openai.com/product)</b> 
+  Used for planning workouts and as a personal trainer 
+  
+  GIF Reader: <b>[imageio](https://github.com/imageio/imageio/blob/master/LICENSE)</b> 
+  Used to convert GIFs into a list of images  
+  
+  Linear Algebra Computation: <b>[numpy](https://github.com/numpy/numpy/blob/main/LICENSE.txt)</b> 
+  Used to perform linear algebra computations behind the scenes for machine learning models and for our rep checker 
+  Frontend: <b>[Tkinter](https://github.com/PacktPublishing/Python-GUI-Programming-with-Tkinter/blob/master/LICENSE)</b> 
+  Used for our frontend framework 
+  Graphing: <b>[matplotlib](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)</b> 
   Used to graph the workout progress
   
 
 ## 🧑‍💻 Authors 🧑‍💻
-Alexander S. Du / [@Mantlemoose](https://github.com/Mantlemoose "Mantlemoose's github page") \
-Prarthan Ghosh / [@coder2003lucky](https://github.com/coder2003lucky "coder2003lucky's github page") \
-Eashan Chatterjee / [@EashanC23](https://github.com/EashanC23 "EashanC23's github page") \
+Alexander S. Du / [@Mantlemoose](https://github.com/Mantlemoose "Mantlemoose's github page") 
+Prarthan Ghosh / [@coder2003lucky](https://github.com/coder2003lucky "coder2003lucky's github page") 
+Eashan Chatterjee / [@EashanC23](https://github.com/EashanC23 "EashanC23's github page") 
 Nicholas Kann / [@butter-my-toast](https://github.com/butter-my-toast "butter-my-toast's github page")
