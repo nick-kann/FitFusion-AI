@@ -33,10 +33,10 @@ with open('input.txt', 'r') as f:
         # Add the key-value pair to the dictionary
         my_dict[key] = (int)(value)
 
-    print(len(my_dict))
+    #print(len(my_dict))
 
 # Print the dictionary
-print(my_dict)
+#print(my_dict)
 
 goal_dict = {1: "cardio", 2: "muscle toning", 3: "ab development", 4: "biscep muscle development", 5: "leg muscle development", 6: "general muscle development"}
 experience_dict = {1: "no experience", 2: "some experience", 3: "extensive experience"}
