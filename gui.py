@@ -12,6 +12,8 @@ import squat
 import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
 
+from json_generate import create
+
 from ask_trainer import initialize
 
 
@@ -161,10 +163,10 @@ class App:
             # print(f"\t{day}: {workout}")
 
         print(weeks[0]['Monday'])
-        week1_days = weeks[0].keys()
-        week2_days = weeks[1].keys()
-        week3_days = weeks[2].keys()
-        week4_days = weeks[3].keys()
+        App._week1_days = weeks[0].keys()
+        App._week2_days = weeks[1].keys()
+        App._week3_days = weeks[2].keys()
+        App._week4_days = weeks[3].keys()
 
         Week1Label = tk.Label(AIMessageBoard)
         ft = tkFont.Font(family='Arial', size=15, weight="bold")
@@ -173,8 +175,9 @@ class App:
         Week1Label["text"] = "Week 1"
 
         Week1Content = tk.Frame(AIMessageBoard)
+        App._weekday_1_l = []
         ind = 0
-        for weekday in week1_days:
+        for weekday in App._week1_days:
             weekday_l = tk.Label(Week1Content)
             ft = tkFont.Font(family='Arial', size=10)
             weekday_l["font"] = ft
@@ -182,6 +185,7 @@ class App:
             weekday_l["wraplength"] = 250
             weekday_l["justify"] = "left"
             weekday_l.grid(row=ind, column=0, sticky=tk.W, pady=2)
+            App._weekday_1_l.append(weekday_l)
             ind += 1
 
         Week2Label = tk.Label(AIMessageBoard)
@@ -191,8 +195,9 @@ class App:
         Week2Label["text"] = "Week 2"
 
         Week2Content = tk.Frame(AIMessageBoard)
+        App._weekday_2_l = []
         ind = 0
-        for weekday in week2_days:
+        for weekday in App._week2_days:
             weekday_l = tk.Label(Week2Content)
             ft = tkFont.Font(family='Arial', size=10)
             weekday_l["font"] = ft
@@ -200,6 +205,7 @@ class App:
             weekday_l["wraplength"] = 250
             weekday_l["justify"] = "left"
             weekday_l.grid(row=ind, column=0, sticky=tk.W, pady=2)
+            App._weekday_2_l.append(weekday_l)
             ind += 1
 
         Week3Label = tk.Label(AIMessageBoard)
@@ -209,8 +215,9 @@ class App:
         Week3Label["text"] = "Week 3"
 
         Week3Content = tk.Frame(AIMessageBoard)
+        App._weekday_3_l = []
         ind = 0
-        for weekday in week3_days:
+        for weekday in App._week3_days:
             weekday_l = tk.Label(Week3Content)
             ft = tkFont.Font(family='Arial', size=10)
             weekday_l["font"] = ft
@@ -218,6 +225,7 @@ class App:
             weekday_l["wraplength"] = 250
             weekday_l["justify"] = "left"
             weekday_l.grid(row=ind, column=1, sticky=tk.W, pady=2)
+            App._weekday_3_l.append(weekday_l)
             ind += 1
 
         Week4Label = tk.Label(AIMessageBoard)
@@ -227,8 +235,9 @@ class App:
         Week4Label["text"] = "Week 4"
 
         Week4Content = tk.Frame(AIMessageBoard)
+        App._weekday_4_l = []
         ind = 0
-        for weekday in week4_days:
+        for weekday in App._week4_days:
             weekday_l = tk.Label(Week4Content)
             ft = tkFont.Font(family='Arial', size=10)
             weekday_l["font"] = ft
@@ -236,6 +245,7 @@ class App:
             weekday_l["wraplength"] = 250
             weekday_l["justify"] = "left"
             weekday_l.grid(row=ind, column=1, sticky=tk.W, pady=2)
+            App._weekday_4_l.append(weekday_l)
             ind += 1
 
         Week1Label.grid(row=0, column=0, sticky=tk.W, pady=2)
@@ -859,7 +869,46 @@ class App:
             f.write("days_per_week: " + str(days) + "\n")
             f.close()
 
+            create()
+            
+            with open("output.json") as f:
+                data = json.load(f)
+
+            # Organize workout plan into list of weeks
+            weeks = []
+            for week_key in data["workout_plan"]:
+                week = {}
+                for day_key, workout in data["workout_plan"][week_key].items():
+                    week[day_key] = workout
+                weeks.append(week)
+
+            ind = 0
+            for weekday in App._week1_days:
+                weekday_l = App._weekday_1_l[ind]
+                weekday_l["text"] = weekday + ": " + weeks[0][weekday]
+                ind += 1
+
+            ind = 0
+            for weekday in App._week2_days:
+                weekday_l = App._weekday_2_l[ind]
+                weekday_l["text"] = weekday + ": " + weeks[1][weekday]
+                ind += 1
+
+            ind = 0
+            for weekday in App._week3_days:
+                weekday_l = App._weekday_3_l[ind]
+                weekday_l["text"] = weekday + ": " + weeks[2][weekday]
+                ind += 1
+
+            ind = 0
+            for weekday in App._week4_days:
+                weekday_l = App._weekday_4_l[ind]
+                weekday_l["text"] = weekday + ": " + weeks[3][weekday]
+                ind += 1
+            
             self.CloseButton_command()
+
+            
 
 
 if __name__ == "__main__":
