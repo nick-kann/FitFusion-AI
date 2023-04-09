@@ -21,6 +21,7 @@ def find_angle(a, b, c):
 
 def start(goal):
     goal = int(goal)
+    orig_goal = goal
     # For webcam input:
     is_up = False
     is_mid = False
@@ -219,6 +220,7 @@ def start(goal):
                     if is_up is True:
                         half_rep = False
                         rep_count += 1
+                        goal -= 1
                         print(rep_count)
                     if is_mid is True and is_up is False:
                         half_rep_percent = (1 - (mid_angle - up_angle) / (down_angle - up_angle)) * 100
@@ -239,7 +241,7 @@ def start(goal):
           with open('results.json', 'r') as f:
               data = json.load(f)
               data[1].append(rep_count)
-              data[1].append(goal)
+              data[1].append(orig_goal)
 
           with open('results.json', 'w') as f:
               json.dump(data, f)
