@@ -21,6 +21,7 @@ is_up = True
 down_count = 0
 up_count = 0
 rep_count = 0
+up_angle = 160
 cap = cv2.VideoCapture(0)
 frame_count = cv2.CAP_PROP_FPS
 with mp_pose.Pose(
@@ -79,7 +80,7 @@ with mp_pose.Pose(
                 is_up = False
                 up_count = 0
 
-        if test_angle >= 160:
+        if test_angle >= up_angle:
             up_count += 1
             if up_count >= int(frame_count / 3):
                 if is_up is False:
