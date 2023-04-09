@@ -9,6 +9,8 @@ import situp
 import pushup
 import jumpingjack
 import squat
+import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
 
 from ask_trainer import initialize
 
@@ -592,7 +594,7 @@ class App:
         ResultsLabel["font"] = ft
         # ResultsLabel["fg"] = "#333333"
         ResultsLabel["justify"] = "center"
-        ResultsLabel.place(x = 440 - 800/2, y=20, width=800, height=660)
+        ResultsLabel.place(x = 440 - 800/2, y=20, width=800, height=560)
 
 
         # results, goal
@@ -640,6 +642,47 @@ class App:
         MessageHeader["wraplength"] = 250
         MessageHeader.place(x=20, y=160, width=300, height = 100)
 
+        CloseButton = tk.Button(resultsFrame)
+        CloseButton["bg"] = "#6b6b6b"
+        ft = tkFont.Font(family='Arial', size=10)
+        CloseButton["font"] = ft
+        # CloseButton["fg"] = "#ffffff"
+        CloseButton["justify"] = "center"
+        CloseButton["text"] = "close"
+        CloseButton.place(x=440 - 800/2, y=600, width=80, height=50)
+        CloseButton["command"] = self.CloseButtonResults_command
+
+        x_axis = []
+        y_axis = []
+
+
+        for i in range(0, len(data[App._exercise])):
+            if(i%2==0):
+                x_axis.append(data[App._exercise][i])
+            else:
+                y_axis.append(data[App._exercise][i])
+
+        #print(len(x_axis))
+        #print(x_axis)
+
+        exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
+
+        plt.scatter(x_axis, y_axis)
+        plt.xlabel(f"Results (number of reps of {exercise_dict[App._exercise]})")
+        plt.ylabel(f"Goals (number of reps of {exercise_dict[App._exercise]})")
+       
+        plt.grid(True)
+        plt.savefig("graph1.png")
+
+        test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
+        
+
+        label1 = tk.Label(image=test)
+        label1.image = test
+
+        # Position image
+        label1.place(x=350, y=40)
+
         
 
     def CloseButton_command(self):
@@ -650,6 +693,9 @@ class App:
         App._trainerFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
 
+    def CloseButtonResults_command(self):
+        App._restultsFrame.pack_forget()
+        App._homeFrame.pack(fill="both", expand=True)
 
 
     def SaveButton_command(self):
