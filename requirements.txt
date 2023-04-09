@@ -2,6 +2,6 @@ opencv-python
 matplotlib
 numpy
 mediapipe
-tkinker
+tkinter
 imageio
 openai
