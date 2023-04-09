@@ -816,7 +816,7 @@ class App:
         App._homeFrame.pack(fill="both", expand=True)
 
     def CloseButtonResults_command(self):
-        App._restultsFrame.pack_forget()
+        App._resultsFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
 
     def SaveButton_command(self):
