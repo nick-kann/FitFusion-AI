@@ -112,10 +112,11 @@ class App:
         ]
         
         v = tk.IntVar()
-        v.set(1)  # initializing the choice, i.e. Python
+         # initializing the choice, i.e. Python
 
         
         y = 190
+        ind = 0
         for language, val in languages:
             rb = tk.Radiobutton(settingsFrame, 
                    text=language,
@@ -124,19 +125,24 @@ class App:
                    anchor='w',
                    variable=v,
                    value=val)
-            rb.pack(anchor=tk.W)   
-            rb.place(x=170, y=y, width = 230, height = 30)
+            rb.pack(anchor=tk.W) 
+            if(ind<3):  
+                rb.place(x=170, y=y, width = 170, height = 30)
+            else:
+                if(ind==3):
+                    y = 190
+                rb.place(x=170+170, y=y, width = 220, height = 30)
+                
             y += 30
+            ind += 1
         
-        v.set(2)
-
         GoalLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
         GoalLabel["font"] = ft
         GoalLabel["fg"] = "#333333"
         GoalLabel["justify"] = "center"
         GoalLabel["text"] = "Goal:"
-        GoalLabel.place(x=20,y=190,width=150,height=30)
+        GoalLabel.place(x=20,y=190,width=150,height=90)
 
         print("settings command")
 
