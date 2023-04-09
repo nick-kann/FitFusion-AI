@@ -20,14 +20,20 @@ def find_angle(a, b, c):
     angle = np.arccos(cosine_angle)
     return np.degrees(angle)
 
-def start():
+def start(goal):
     # For webcam input:
     is_up = True
+    is_mid = False
     down_count = 0
     up_count = 0
+    mid_count = 0
     rep_count = 0
-    up_angle = 95
-    down_angle = 160
+    down_angle = 95
+    up_angle = 160
+    mid_angle = 160
+    percentage = 0
+    half_rep = False
+    half_rep_percent = 0
 
 
     gif = imageio.mimread('./countdown_images/pushup_visual.gif')
@@ -41,6 +47,7 @@ def start():
 
     print(cv2.CAP_PROP_FPS)
     fps = cap.get(cv2.CAP_PROP_FPS)
+    print(fps)
     frames = 0
     countdown = 3
     countdown_complete = False
@@ -50,8 +57,8 @@ def start():
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5) as pose:
       while cap.isOpened():
-
         success, image = cap.read()
+        image = cv2.flip(image, 1)
         if not success:
 
           print("Ignoring empty camera frame.")
@@ -76,7 +83,6 @@ def start():
             mp_pose.POSE_CONNECTIONS,
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
 
-        cv2.flip(image, 1)
 
         if start_countdown and not countdown_complete:
 
@@ -133,6 +139,28 @@ def start():
             if start_text_frames >= (fps // 2):
                 start_text_frames = -1
 
+        if half_rep is True:
+            font_scale = 1
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_thickness = 2
+
+            percent_text = "Half-rep: " + str(round(half_rep_percent, 2)) + "% there"
+            text_size, _ = cv2.getTextSize(percent_text, font, font_scale, font_thickness)
+            text_size_x, text_size_y = text_size
+
+            image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
+                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+        font_scale = 1
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_thickness = 2
+
+        goal_text = str(goal)
+        text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
+        text_size_x, text_size_y = text_size
+
+        image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
+                            font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+
         cv2.imshow('Main image', image)
 
         gif_frame +=2
@@ -164,20 +192,40 @@ def start():
             else:
                 test_angle = right_angle
 
+            # percentage = (1 - (test_angle - down_angle) / (up_angle - down_angle)) * 100
+            # percentage = max(percentage, 0)
+            # percentage = min(percentage, 100)
 
-            if (test_angle <= up_angle):
+            if test_angle <= down_angle:
                 down_count += 1
-                if (down_count >= 4):
+                if down_count >= int(fps / 5):
                     up_count = 0
                     is_up = False
-            if (test_angle >= down_angle):
+
+            if test_angle >= up_angle:
                 up_count += 1
-                if (up_count >= 4):
-                    down_count = 0
-                    if (is_up == False):
+                if up_count >= int(fps / 5):
+                    if is_up is False:
+                        half_rep = False
                         rep_count += 1
+                        goal -= 1
                         print(rep_count)
+                    if is_mid is True and is_up is True:
+                        half_rep_percent = (1 - (mid_angle - down_angle) / (up_angle - down_angle)) * 100
+                        half_rep = True
                     is_up = True
+                    down_count = 0
+                    is_mid = False
+                    mid_count = 0
+                    mid_angle = up_angle
+
+            if up_angle > test_angle > down_angle:
+                mid_count += 1
+                mid_angle = min(mid_angle, test_angle)
+                if mid_count >= int(fps / 5):
+                    is_mid = True
+                    up_count = 0
+
 
 
 

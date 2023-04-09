@@ -30,9 +30,11 @@ gif = imageio.mimread('./countdown_images/situp_visual.gif', memtest=False)
 gif_frame = 0
 start_text_frames = 0
 
-up_angle = 110
+up_angle = 120
 mid_angle = 160
 down_angle = 160
+half_rep = False
+half_rep_percent = 0
 cap = cv2.VideoCapture(0)
 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -129,6 +131,18 @@ with mp_pose.Pose(
         if start_text_frames >= (fps // 2):
             start_text_frames = -1
 
+    if half_rep is True:
+        font_scale = 1
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_thickness = 2
+
+        percent_text = "Half-rep: " + str(round(half_rep_percent, 2)) + "% there"
+        text_size, _ = cv2.getTextSize(percent_text, font, font_scale, font_thickness)
+        text_size_x, text_size_y = text_size
+
+        image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
+                            font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+
     cv2.imshow('Main image', image)
 
     gif_frame += 2
@@ -159,18 +173,19 @@ with mp_pose.Pose(
 
         if test_angle <= up_angle:
             up_count += 1
-            if up_count >= int(fps / 2):
+            if up_count >= int(fps / 5):
                 is_up = True
                 down_count = 0
         if test_angle >= down_angle:
             down_count += 1
-            if down_count >= int(fps / 2):
+            if down_count >= int(fps / 5):
                 if is_up is True:
+                    half_rep = False
                     rep_count += 1
                     print(rep_count)
                 if is_mid is True and is_up is False:
-                    percent = (1 - (mid_angle - up_angle) / (down_angle - up_angle)) * 100
-                    print("Half-rep, doesn't count: " + str(percent) + "% there")
+                    half_rep_percent = (1 - (mid_angle - up_angle) / (down_angle - up_angle)) * 100
+                    half_rep = True
                 is_up = False
                 up_count = 0
                 is_mid = False
@@ -179,7 +194,7 @@ with mp_pose.Pose(
         if up_angle < test_angle < down_angle:
             mid_count += 1
             mid_angle = min(mid_angle, test_angle)
-            if mid_count >= int(fps / 2):
+            if mid_count >= int(fps / 5):
                 is_mid = True
                 down_count = 0
 
