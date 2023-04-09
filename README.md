@@ -9,7 +9,7 @@ Fitfusion is an AI-powered fitness project that offers a personalized workout sc
 [**Google Slides**](https://docs.google.com/presentation/d/1OXqh9sOShfV5hX5ayfGW8IWrVRSj2gcLwSxL_Wa3PYU/edit?usp=sharing)
 
 ## 🎬 Demo 🎬 
-
+https://www.youtube.com/watch?v=HikxNeUNo_g&feature=youtu.be
 
 
 ## ⚙️ How it Works ⚙️
