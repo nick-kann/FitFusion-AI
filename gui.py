@@ -248,7 +248,7 @@ class App:
         # CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
 
         # DELETE
-        #self.ShowResultsPage()
+        # self.ShowResultsPage()
 
     def TrainerButton_command(self):
 
@@ -661,7 +661,7 @@ class App:
 
     def ShowResultsPage(self):
         resultsFrame = tk.Frame(App._root)
-        resultsFrame["bg"] = "#20dfff"
+        resultsFrame["bg"] = "#36393e"
         App._homeFrame.pack_forget()
         resultsFrame.pack(fill="both", expand=True)
         App._restultsFrame = resultsFrame
@@ -671,15 +671,13 @@ class App:
         ResultsLabel["font"] = ft
         # ResultsLabel["fg"] = "#333333"
         ResultsLabel["justify"] = "center"
-        ResultsLabel.place(x = 440 - 800/2, y=20, width=800, height=560)
-
+        ResultsLabel.place(x=440 - 800/2, y=20, width=800, height=560)
 
         # results, goal
         with open('results.json', 'r') as f:
             data = json.load(f)
         results = data[App._exercise][len(data[App._exercise])-2]
         t_goal = data[App._exercise][len(data[App._exercise])-1]
-
 
         GoalHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
@@ -688,9 +686,8 @@ class App:
         GoalHeader["anchor"] = "w"
         #GoalHeader["text"] = "Goal: " + str(App._goal_val)
         GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
-        GoalHeader.place(x=20, y=20, width=200, height = 30)
+        GoalHeader.place(x=20, y=20, width=200, height=30)
 
-        
         ResultsHeader = tk.Label(ResultsLabel)
         ft = tkFont.Font(family='Times', size=20, weight="bold")
         ResultsHeader["font"] = ft
@@ -699,43 +696,47 @@ class App:
         #ResultsHeader["text"] = "Results:  " + str(App._results_val)
         ResultsHeader["wraplength"] = 250
         ResultsHeader["text"] = "Results: " + str(results) + " reps."
-        ResultsHeader.place(x=20, y=100, width=200, height = 30)
+        ResultsHeader.place(x=20, y=100, width=200, height=30)
 
         message = ""
         if results <= 0.8 * t_goal:
             #print(results < 0.8 * t_goal)
             message = "Not quite enough- more work is needed!"
-        elif results>= 1.2 * t_goal:
+        elif results >= 1.2 * t_goal:
             message = "Nice! You exceeded your goal."
         else:
             message = "Nice! You met your goal."
 
+        # MessageHeader = tk.Label(ResultsLabel)
+        # ft = tkFont.Font(family='Times', size=20)
+        # MessageHeader["font"] = ft
+        # MessageHeader["justify"] = "left"
+        # MessageHeader["anchor"] = "w"
+        # MessageHeader["text"] = message
+        # MessageHeader["wraplength"] = 250
+        # MessageHeader.place(x=20, y=160, width=300, height=100)
+        ResultsHeader = ctk.CTkLabel(
+            ResultsLabel, width=300, height=100, text=message)
+        ResultsHeader.place(x=20, y=160)
 
-        MessageHeader = tk.Label(ResultsLabel)
-        ft = tkFont.Font(family='Times', size=20)
-        MessageHeader["font"] = ft
-        MessageHeader["justify"] = "left"
-        MessageHeader["anchor"] = "w"
-        MessageHeader["text"] = message
-        MessageHeader["wraplength"] = 250
-        MessageHeader.place(x=20, y=160, width=300, height = 100)
-
-        CloseButton = tk.Button(resultsFrame)
-        CloseButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        CloseButton["font"] = ft
-        # CloseButton["fg"] = "#ffffff"
-        CloseButton["justify"] = "center"
-        CloseButton["text"] = "close"
-        CloseButton.place(x=440 - 800/2, y=600, width=80, height=50)
-        CloseButton["command"] = self.CloseButtonResults_command
+        # CloseButton = tk.Button(resultsFrame)
+        # CloseButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # CloseButton["font"] = ft
+        # # CloseButton["fg"] = "#ffffff"
+        # CloseButton["justify"] = "center"
+        # CloseButton["text"] = "close"
+        # CloseButton.place(x=440 - 800/2, y=600, width=80, height=50)
+        # CloseButton["command"] = self.CloseButtonResults_command
+        CloseButton = ctk.CTkButton(
+            master=resultsFrame, width=80, height=50, command=self.CloseButtonResults_command, text="close")
+        CloseButton.place(x=30, y=app._height - 60)
 
         results_arr = []
         goals_arr = []
 
-
         for i in range(0, len(data[App._exercise])):
-            if(i%2==0):
+            if(i % 2 == 0):
                 results_arr.append(data[App._exercise][i])
             else:
                 goals_arr.append(data[App._exercise][i])
@@ -747,26 +748,24 @@ class App:
         for i in range(0, len(results_arr)):
             y_axis.append(results_arr[i]/goals_arr[i]*100)
 
-        #print(len(x_axis))
-        #print(x_axis)
+        # print(len(x_axis))
+        # print(x_axis)
 
-        exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
+        exercise_dict = {0: "push-ups", 1: "sit-ups",
+                         2: "jumping jacks", 3: "squats"}
 
         plt.scatter(x_axis, y_axis)
         plt.xlabel(f"Workout number")
         plt.ylabel(f"Percent of goal completed")
-       
+
         plt.grid(True)
         fig, ax = plt.subplots()
         ax.set_ylim(0, 100)
 
-
         plt.savefig("graph1.png")
 
-
-
-        test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
-        
+        test = ImageTk.PhotoImage(Image.open(
+            "graph1.png").resize((450, 400), Image.ANTIALIAS))
 
         label1 = tk.Label(resultsFrame, image=test)
         label1['bg'] = "#333033"
@@ -774,8 +773,6 @@ class App:
 
         # Position image
         label1.place(x=350, y=40)
-
-        
 
     def CloseButton_command(self):
         App._settingsFrame.pack_forget()
@@ -788,7 +785,6 @@ class App:
     def CloseButtonResults_command(self):
         App._restultsFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
-
 
     def SaveButton_command(self):
         # print(self._v_goal.get())
