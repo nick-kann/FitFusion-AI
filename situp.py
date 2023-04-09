@@ -145,12 +145,27 @@ def start(goal):
             image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
-        goal_text = str(goal)
-        text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
-        text_size_x, text_size_y = text_size
+        if start_countdown:
+            font_scale = 2
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_thickness = 10
+            goal_text = "Pushups remaining: " + str(goal)
+            text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
+            text_size_x, text_size_y = text_size
 
-        image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                            font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+            image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
+                                font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
+
+            font_scale = 2
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_thickness = 5
+            goal_text = "Pushups remaining: " + str(goal)
+            text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
+            text_size_x, text_size_y = text_size
+
+            image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
+                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+            
         cv2.imshow('Main image', image)
 
         gif_frame += 2
