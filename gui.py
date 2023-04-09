@@ -1,15 +1,17 @@
 import tkinter as tk
 import tkinter.font as tkFont
+import os
 
 
 class App:
+    saveData = ""
     def __init__(self, root):
         # setting title
         root.title("undefined")
         App._root = root
         # setting window size
         width = 600
-        height = 500
+        height = 700
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height,
@@ -60,17 +62,33 @@ class App:
 
     def SettingsButton_command(self):
 
+        with open('input.txt', 'r') as f:
+            # Initialize an empty dictionary
+            my_dict = {}
+
+            # Iterate over each line in the file
+            for line in f:
+                # Split the line into key and value pairs
+                
+                key, value = line.strip().split(': ')
+
+                # Add the key-value pair to the dictionary
+                my_dict[key] = (int)(value)
+
+
+
         settingsFrame = tk.Frame(App._root)
         settingsFrame["bg"] = "#20dfff"
         App._homeFrame.pack_forget()
         settingsFrame.pack(fill="both", expand=True)
+        App._settingsFrame = settingsFrame
 
         labelEntry_x = 20
         weightEntry_x = labelEntry_x + 150
         weight_y = 20
         generalLabelWidth = 150
         generalEntryWidth = 100
-        generalHeight = 30
+        generalHeight =30
 
         WeightEntry=tk.Entry(settingsFrame)
         WeightEntry["borderwidth"] = "1px"
@@ -79,6 +97,11 @@ class App:
         #WeightEntry["fg"] = "#333333"
         WeightEntry["justify"] = "center"
         WeightEntry.place(x=weightEntry_x,y=weight_y,width=generalEntryWidth,height=generalHeight)
+        if(len(my_dict.keys())==7):
+            WeightEntry.insert(0, my_dict['weight'])
+
+        self._v_weightEntry = WeightEntry
+
 
         WeightLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
@@ -92,9 +115,12 @@ class App:
         HeightEntry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         HeightEntry["font"] = ft
-        #HeightEntry["fg"] = "#333333"
+        #HeightEntry["fg"] = "#333333" 
         HeightEntry["justify"] = "center"
         HeightEntry.place(x=weightEntry_x,y=weight_y + 50,width=100,height=generalHeight)
+        if(len(my_dict.keys())==7):
+            HeightEntry.insert(0, my_dict['height'])
+        self._v_heightEntry = HeightEntry
 
         HeightLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
@@ -119,8 +145,9 @@ class App:
              ("general muscle development", 6),
         ]
         
-        v = tk.IntVar()
+        self._v_goal = tk.IntVar()
         y = weight_y + 110
+        goal_rbuttons = [0, 0, 0, 0, 0, 0]
         ind = 0
         for language, val in languages:
             goal_rb = tk.Radiobutton(settingsFrame, 
@@ -128,9 +155,10 @@ class App:
                    padx = 20, 
                    justify='left',
                    anchor='w',
-                   variable=v,
+                   variable=self._v_goal,
                    value=val)
-            goal_rb.pack(anchor=tk.W) 
+            goal_rb.pack(anchor=tk.W)
+            goal_rbuttons[ind] = goal_rb 
             if(ind<3):  
                 goal_rb.place(x=weightEntry_x, y=y, width = 170, height = generalHeight)
             else:
@@ -140,7 +168,9 @@ class App:
                 
             y += generalHeight
             ind += 1
-        
+        if(len(my_dict.keys())==7):
+            goal_rbuttons[my_dict['goal']-1].select()
+
         GoalLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
         GoalLabel["font"] = ft
@@ -163,22 +193,28 @@ class App:
    	     ("some experience", 2),
     	     ("extensive experience", 3)
         ]
-        
-        exp_v = tk.IntVar()
+        #WORKOUT EXPERIENCE 
+
+
+        self._v_workExp = tk.IntVar()
         y = weight_y + 220
+        exp_rbuttons = [0, 0, 0]
+        ind = 0
         for experience, val in experiences:
             exp_rb = tk.Radiobutton(settingsFrame, 
                    text=experience,
                    padx = 20, 
                    justify='left',
                    anchor='w',
-                   variable=exp_v,
+                   variable=self._v_workExp,
                    value=val)
             exp_rb.pack(anchor=tk.W)  
             exp_rb.place(x=weightEntry_x, y=y, width = 190, height = generalHeight)
-                
+            exp_rbuttons[ind] = exp_rb
             y += generalHeight
             ind += 1
+        if(len(my_dict.keys())==7):
+            exp_rbuttons[my_dict['experience']-1].select()
 
         TimeEntry=tk.Entry(settingsFrame)
         TimeEntry["borderwidth"] = "1px"
@@ -187,6 +223,9 @@ class App:
         #TimeEntry["fg"] = "#333333"
         TimeEntry["justify"] = "center"
         TimeEntry.place(x=weightEntry_x,y=weight_y + 340,width=generalEntryWidth,height=generalHeight)
+        if(len(my_dict.keys())==7):
+            TimeEntry.insert(0, my_dict['time_available'])
+        self._v_timeEntry = TimeEntry
 
         TimeLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
@@ -200,21 +239,27 @@ class App:
    	     ("home", 2)
         ]
         
-        exp_l = tk.IntVar()
+
+        #LOCATION
+        self._v_location = tk.IntVar()
         y = weight_y + 400
+        location_rbuttons = [0, 0]
+        ind = 0
         for location, val in locations:
-            exp_l = tk.Radiobutton(settingsFrame, 
+            l_rb = tk.Radiobutton(settingsFrame, 
                    text=location,
                    padx = 20, 
                    justify='left',
                    anchor='w',
-                   variable=exp_l,
+                   variable=self._v_location,
                    value=val)
-            exp_l.pack(anchor=tk.W)  
-            exp_l.place(x=weightEntry_x, y=y, width = 340, height = generalHeight)
-                
+            l_rb.pack(anchor=tk.W)  
+            l_rb.place(x=weightEntry_x, y=y, width = 340, height = generalHeight)
+            location_rbuttons[ind] = l_rb    
             y += generalHeight
             ind += 1
+        if(len(my_dict.keys())==7):
+            location_rbuttons[my_dict['location']-1].select()
 
         LocationLabel=tk.Label(settingsFrame)
         ft = tkFont.Font(family='Times',size=10)
@@ -224,8 +269,57 @@ class App:
         LocationLabel["text"] = "Location:"
         LocationLabel.place(x=labelEntry_x,y=weight_y + 400,width=generalLabelWidth,height=generalHeight*2)
 
+        DaysEntry=tk.Entry(settingsFrame)
+        DaysEntry["borderwidth"] = "1px"
+        ft = tkFont.Font(family='Times',size=10)
+        DaysEntry["font"] = ft
+        #DaysEntry["fg"] = "#333333"
+        DaysEntry["justify"] = "center"
+        DaysEntry.place(x=weightEntry_x,y=weight_y + 490,width=generalEntryWidth,height=generalHeight)
+        if(len(my_dict.keys())==7):
+            DaysEntry.insert(0, my_dict['time_available'])
+        self._v_daysEntry = DaysEntry
+
+        DaysLabel=tk.Label(settingsFrame)
+        ft = tkFont.Font(family='Times',size=10)
+        DaysLabel["font"] = ft
+        #DaysLabel["fg"] = "#333333"
+        DaysLabel["justify"] = "center"
+        DaysLabel["text"] = "Days per week:"
+        DaysLabel.place(x=labelEntry_x,y=weight_y + 490,width=generalLabelWidth,height=generalHeight)
+
+
+
+        CloseButton = tk.Button(settingsFrame)
+        CloseButton["bg"] = "#6b6b6b"
+        ft = tkFont.Font(family='Arial', size=10)
+        CloseButton["font"] = ft
+        #CloseButton["fg"] = "#ffffff"
+        CloseButton["justify"] = "center"
+        CloseButton["text"] = "close"
+        CloseButton.place(x=labelEntry_x, y=weight_y + 550, width=80, height=50)
+        CloseButton["command"] = self.CloseButton_command
+
+        SaveButton = tk.Button(settingsFrame)
+        SaveButton["bg"] = "#6b6b6b"
+        ft = tkFont.Font(family='Arial', size=10)
+        SaveButton["font"] = ft
+        #SaveButton["fg"] = "#ffffff"
+        SaveButton["justify"] = "center"
+        SaveButton["text"] = "save"
+        SaveButton.place(x=labelEntry_x + 340 + 140, y=weight_y + 550, width=80, height=50)
+        SaveButton["command"] = self.SaveButton_command
+
 
         print("settings command")
+        # intializing values from file
+        try:
+            with open("input.json", "r") as f:
+                if os.path.getsize("input.json") > 0:
+                    for line in f:
+                        print(line)
+        except Exception:
+            pass
 
     def select_R_Button(self):
         print(self.opt_)
@@ -236,6 +330,55 @@ class App:
     def ShowChoice(self):
         print(self)
 
+    def CloseButton_command(self):
+        App._settingsFrame.pack_forget()
+        App._homeFrame.pack(fill="both", expand=True)
+
+    def SaveButton_command(self):
+        # print(self._v_goal.get())
+        goal = self._v_goal.get()
+        # print(self._v_workExp.get())
+        workExp = self._v_workExp.get()
+        # print(self._v_location.get())
+        location = self._v_location.get()
+        # print(self._v_heightEntry.get())
+        height = self._v_heightEntry.get()
+        # print(self._v_weightEntry.get())
+        weight = self._v_weightEntry.get()
+        # print(self._v_timeEntry.get())
+        time = self._v_timeEntry.get()
+        # print(self._v_daysEntry.get())
+        days = self._v_daysEntry.get()
+        if weight=="" or height=="" or time=="" or workExp==0 or location==0 or weight==0 or days=="":
+            print("not valid do not submit try again") 
+        else:
+            f = open("input.txt", 'w')
+            # f.write("goal", ) 
+            
+            """f.write("{")
+            f.write("\"weight\": " + str(weight) + ",")
+            f.write("\"height\": " + str(height) + ",")
+            f.write("\"goal\": " + str(goal)+ ",")
+            f.write("\"experience\": " + str(workExp)+ ",")
+            f.write("\"time_available\": " + str(time)+ ",")
+            f.write("\"location\": " + str(location)+ ",")
+            f.write("\"days_per_week\": " + str(days))
+            f.write("}")
+            f.write(" ")
+            f.close()"""
+            f.write("weight: " + str(weight) + "\n")
+            f.write("height: " + str(height) + "\n")
+            f.write("goal: " + str(goal)+ "\n")
+            f.write("experience: " + str(workExp)+ "\n")
+            f.write("time_available: " + str(time)+ "\n")
+            f.write("location: " + str(location)+ "\n")
+            f.write("days_per_week: " + str(days)+ "\n")
+            f.close()
+            
+
+
+
+            self.CloseButton_command()
 
 
 if __name__ == "__main__":
