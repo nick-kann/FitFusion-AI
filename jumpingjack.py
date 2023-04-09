@@ -18,12 +18,19 @@ def find_angle(a, b, c):
     angle = np.arccos(cosine_angle)
     return np.degrees(angle)
 
-def start():
+
+def start(goal):
     # For webcam input:
     is_up = False
+    is_mid = False
     down_count = 0
     up_count = 0
+    mid_count = 0
     rep_count = 0
+    down_pos = 0
+    mid_pos = 0
+    half_rep = False
+    half_rep_percent = 0
 
     gif = imageio.mimread('./countdown_images/jumpingjacks_visual.gif', memtest=False)
     gif_frame = 0
@@ -123,6 +130,12 @@ def start():
             if start_text_frames >= (fps // 2):
                 start_text_frames = -1
 
+        goal_text = str(goal)
+        text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
+        text_size_x, text_size_y = text_size
+
+        image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
+                            font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
         cv2.imshow('Main image', image)
 
         gif_frame += 1
@@ -155,7 +168,83 @@ def start():
                         print(rep_count)
                     is_up = False
                     up_count = 0
+                    
+        if countdown_complete and start_text_frames != -1:
+            start_text_frames += 1
+            font_scale = 4
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_thickness = 14
+
+            countdown_text = "Start!"
+            text_size, _ = cv2.getTextSize(countdown_text, font, font_scale, font_thickness)
+            text_size_x, text_size_y = text_size
+
+            image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+            if start_text_frames >= (fps // 2):
+                start_text_frames = -1
+
+        if half_rep is True:
+            font_scale = 1
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_thickness = 2
+
+            percent_text = "Half-rep: " + str(round(half_rep_percent, 2)) + "% there"
+            text_size, _ = cv2.getTextSize(percent_text, font, font_scale, font_thickness)
+            text_size_x, text_size_y = text_size
+
+            image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
+                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+
+        cv2.imshow('Main image', image)
+
+        gif_frame += 1
+        if gif_frame >= len(gif):
+            gif_frame = 0
+
+        if results.pose_landmarks is not None and countdown_complete:
+            # Extract pose landmarks
+            landmarks = results.pose_landmarks.landmark
+
+            nose = landmark_coord(landmarks[mp_pose.PoseLandmark.NOSE.value])
+            left_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
+            right_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
+            left_elbow = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value])
+            right_elbow = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
+
+            # print(left_wrist, right_wrist)
+
+            if left_wrist[1] < nose[1] and right_wrist[1] < nose[1]:
+                up_count += 1
+                if up_count > int(fps / 10):
+                    is_up = True
+                    down_count = 0
+
+            if left_wrist[1] > left_elbow[1] and right_wrist[1] > right_elbow[1]:
+                down_count += 1
+                down_pos = max(left_wrist[1], right_wrist[1])
+                if down_count > int(fps / 10):
+                    if is_up is True:
+                        rep_count += 1
+                        print(rep_count)
+                        half_rep = False
+                    if is_up is False and is_mid is True:
+                        half_rep_percent = min(90, (1 - (mid_pos - nose[1]) / (down_pos - nose[1])) * 100)
+                        half_rep = True
+                    is_up = False
+                    up_count = 0
+                    is_mid = False
+                    mid_count = 0
+                    mid_pos = down_pos
+
+            if left_elbow[1] > left_wrist[1] > nose[1] and right_elbow[1] > right_wrist[1] > nose[1]:
+                mid_count += 1
+                mid_pos = min(mid_pos, max(left_wrist[1], right_wrist[1]))
+                if mid_count > int(fps / 5):
+                    is_mid = True
+                    down_count = 0
 
         if cv2.waitKey(5) & 0xFF == 27: # esc to quit
-          break
+            break
     cap.release()
+    cv2.destroyAllWindows()
