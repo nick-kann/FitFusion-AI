@@ -52,7 +52,7 @@ print(my_dict['time_available'])
 print(gym_dict[my_dict['location']])
 """
 
-user_prompt = f"Can you please generate a 4-week, {my_dict['days_per_week']} days per week workout plan for someone whose weight is {my_dict['weight']} pounds, has a height of {my_dict['height']} inches, and whose goal for the workout is {goal_dict[my_dict['goal']]}. They have {experience_dict[my_dict['experience']]} with workouts, with {my_dict['time_available']} hours available per day to workout, and will do the workouts at {gym_dict[my_dict['location']]}. In your answer, format it as a json dict file. Also please specify the day of the week by name."
+user_prompt = f"Can you please generate a 4-week, {my_dict['days_per_week']} days per week workout plan for someone whose weight is {my_dict['weight']} pounds, has a height of {my_dict['height']} inches, and whose goal for the workout is {goal_dict[my_dict['goal']]}. They have {experience_dict[my_dict['experience']]} with workouts, with {my_dict['time_available']} hours available per day to workout, and will do the workouts at {gym_dict[my_dict['location']]}. Please specify the day of the week by name. At the end please give guidance on what types of food to eat and what types of food to avoid. In your answer, format everything as a json dict file."
 
 print(user_prompt)
 

@@ -64,10 +64,91 @@ class App:
         App._homeFrame.pack_forget()
         settingsFrame.pack(fill="both", expand=True)
 
+        WeightEntry=tk.Entry(settingsFrame)
+        WeightEntry["borderwidth"] = "1px"
+        ft = tkFont.Font(family='Times',size=10)
+        WeightEntry["font"] = ft
+        WeightEntry["fg"] = "#333333"
+        WeightEntry["justify"] = "center"
+        WeightEntry.place(x=170,y=50,width=100,height=30)
+
+        WeightLabel=tk.Label(settingsFrame)
+        ft = tkFont.Font(family='Times',size=10)
+        WeightLabel["font"] = ft
+        WeightLabel["fg"] = "#333333"
+        WeightLabel["justify"] = "center"
+        WeightLabel["text"] = "Weight:"
+        WeightLabel.place(x=20,y=50,width=150,height=30)
+
+        HeightEntry=tk.Entry(settingsFrame)
+        HeightEntry["borderwidth"] = "1px"
+        ft = tkFont.Font(family='Times',size=10)
+        HeightEntry["font"] = ft
+        HeightEntry["fg"] = "#333333"
+        HeightEntry["justify"] = "center"
+        HeightEntry.place(x=170,y=120,width=100,height=30)
+
+        HeightLabel=tk.Label(settingsFrame)
+        ft = tkFont.Font(family='Times',size=10)
+        HeightLabel["font"] = ft
+        HeightLabel["fg"] = "#333333"
+        HeightLabel["justify"] = "center"
+        HeightLabel["text"] = "Height:"
+        HeightLabel.place(x=20,y=120,width=150,height=30)
+
+        # r_button_options = {1: "cardio",
+   	    #  2: "muscle toning",
+    	#      3: "ab development",
+        #      4: "bicep muscle development",
+        #      5: "leg muscle development",
+        #      6: "general muscle development"
+        # }
+        languages = [("cardio", 1),
+   	     ("muscle toning", 2),
+    	     ("ab development", 3),
+             ("bicep muscle development", 4),
+             ("leg muscle development", 5),
+             ("general muscle development", 6),
+        ]
+        
+        v = tk.IntVar()
+        v.set(1)  # initializing the choice, i.e. Python
+
+        
+        y = 190
+        for language, val in languages:
+            rb = tk.Radiobutton(settingsFrame, 
+                   text=language,
+                   padx = 20, 
+                   justify='left',
+                   anchor='w',
+                   variable=v,
+                   value=val)
+            rb.pack(anchor=tk.W)   
+            rb.place(x=170, y=y, width = 230, height = 30)
+            y += 30
+        
+        v.set(2)
+
+        GoalLabel=tk.Label(settingsFrame)
+        ft = tkFont.Font(family='Times',size=10)
+        GoalLabel["font"] = ft
+        GoalLabel["fg"] = "#333333"
+        GoalLabel["justify"] = "center"
+        GoalLabel["text"] = "Goal:"
+        GoalLabel.place(x=20,y=190,width=150,height=30)
+
         print("settings command")
+
+    def select_R_Button(self):
+        print(self.opt_)
 
     def DropDownButton_command(self):
         print("command")
+    
+    def ShowChoice(self):
+        print(self)
+
 
 
 if __name__ == "__main__":
