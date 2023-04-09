@@ -4,7 +4,7 @@ import os
 import json
 from tkinter import simpledialog
 from tkinter import ttk
-# import squat
+import customtkinter as ctk
 import situp
 import pushup
 import jumpingjack
@@ -15,10 +15,11 @@ from ask_trainer import initialize
 
 class App:
     saveData = ""
+    ctk.set_default_color_theme("dark-blue")
 
     def __init__(self, root):
         # setting title
-        root.title("undefined")
+        root.title("app name")
         App._root = root
         # setting window size
         App._width = 880
@@ -34,64 +35,91 @@ class App:
 
         homeFrame = tk.Frame(root)
         App._homeFrame = homeFrame
-        homeFrame["bg"] = "#00ffff"
+        homeFrame["bg"] = "#36393e"
         homeFrame.pack(fill="both", expand=True)
 
-        SettingsButton = tk.Button(homeFrame)
-        SettingsButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        SettingsButton["font"] = ft
-        # SettingsButton["fg"] = "#ffffff"
-        SettingsButton["justify"] = "center"
-        SettingsButton["text"] = "Settings"
-        SettingsButton.place(x=App._width-(600 - 530 + 9),
-                             y=10, width=50, height=50)
-        SettingsButton["command"] = self.SettingsButton_command
+        # SettingsButton = tk.Button(homeFrame)
+        # SettingsButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # SettingsButton["font"] = ft
+        # # SettingsButton["fg"] = "#ffffff"
+        # SettingsButton["justify"] = "center"
+        # SettingsButton["text"] = "Settings"
+        # SettingsButton.place(x=App._width-(600 - 530 + 9),
+        #                      y=10, width=50, height=50)
+        # SettingsButton["command"] = self.SettingsButton_command
+
+        settingsButton = ctk.CTkButton(
+            master=homeFrame, corner_radius=8, width=40, height=40, text="Prefs", font=ctk.CTkFont(family='Arial', size=10), anchor="w", command=self.SettingsButton_command)
+        settingsButton.place(
+            x=App._width-(600 - 530), y=13)
+        # settingsButton.pack()
 
         options = ['squat', 'situp', 'pushup', 'jumpingjack']
 
         # create a Combobox widget and add it to the window
-        combo = ttk.Combobox(homeFrame, values=options)
-        combo.place(x=450, y=20, width=30, height=15)
-        combo.pack()
+        # combo = ttk.Combobox(homeFrame, values=options)
+        # combo.place(x=450, y=20, width=30, height=15)
+        # combo.pack()
+        combo = ctk.CTkComboBox(
+            master=homeFrame, values=options, height=15, width=190)
+        combo.place(x=350, y=5)
+
         combo.set(options[0])
-        print(combo.get())
         self.__comboDd__ = combo
-        TrainerButton = tk.Button(homeFrame)
-        TrainerButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        TrainerButton["font"] = ft
-        # SettingsButton["fg"] = "#ffffff"
-        TrainerButton["justify"] = "center"
-        TrainerButton["text"] = "AI Trainer"
-        TrainerButton.place(x=App._width - 130, y=App._height - 85, width=100, height=50)
-        TrainerButton["command"] = self.TrainerButton_command
+        # TrainerButton = tk.Button(homeFrame)
+        # TrainerButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # TrainerButton["font"] = ft
+        # # SettingsButton["fg"] = "#ffffff"
+        # TrainerButton["justify"] = "center"
+        # TrainerButton["text"] = "AI Trainer"
+        # TrainerButton.place(x=App._width - 130,
+        #                     y=App._height - 85, width=100, height=50)
+        # TrainerButton["command"] = self.TrainerButton_command
 
-        DropDownButton = tk.Button(homeFrame)
-        DropDownButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        DropDownButton["font"] = ft
-        # DropDownButton["fg"] = "#ffffff"
-        DropDownButton["justify"] = "center"
-        DropDownButton["text"] = "Start Rep"
-        DropDownButton.place(x=20, y=10, width=100, height=25)
-        DropDownButton["command"] = self.DropDownButton_command
+        TrainerButton = ctk.CTkButton(
+            master=homeFrame, text="AI Trainer", width=100, height=50, command=self.TrainerButton_command)
+        TrainerButton.place(x=App._width - 125,
+                            y=App._height - 60)
 
-        GoalLabel = tk.Label(homeFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        GoalLabel["font"] = ft
-        # GoalLabel["fg"] = "#333333"
-        GoalLabel["justify"] = "center"
-        GoalLabel["text"] = "Goal (# of reps):"
-        GoalLabel.place(x=340, y=30, width=130, height=30)
+        # DropDownButton = tk.Button(homeFrame)
+        # DropDownButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # DropDownButton["font"] = ft
+        # # DropDownButton["fg"] = "#ffffff"
+        # DropDownButton["justify"] = "center"
+        # DropDownButton["text"] = "Start Rep"
+        # DropDownButton.place(x=20, y=10, width=100, height=25)
+        # DropDownButton["command"] = self.DropDownButton_command
 
-        GoalEntry = tk.Entry(homeFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        GoalEntry["borderwidth"] = "1px"
-        GoalEntry["font"] = ft
-        GoalEntry["justify"] = "center"
-        GoalEntry.insert(0, 30)
-        GoalEntry.place(x=470, y=30, width=70, height=30)
+        DropDownButton = ctk.CTkButton(master=homeFrame, text="Start Counting reps!",
+                                       width=175, height=50, command=self.DropDownButton_command, font=ctk.CTkFont(size=14))
+        DropDownButton.place(x=20, y=10)
+
+        # GoalLabel = tk.Label(homeFrame)
+        # ft = tkFont.Font(family='Arial', size=10)
+        # GoalLabel["font"] = ft
+        # # GoalLabel["fg"] = "#333333"
+        # GoalLabel["justify"] = "center"
+        # GoalLabel["text"] = "Goal (# of reps):"
+        # GoalLabel.place(x=340, y=30, width=130, height=30)
+
+        GoalLabel = ctk.CTkLabel(
+            master=homeFrame, text="Goal (# of reps):", width=130, height=30)
+        GoalLabel.place(x=340, y=30)
+
+        # GoalEntry = tk.Entry(homeFrame)
+        # ft = tkFont.Font(family='Arial', size=10)
+        # GoalEntry["borderwidth"] = "1px"
+        # GoalEntry["font"] = ft
+        # GoalEntry["justify"] = "center"
+        # GoalEntry.insert(0, 10)
+        # GoalEntry.place(x=470, y=30, width=70, height=30)
+
+        GoalEntry = ctk.CTkEntry(master=homeFrame, width=70, height=30)
+        GoalEntry.place(x=470, y=30)
+        GoalEntry.insert(0, 10)
 
         App._workout_GoalEntry = GoalEntry
 
@@ -101,7 +129,8 @@ class App:
         # AIMessageBoard["fg"] = "#cec9c3"
         # AIMessageBoard["justify"] = "center"
         # AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        AIMessageBoard.place(x=310, y=70, width=540, height=520)
+        AIMessageBoard.place(
+            x=10, y=70, width=860, height=520)
 
         # Load data from JSON file
         with open("output.json") as f:
@@ -214,7 +243,7 @@ class App:
         # CurrentWorkoutLabel["fg"] = "#cec9c3"
         CurrentWorkoutLabel["justify"] = "center"
         CurrentWorkoutLabel["text"] = "label"
-        CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
+        # CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
 
     def TrainerButton_command(self):
 
@@ -226,37 +255,42 @@ class App:
         FONT_BOLD = "Helvetica 13 bold"
 
         trainerFrame = tk.Frame(App._root)
-        trainerFrame["bg"] = "#20dfff"
+        trainerFrame["bg"] = "#36393e"
         App._homeFrame.pack_forget()
         trainerFrame.pack(fill="both", expand=True)
         App._trainerFrame = trainerFrame
 
-        CloseButton = tk.Button(trainerFrame)
-        CloseButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        CloseButton["font"] = ft
-        # CloseButton["fg"] = "#ffffff"
-        CloseButton["justify"] = "center"
-        CloseButton["text"] = "close"
-        CloseButton.place(x=100, y=600, width=80, height=50)
-        CloseButton["command"] = self.CloseButtonTrainer_command
+        # CloseButton = tk.Button(trainerFrame)
+        # CloseButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # CloseButton["font"] = ft
+        # # CloseButton["fg"] = "#ffffff"
+        # CloseButton["justify"] = "center"
+        # CloseButton["text"] = "close"
+        # CloseButton.place(x=100, y=600, width=80, height=50)
+        # CloseButton["command"] = self.CloseButtonTrainer_command
+        CloseButton = ctk.CTkButton(
+            master=trainerFrame, width=80, height=50, command=self.CloseButtonTrainer_command, text="close")
+        CloseButton.place(x=100, y=600)
 
-        lable1 = tk.Label(trainerFrame, bg=BG_COLOR, fg=TEXT_COLOR, text="Welcome", font=FONT_BOLD, pady=10, width=20, height=1)
-        lable1.place(x=440 - 70/2, y=20, width = 70, height = 30)
+        label1 = ctk.CTkLabel(master=trainerFrame, fg_color=BG_COLOR,
+                              text="Welcome", pady=10, width=20, height=1, corner_radius=9)
+        label1.place(x=440 - 70/2, y=20, )
 
-        txt = tk.Text(trainerFrame, bg=BG_COLOR, fg=TEXT_COLOR, font=FONT, width=60)
-        txt.place(x = 100, y=60, width = 670, height = 540)
+        txt = ctk.CTkTextbox(trainerFrame, fg_color=BG_COLOR,
+                             width=670, height=540, pady=2)
+        txt.place(x=100, y=60)
         App._txt = txt
 
-        send = tk.Button(trainerFrame, text="Send", font=FONT_BOLD, bg=BG_GRAY,
-              command=self.send_command)
-        send.place(x=100+620, y=600, width = 50, height = 50)
+        send = ctk.CTkButton(trainerFrame, text="Send", width=50, height=50, fg_color="#000",
+                             command=self.send_command)
+        send.place(x=100+620, y=600, )
 
-        e = tk.Entry(trainerFrame, bg="#2C3E50", fg=TEXT_COLOR, font=FONT, width=55)
-        e.place(x = 180, y = 600, width=540, height=50)
+        e = ctk.CTkEntry(trainerFrame, fg_color="#2C3E50",
+                         width=540, height=50)
+        e.place(x=180, y=600)
         e.focus()
         App._e = e
-
 
     def send_command(self):
         send = "You -> " + App._e.get()
@@ -288,7 +322,7 @@ class App:
                 my_dict[key] = (int)(value)
 
         settingsFrame = tk.Frame(App._root)
-        settingsFrame["bg"] = "#20dfff"
+        settingsFrame["bg"] = "#36393e"
         App._homeFrame.pack_forget()
         settingsFrame.pack(fill="both", expand=True)
         App._settingsFrame = settingsFrame
@@ -300,50 +334,63 @@ class App:
         generalEntryWidth = 100
         generalHeight = 30
 
-        WeightEntry = tk.Entry(settingsFrame)
-        WeightEntry["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times', size=10)
-        WeightEntry["font"] = ft
-        # WeightEntry["fg"] = "#333333"
-        WeightEntry["justify"] = "center"
-        WeightEntry.place(x=weightEntry_x, y=weight_y,
-                          width=generalEntryWidth, height=generalHeight)
+        # WeightEntry = tk.Entry(settingsFrame)
+        # WeightEntry["borderwidth"] = "1px"
+        # ft = tkFont.Font(family='Times', size=10)
+        # WeightEntry["font"] = ft
+        # # WeightEntry["fg"] = "#333333"
+        # WeightEntry["justify"] = "center"
+        # WeightEntry.place(x=weightEntry_x, y=weight_y,
+        #                   width=generalEntryWidth, height=generalHeight)
+        WeightEntry = ctk.CTkEntry(
+            master=settingsFrame, width=generalEntryWidth, height=generalHeight)
+        WeightEntry.place(x=weightEntry_x, y=weight_y)
+
         if(len(my_dict.keys()) == 7):
             WeightEntry.insert(0, my_dict['weight'])
 
         self._v_weightEntry = WeightEntry
 
-        WeightLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        WeightLabel["font"] = ft
-        # WeightLabel["fg"] = "#333333"
-        WeightLabel["justify"] = "center"
-        WeightLabel["text"] = "Weight:"
-        WeightLabel.place(x=labelEntry_x, y=weight_y,
-                          width=generalLabelWidth, height=generalHeight)
-        WeightEntry.lift()
-        WeightEntry.focus()
+        # WeightLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # WeightLabel["font"] = ft
+        # # WeightLabel["fg"] = "#333333"
+        # WeightLabel["justify"] = "center"
+        # WeightLabel["text"] = "Weight:"
+        # WeightLabel.place(x=labelEntry_x, y=weight_y,
+        #                   width=generalLabelWidth, height=generalHeight)
+        WeightLabel = ctk.CTkLabel(
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Weight: ")
+        WeightLabel.place(x=labelEntry_x, y=weight_y)
+        # WeightEntry.lift()
+        # WeightEntry.focus()
 
-        HeightEntry = tk.Entry(settingsFrame)
-        HeightEntry["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times', size=10)
-        HeightEntry["font"] = ft
-        # HeightEntry["fg"] = "#333333"
-        HeightEntry["justify"] = "center"
-        HeightEntry.place(x=weightEntry_x, y=weight_y + 50,
-                          width=100, height=generalHeight)
+        # HeightEntry = tk.Entry(settingsFrame)
+        # HeightEntry["borderwidth"] = "1px"
+        # ft = tkFont.Font(family='Times', size=10)
+        # HeightEntry["font"] = ft
+        # # HeightEntry["fg"] = "#333333"
+        # HeightEntry["justify"] = "center"
+        # HeightEntry.place(x=weightEntry_x, y=weight_y + 50,
+        #                   width=100, height=generalHeight)
+        HeightEntry = ctk.CTkEntry(
+            master=settingsFrame, width=generalEntryWidth, height=generalHeight)
+        HeightEntry.place(x=weightEntry_x, y=weight_y+50)
         if(len(my_dict.keys()) == 7):
             HeightEntry.insert(0, my_dict['height'])
         self._v_heightEntry = HeightEntry
 
-        HeightLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        HeightLabel["font"] = ft
-        # HeightLabel["fg"] = "#333333"
-        HeightLabel["justify"] = "center"
-        HeightLabel["text"] = "Height:"
-        HeightLabel.place(x=labelEntry_x, y=weight_y + 50,
-                          width=150, height=generalHeight)
+        # HeightLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # HeightLabel["font"] = ft
+        # # HeightLabel["fg"] = "#333333"
+        # HeightLabel["justify"] = "center"
+        # HeightLabel["text"] = "Height:"
+        # HeightLabel.place(x=labelEntry_x, y=weight_y + 50,
+        #                   width=150, height=generalHeight)
+        HeightLabel = ctk.CTkLabel(
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Height: ")
+        HeightLabel.place(x=labelEntry_x, y=weight_y+50)
         HeightEntry.lift()
 
         # r_button_options = {1: "cardio",
@@ -389,21 +436,28 @@ class App:
         if(len(my_dict.keys()) == 7):
             goal_rbuttons[my_dict['goal']-1].select()
 
-        GoalLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        GoalLabel["font"] = ft
-        # GoalLabel["fg"] = "#333333"
-        GoalLabel["justify"] = "center"
-        GoalLabel["text"] = "Goal:"
-        GoalLabel.place(x=labelEntry_x, y=weight_y + 110, width=150, height=90)
+        # GoalLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # GoalLabel["font"] = ft
+        # # GoalLabel["fg"] = "#333333"
+        # GoalLabel["justify"] = "center"
+        # GoalLabel["text"] = "Goal:"
+        # GoalLabel.place(x=labelEntry_x, y=weight_y + 110, width=150, height=90)
 
-        ExpLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        ExpLabel["font"] = ft
-        # ExpLabel["fg"] = "#333333"
-        ExpLabel["justify"] = "center"
-        ExpLabel["text"] = "Workout experience:"
-        ExpLabel.place(x=labelEntry_x, y=weight_y + 220, width=150, height=90)
+        GoalLabel = ctk.CTkLabel(
+            master=settingsFrame, width=150, height=90, bg_color="#262626", corner_radius=19, text="Goal: ")
+        GoalLabel.place(x=labelEntry_x, y=weight_y+110)
+
+        # ExpLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # ExpLabel["font"] = ft
+        # # ExpLabel["fg"] = "#333333"
+        # ExpLabel["justify"] = "center"
+        # ExpLabel["text"] = "Workout experience:"
+        # ExpLabel.place(x=labelEntry_x, y=weight_y + 220, width=150, height=90)
+        ExpLabel = ctk.CTkLabel(
+            master=settingsFrame, width=150, height=90, bg_color="#262626", corner_radius=19, text="Workout experience: ")
+        ExpLabel.place(x=labelEntry_x, y=weight_y+220)
 
         experiences = [("no experience", 1),
                        ("some experience", 2),
@@ -431,27 +485,33 @@ class App:
         if(len(my_dict.keys()) == 7):
             exp_rbuttons[my_dict['experience']-1].select()
 
-        TimeEntry = tk.Entry(settingsFrame)
-        TimeEntry["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times', size=10)
-        TimeEntry["font"] = ft
-        # TimeEntry["fg"] = "#333333"
-        TimeEntry["justify"] = "center"
-        TimeEntry.place(x=weightEntry_x, y=weight_y + 340,
-                        width=generalEntryWidth, height=generalHeight)
+        # TimeEntry = tk.Entry(settingsFrame)
+        # TimeEntry["borderwidth"] = "1px"
+        # ft = tkFont.Font(family='Times', size=10)
+        # TimeEntry["font"] = ft
+        # # TimeEntry["fg"] = "#333333"
+        # TimeEntry["justify"] = "center"
+        # TimeEntry.place(x=weightEntry_x, y=weight_y + 340,
+        #                 width=generalEntryWidth, height=generalHeight)
+        TimeEntry = ctk.CTkEntry(
+            master=settingsFrame, width=generalEntryWidth, height=generalHeight)
+        TimeEntry.place(x=weightEntry_x, y=weight_y+340)
         if(len(my_dict.keys()) == 7):
             TimeEntry.insert(0, my_dict['time_available'])
         self._v_timeEntry = TimeEntry
 
-        TimeLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        TimeLabel["font"] = ft
-        # TimeLabel["fg"] = "#333333"
-        TimeLabel["justify"] = "center"
-        TimeLabel["text"] = "Time:"
-        TimeLabel.place(x=labelEntry_x, y=weight_y + 340,
-                        width=generalLabelWidth, height=generalHeight)
+        # TimeLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # TimeLabel["font"] = ft
+        # # TimeLabel["fg"] = "#333333"
+        # TimeLabel["justify"] = "center"
+        # TimeLabel["text"] = "Time:"
+        # TimeLabel.place(x=labelEntry_x, y=weight_y + 340,
+        #                 width=generalLabelWidth, height=generalHeight)
 
+        TimeLabel = ctk.CTkLabel(
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Time per day: ")
+        TimeLabel.place(x=labelEntry_x, y=weight_y+340)
         locations = [("gym", 1),
                      ("home", 2)
                      ]
@@ -477,58 +537,75 @@ class App:
         if(len(my_dict.keys()) == 7):
             location_rbuttons[my_dict['location']-1].select()
 
-        LocationLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        LocationLabel["font"] = ft
-        # LocationLabel["fg"] = "#333333"
-        LocationLabel["justify"] = "center"
-        LocationLabel["text"] = "Location:"
-        LocationLabel.place(x=labelEntry_x, y=weight_y + 400,
-                            width=generalLabelWidth, height=generalHeight*2)
+        # LocationLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # LocationLabel["font"] = ft
+        # # LocationLabel["fg"] = "#333333"
+        # LocationLabel["justify"] = "center"
+        # LocationLabel["text"] = "Location:"
+        # LocationLabel.place(x=labelEntry_x, y=weight_y + 400,
+        #                     width=generalLabelWidth, height=generalHeight*2)
+        LocationLabel = ctk.CTkLabel(
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight*2, bg_color="#262626", corner_radius=19, text="Location: ")
+        LocationLabel.place(x=labelEntry_x, y=weight_y+400)
 
-        DaysEntry = tk.Entry(settingsFrame)
-        DaysEntry["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times', size=10)
-        DaysEntry["font"] = ft
-        # DaysEntry["fg"] = "#333333"
-        DaysEntry["justify"] = "center"
-        DaysEntry.place(x=weightEntry_x, y=weight_y + 490,
-                        width=generalEntryWidth, height=generalHeight)
+        # DaysEntry = tk.Entry(settingsFrame)
+        # DaysEntry["borderwidth"] = "1px"
+        # ft = tkFont.Font(family='Times', size=10)
+        # DaysEntry["font"] = ft
+        # # DaysEntry["fg"] = "#333333"
+        # DaysEntry["justify"] = "center"
+        # DaysEntry.place(x=weightEntry_x, y=weight_y + 490,
+        #                 width=generalEntryWidth, height=generalHeight)
+        DaysEntry = ctk.CTkEntry(
+            master=settingsFrame, width=generalEntryWidth, height=generalHeight)
+        DaysEntry.place(x=weightEntry_x, y=weight_y+490)
         if(len(my_dict.keys()) == 7):
             DaysEntry.insert(0, my_dict['time_available'])
         self._v_daysEntry = DaysEntry
 
-        DaysLabel = tk.Label(settingsFrame)
-        ft = tkFont.Font(family='Times', size=10)
-        DaysLabel["font"] = ft
-        # DaysLabel["fg"] = "#333333"
-        DaysLabel["justify"] = "center"
-        DaysLabel["text"] = "Days per week:"
-        DaysLabel.place(x=labelEntry_x, y=weight_y + 490,
-                        width=generalLabelWidth, height=generalHeight)
+        # DaysLabel = tk.Label(settingsFrame)
+        # ft = tkFont.Font(family='Times', size=10)
+        # DaysLabel["font"] = ft
+        # # DaysLabel["fg"] = "#333333"
+        # DaysLabel["justify"] = "center"
+        # DaysLabel["text"] = "Days per week:"
+        # DaysLabel.place(x=labelEntry_x, y=weight_y + 490,
+        #                 width=generalLabelWidth, height=generalHeight)
+        DaysLabel = ctk.CTkLabel(
+            master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Days per week: ")
+        DaysLabel.place(x=labelEntry_x, y=weight_y+490)
         DaysEntry.lift()
 
-        CloseButton = tk.Button(settingsFrame)
-        CloseButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        CloseButton["font"] = ft
-        # CloseButton["fg"] = "#ffffff"
-        CloseButton["justify"] = "center"
-        CloseButton["text"] = "close"
-        CloseButton.place(x=labelEntry_x, y=weight_y +
-                          550, width=80, height=50)
-        CloseButton["command"] = self.CloseButton_command
+        # CloseButton = tk.Button(settingsFrame)
+        # CloseButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # CloseButton["font"] = ft
+        # # CloseButton["fg"] = "#ffffff"
+        # CloseButton["justify"] = "center"
+        # CloseButton["text"] = "close"
+        # CloseButton.place(x=labelEntry_x, y=weight_y +
+        #                   550, width=80, height=50)
+        # CloseButton["command"] = self.CloseButton_command
+        CloseButton = ctk.CTkButton(
+            master=settingsFrame, command=self.SaveButton_command, width=100, height=50, text="Close")
+        CloseButton.place(
+            x=labelEntry_x, y=App._height - 60)
 
-        SaveButton = tk.Button(settingsFrame)
-        SaveButton["bg"] = "#6b6b6b"
-        ft = tkFont.Font(family='Arial', size=10)
-        SaveButton["font"] = ft
-        # SaveButton["fg"] = "#ffffff"
-        SaveButton["justify"] = "center"
-        SaveButton["text"] = "save"
-        SaveButton.place(x=App._width - (600 - (labelEntry_x + 340 + 140)),
-                         y=weight_y + 550, width=80, height=50)
-        SaveButton["command"] = self.SaveButton_command
+        # SaveButton = tk.Button(settingsFrame)
+        # SaveButton["bg"] = "#6b6b6b"
+        # ft = tkFont.Font(family='Arial', size=10)
+        # SaveButton["font"] = ft
+        # # SaveButton["fg"] = "#ffffff"
+        # SaveButton["justify"] = "center"
+        # SaveButton["text"] = "save"
+        # SaveButton.place(x=App._width - (600 - (labelEntry_x + 340 + 140)),
+        #                  y=weight_y + 550, width=80, height=50)
+        # SaveButton["command"] = self.SaveButton_command
+        SaveButton = ctk.CTkButton(
+            master=settingsFrame, command=self.SaveButton_command, width=100, height=50, text="Save")
+        SaveButton.place(
+            x=App._width - (600 - (labelEntry_x + 340 + 130)), y=App._height - 60)
 
         WeightEntry.lift()
         HeightEntry.lift()
@@ -571,7 +648,7 @@ class App:
     def CloseButton_command(self):
         App._settingsFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
-    
+
     def CloseButtonTrainer_command(self):
         App._trainerFrame.pack_forget()
         App._homeFrame.pack(fill="both", expand=True)
