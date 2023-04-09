@@ -21,6 +21,7 @@ def find_angle(a, b, c):
 
 def start(goal):
     goal = int(goal)
+    orig_goal = goal
     # For webcam input:
     is_up = False
     is_mid = False
@@ -32,6 +33,7 @@ def start(goal):
     gif = imageio.mimread('./countdown_images/situp_visual.gif', memtest=False)
     gif_frame = 0
     start_text_frames = 0
+    percentage = 0
 
     up_angle = 120
     mid_angle = 160
@@ -89,6 +91,9 @@ def start(goal):
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                                font_scale, (0, 0, 0), font_thickness + 8, cv2.LINE_AA)
+
+            image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
             frames += 1
@@ -111,13 +116,13 @@ def start(goal):
 
             image = cv2.addWeighted(image, 0.5, gif_image, 0.5, 0)
 
-            countdown_text = "Press space to start the countdown"
-            text_size, _ = cv2.getTextSize(countdown_text, cv2.FONT_HERSHEY_SIMPLEX, 1, 3)
+            countdown_text = "Press space to start the countdown!"
+            text_size, _ = cv2.getTextSize(countdown_text, cv2.FONT_HERSHEY_SIMPLEX, 2, 3)
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height - (4 * text_size_y)) // 2),
                                 cv2.FONT_HERSHEY_SIMPLEX,
-                                1, (0, 0, 0), 3, cv2.LINE_AA)
+                                2, (0, 0, 0), 3, cv2.LINE_AA)
 
         if countdown_complete and start_text_frames != -1:
             start_text_frames += 1
@@ -128,7 +133,8 @@ def start(goal):
             countdown_text = "Start!"
             text_size, _ = cv2.getTextSize(countdown_text, font, font_scale, font_thickness)
             text_size_x, text_size_y = text_size
-
+            image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                                font_scale, (0, 0, 0), font_thickness + 8, cv2.LINE_AA)
             image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
             if start_text_frames >= (fps // 2):
@@ -144,28 +150,45 @@ def start(goal):
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
+                                font_scale, (0, 0, 0), font_thickness + 6, cv2.LINE_AA)
+            image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
         if start_countdown:
             font_scale = 2
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_thickness = 10
-            goal_text = "Situps remaining: " + str(goal)
+            goal_text = "Situps remaining: " + str(goal) if goal > 0 else "Goal completed!"
+            if goal < 0:
+                goal_text = goal_text + " (+" + str(-1 * goal) + ")"
             text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
             text_size_x, text_size_y = text_size
 
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                                font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
-
-            font_scale = 2
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            font_thickness = 5
-            text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
-            text_size_x, text_size_y = text_size
+                                font_scale, (0, 0, 0), 7, cv2.LINE_AA)
 
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+                                font_scale, (255, 255, 255), 3, cv2.LINE_AA)
 
+        length = width * 3 / 4 * percentage / 100
+        top_left = (int((width - length) / 2), int(18 / 20 * height))
+        bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
+        color = (0, int(255 * percentage / 100), 0)
+        thickness = -1
+
+        if length > 0:
+            image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
+
+        escape_text = "Hold esc to finish"
+        text_size, _ = cv2.getTextSize(escape_text, cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+        text_size_x, text_size_y = text_size
+
+        image = cv2.putText(image, escape_text, (1, int(1.5 * text_size_y)),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            1, (0, 0, 0), 5, cv2.LINE_AA)
+        image = cv2.putText(image, escape_text, (1, int(1.5 * text_size_y)),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            1, (255, 255, 255), 2, cv2.LINE_AA)
         cv2.imshow('Main image', image)
 
         gif_frame += 2
@@ -194,6 +217,10 @@ def start(goal):
             else:
                 test_angle = right_angle
 
+            percentage = (1 - (test_angle - up_angle) / (down_angle - up_angle)) * 100
+            percentage = max(percentage, 0)
+            percentage = min(percentage, 100)
+
             if test_angle <= up_angle:
                 up_count += 1
                 if up_count >= int(fps / 5):
@@ -205,6 +232,7 @@ def start(goal):
                     if is_up is True:
                         half_rep = False
                         rep_count += 1
+                        goal -= 1
                         print(rep_count)
                     if is_mid is True and is_up is False:
                         half_rep_percent = (1 - (mid_angle - up_angle) / (down_angle - up_angle)) * 100
@@ -225,7 +253,7 @@ def start(goal):
           with open('results.json', 'r') as f:
               data = json.load(f)
               data[1].append(rep_count)
-              data[1].append(goal)
+              data[1].append(orig_goal)
 
           with open('results.json', 'w') as f:
               json.dump(data, f)

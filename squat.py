@@ -26,6 +26,7 @@ def find_angle(a, b, c):
 
 def start(goal):
     goal = int(goal)
+    orig_goal = goal
     # For webcam input:
     is_up = True
     is_mid = False
@@ -34,10 +35,11 @@ def start(goal):
     mid_count = 0
     rep_count = 0
     up_angle = 160
-    up_distance = 1
+    up_distance = -1
     mid_distance = 0
     half_rep = False
     half_rep_percent = 0
+    percentage = 0
 
     gif = imageio.mimread('./countdown_images/squat_visual.gif')
 
@@ -93,11 +95,15 @@ def start(goal):
                 font_thickness = 24
 
                 countdown_text = str(countdown)
-                text_size, _ = cv2.getTextSize(
-                    countdown_text, font, font_scale, font_thickness)
+                text_size, _ = cv2.getTextSize(countdown_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
 
-                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2),
+                                    font,
+                                    font_scale, (0, 0, 0), font_thickness + 8, cv2.LINE_AA)
+
+                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2),
+                                    font,
                                     font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
 
                 frames += 1
@@ -121,14 +127,14 @@ def start(goal):
 
                 image = cv2.addWeighted(image, 0.5, gif_image, 0.5, 0)
 
-                countdown_text = "Press space to start the countdown"
-                text_size, _ = cv2.getTextSize(
-                    countdown_text, cv2.FONT_HERSHEY_SIMPLEX, 1, 3)
+                countdown_text = "Press space to start the countdown!"
+                text_size, _ = cv2.getTextSize(countdown_text, cv2.FONT_HERSHEY_SIMPLEX, 2, 3)
                 text_size_x, text_size_y = text_size
 
-                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height - (4 * text_size_y)) // 2),
+                image = cv2.putText(image, countdown_text,
+                                    ((width - text_size_x) // 2, (height - (4 * text_size_y)) // 2),
                                     cv2.FONT_HERSHEY_SIMPLEX,
-                                    1, (0, 0, 0), 3, cv2.LINE_AA)
+                                    2, (0, 0, 0), 3, cv2.LINE_AA)
 
             if countdown_complete and start_text_frames != -1:
                 start_text_frames += 1
@@ -140,8 +146,11 @@ def start(goal):
                 text_size, _ = cv2.getTextSize(
                     countdown_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
-
-                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2), font,
+                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2),
+                                    font,
+                                    font_scale, (0, 0, 0), font_thickness + 8, cv2.LINE_AA)
+                image = cv2.putText(image, countdown_text, ((width - text_size_x) // 2, (height + text_size_y) // 2),
+                                    font,
                                     font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
                 if start_text_frames >= (fps // 2):
                     start_text_frames = -1
@@ -157,27 +166,45 @@ def start(goal):
                     percent_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
 
+                iimage = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
+                                font_scale, (0, 0, 0), font_thickness + 6, cv2.LINE_AA)
                 image = cv2.putText(image, percent_text, ((width - text_size_x) // 2, (height + text_size_y) // 6), font,
-                                    font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+                                font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
             if start_countdown:
                 font_scale = 2
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 font_thickness = 10
-                goal_text = "Squats remaining: " + str(goal)
+                goal_text = "Squats remaining: " + str(goal) if goal > 0 else "Goal completed!"
+                if goal < 0:
+                    goal_text = goal_text + " +" + str(-1 * goal)
                 text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
                 text_size_x, text_size_y = text_size
 
                 image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                                    font_scale, (0, 0, 0), font_thickness, cv2.LINE_AA)
-
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                font_thickness = 5
-                text_size, _ = cv2.getTextSize(goal_text, font, font_scale, font_thickness)
-                text_size_x, text_size_y = text_size
+                                    font_scale, (0, 0, 0), 7, cv2.LINE_AA)
 
                 image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
-                                    font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+                                    font_scale, (255, 255, 255), 3, cv2.LINE_AA)
 
+            length = width * 3 / 4 * percentage / 100
+            top_left = (int((width - length) / 2), int(18 / 20 * height))
+            bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
+            color = (0, int(255 * percentage / 100), 0)
+            thickness = -1
+
+            if length > 0:
+                image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
+
+            escape_text = "Hold esc to finish"
+            text_size, _ = cv2.getTextSize(escape_text, cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+            text_size_x, text_size_y = text_size
+
+            image = cv2.putText(image, escape_text, (1, int(1.5 * text_size_y)),
+                                cv2.FONT_HERSHEY_SIMPLEX,
+                                1, (0, 0, 0), 5, cv2.LINE_AA)
+            image = cv2.putText(image, escape_text, (1, int(1.5 * text_size_y)),
+                                cv2.FONT_HERSHEY_SIMPLEX,
+                                1, (255, 255, 255), 2, cv2.LINE_AA)
             cv2.imshow('Main image', image)
 
             gif_frame += 0.25
@@ -222,9 +249,11 @@ def start(goal):
 
                 if test_angle >= up_angle:
                     up_count += 1
+                    up_distance = test_knee[1] - test_hip[1]
                     if up_count >= int(fps / 6):
                         if is_up is False:
                             rep_count += 1
+                            goal -= 1
                             print(rep_count)
                             half_rep = False
                         if is_up is True and is_mid is True:
@@ -235,7 +264,6 @@ def start(goal):
                         down_count = 0
                         is_mid = False
                         mid_count = 0
-                        up_distance = test_knee[1] - test_hip[1]
                         mid_distance = up_distance
 
                 if test_angle < up_angle and test_knee[1] > test_hip[1]:
@@ -246,11 +274,15 @@ def start(goal):
                         is_mid = True
                         up_count = 0
 
+                percentage = (1 - ((test_knee[1] - test_hip[1]) / up_distance)) * 100
+                percentage = max(percentage, 0)
+                percentage = min(percentage, 100)
+
             if cv2.waitKey(5) & 0xFF == 27:  # esc to quit
                 with open('results.json', 'r') as f:
                     data = json.load(f)
                     data[1].append(rep_count)
-                    data[1].append(goal)
+                    data[1].append(orig_goal)
 
                 with open('results.json', 'w') as f:
                     json.dump(data, f)
