@@ -26,6 +26,8 @@ def start():
     down_count = 0
     up_count = 0
     rep_count = 0
+    up_angle = 95
+    down_angle = 160
 
 
     gif = imageio.mimread('./countdown_images/pushup_visual.gif')
@@ -163,12 +165,12 @@ def start():
                 test_angle = right_angle
 
 
-            if (test_angle <= 90):
+            if (test_angle <= up_angle):
                 down_count += 1
                 if (down_count >= 4):
                     up_count = 0
                     is_up = False
-            if (test_angle >= 160):
+            if (test_angle >= down_angle):
                 up_count += 1
                 if (up_count >= 4):
                     down_count = 0
