@@ -297,6 +297,9 @@ class App:
         e.focus()
         App._e = e
 
+        scrollbar = Scrollbar(txt)
+        scrollbar.place(relheight=1, relx=0.974)
+
     def send_command(self):
         send = "You -> " + App._e.get()
         App._txt.insert(tk.END, "\n" + send)
