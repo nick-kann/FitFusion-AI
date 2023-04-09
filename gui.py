@@ -46,7 +46,7 @@ class App:
         # SettingsButton["fg"] = "#ffffff"
         TrainerButton["justify"] = "center"
         TrainerButton["text"] = "AI Trainer"
-        TrainerButton.place(x=480, y=600, width=100, height=50)
+        TrainerButton.place(x=App._width - 130, y=App._height - 85, width=100, height=50)
         TrainerButton["command"] = self.TrainerButton_command
 
         DropDownButton = tk.Button(homeFrame)
@@ -65,7 +65,7 @@ class App:
         # AIMessageBoard["fg"] = "#cec9c3"
         # AIMessageBoard["justify"] = "center"
         # AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        AIMessageBoard.place(x=310, y=70, width=540, height=600)
+        AIMessageBoard.place(x=310, y=70, width=540, height=520)
 
         # Load data from JSON file
         with open("output.json") as f:

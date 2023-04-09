@@ -4,7 +4,7 @@ from tkinter import *
 root = Tk()
 root.title("Chatbot")
 
-width = 600
+width = 880
 height = 700
 screenwidth = root.winfo_screenwidth()
 screenheight = root.winfo_screenheight()
