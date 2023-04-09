@@ -29,63 +29,48 @@ With our cutting-edge technology and personalized approach to fitness, FitFusion
 git clone https://github.com/butter-my-toast/yelp-guru/ 
 ```
 <p>
-  <b>2.</b> Start the server and take note of the IP 
+  <b>2.</b> Install the dependencies
 </p>
 
 ```
-cd yelp-guru
-python main.py
+pip install -r requirements.txt
 ```
+
+  <b>3.</b> Then retrieve an API key from [OpenAI](https://platform.openai.com/account/api-keys "OpenAI")
+</p>
 <p>
-  The output should be something similar to the following code segment:
+  <b>4.</b> Finally, you can run the application!
 </p>
 
 ```
- * Serving Flask app 'main' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on all addresses.
-   WARNING: This is a development server. Do not use it in a production deployment.
- * Running on http://10.1.126.35:43/ (Press CTRL+C to quit)
+python gui.py
 ```
-<p>
-  <b>3.</b> Then open a new terminal and navigate back into the yelp-guru directory and modify the HomePage.jsx file located at "pioneerHacksFrontEnd/pioneerHacksFrontEnd/src/components/Homepage/Homepage.jsx".
-  Find the fetch function on line 29 and replace the URL with your server ip given in the previous command.
-  Then navigate to the pioneerHacksFrontEnd/pionerHacksFrontEnd folder and run the following command:
-</p>
-
-```
-npm install
-npm run dev
-```
-<p>
-  And with that, it should all be up and running!
-</p>
 
 ## 🛠️ Technologies used 🛠️
-  Front-end: <b>[React.js](https://github.com/facebook/react/blob/main/LICENSE)</b> \
-  React is used for the entire webview of the project \
+  Computer Vision: <b>[OpenCV](https://github.com/opencv/opencv/blob/4.x/LICENSE)</b> \
+  Infrastructure for computer vision application \
   \
-  Back-end: <b>[Flask](https://github.com/pallets/flask/blob/main/LICENSE.rst "Flask license")</b> \
-  Flask is used to connect our data processing to the front-end \
+  Pose Estimation: <b>[MediaPipe](https://github.com/google/mediapipe/blob/master/LICENSE)</b> \
+  Used to get the specific landmarks on a human body \
   \
-  Inference API: <b>[Hugging Face](https://huggingface.co/ "Hugging Face")</b> \
-  Hugging Face's Inference API was used to quickly access the NLP models without any cost \
+  NLP Model: <b>[OpenAI's GPT3.5-Turbo](https://openai.com/product)</b> \
+  Used for planning workouts and as a personal trainer \
   \
-  Named-entity recognition: <b>[InstaFoodRoBERTa-NER](https://huggingface.co/Dizex/InstaFoodRoBERTa-NER "InstaFoodROBERTa-NER")</b> \
-  Dizex's fine-tuned BERT model was used to recognize the food entities in our Yelp reviews \
+  GIF Reader: <b>[imageio](https://github.com/imageio/imageio/blob/master/LICENSE)</b> \
+  Used to convert GIFs into a list of images  \
   \
-  Aspect-based sentiment analysis: <b>[deberta-v3-large-absa-v1.1](https://huggingface.co/yangheng/deberta-v3-large-absa-v1.1 "deberta-v3-large-absa-v1.1")</b> \
-  Yangheng's ABSA model was used to determine the sentiment of a specific food in a review \
+  Linear Algebra Computation: <b>[numpy](https://github.com/numpy/numpy/blob/main/LICENSE.txt)</b> \
+  Used to perform linear algebra computations behind the scenes for machine learning models and for our rep checker \
   \
-  Food database: <b>[FoodData Central](https://fdc.nal.usda.gov/ "FoodData Central")</b> \
-  The U.S. Department of Agriculture's food database was used to find the calories of foods and determine the health scores for them
+  Frontend: <b>[Tkinter](https://github.com/PacktPublishing/Python-GUI-Programming-with-Tkinter/blob/master/LICENSE)</b> \
+  Used for our frontend framework \
+  \
+  Graphing: <b>[matplotlib](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)</b> \
+  Used to graph the workout progress
   
 
 ## 🧑‍💻 Authors 🧑‍💻
 Alexander S. Du / [@Mantlemoose](https://github.com/Mantlemoose "Mantlemoose's github page") \
-Alex Y. Du / [@alexyd88](https://github.com/alexyd88 "alexyd88's github page") \
+Prarthan Ghosh / [@coder2003lucky](https://github.com/coder2003lucky "coder2003lucky's github page") \
 Eashan Chatterjee / [@EashanC23](https://github.com/EashanC23 "EashanC23's github page") \
 Nicholas Kann / [@butter-my-toast](https://github.com/butter-my-toast "butter-my-toast's github page")
