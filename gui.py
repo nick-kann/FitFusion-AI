@@ -730,15 +730,22 @@ class App:
         CloseButton.place(x=440 - 800/2, y=600, width=80, height=50)
         CloseButton["command"] = self.CloseButtonResults_command
 
-        x_axis = []
-        y_axis = []
+        results_arr = []
+        goals_arr = []
 
 
         for i in range(0, len(data[App._exercise])):
             if(i%2==0):
-                x_axis.append(data[App._exercise][i])
+                results_arr.append(data[App._exercise][i])
             else:
-                y_axis.append(data[App._exercise][i])
+                goals_arr.append(data[App._exercise][i])
+        x_axis = []
+        for i in range(0, len(results_arr)):
+            x_axis.append(i+1)
+
+        y_axis = []
+        for i in range(0, len(results_arr)):
+            y_axis.append(results_arr[i]/goals_arr[i]*100)
 
         #print(len(x_axis))
         #print(x_axis)
@@ -746,10 +753,14 @@ class App:
         exercise_dict = {0: "push-ups", 1: "sit-ups", 2: "jumping jacks", 3: "squats"}
 
         plt.scatter(x_axis, y_axis)
-        plt.xlabel(f"Results (number of reps of {exercise_dict[App._exercise]})")
-        plt.ylabel(f"Goals (number of reps of {exercise_dict[App._exercise]})")
+        plt.xlabel(f"Workout number")
+        plt.ylabel(f"Percent of goal completed")
        
         plt.grid(True)
+        fig, ax = plt.subplots()
+        ax.set_ylim(0, 100)
+
+
         plt.savefig("graph1.png")
 
 
@@ -757,7 +768,7 @@ class App:
         test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
         
 
-        label1 = tk.Label(image=test)
+        label1 = tk.Label(resultsFrame, image=test)
         label1['bg'] = "#333033"
         label1.image = test
 
