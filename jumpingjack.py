@@ -17,12 +17,10 @@ def find_angle(a, b, c):
     return np.degrees(angle)
 
 # For webcam input:
-is_up = True
+is_up = False
 down_count = 0
 up_count = 0
 rep_count = 0
-up_angle = 130
-down_angle = 165
 cap = cv2.VideoCapture(0)
 frame_count = cv2.CAP_PROP_FPS
 with mp_pose.Pose(
@@ -55,36 +53,26 @@ with mp_pose.Pose(
         # Extract pose landmarks
         landmarks = results.pose_landmarks.landmark
 
+        nose = landmark_coord(landmarks[mp_pose.PoseLandmark.NOSE.value])
+        left_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
+        right_wrist = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
         left_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value])
-        left_hip = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
-        left_heel = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_HEEL.value])
-
-        left_angle = find_angle(left_shoulder, left_hip, left_heel)
-
         right_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value])
-        right_hip = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value])
-        right_heel = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_HEEL.value])
 
-        right_angle = find_angle(right_shoulder, right_hip, right_heel)
-
-        if (landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].z < landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].z):
-            test_angle = left_angle
-        else:
-            test_angle = right_angle
-
-        if (test_angle <= up_angle):
+        if (left_wrist[1] > nose[1] and right_wrist[1] > nose[1]):
             up_count += 1
-            if (up_count >= int(frame_count / 2)):
-                if (is_up == False):
-                    rep_count += 1
-                    print(rep_count)
+            if up_count > int(frame_count / 3):
                 is_up = True
                 down_count = 0
-        if (test_angle >= up_angle):
+
+        if (left_wrist[1] < left_shoulder[1] and right_wrist[1] < right_shoulder[1]):
             down_count += 1
-            if (down_count >= int(frame_count / 2)):
+            if down_count > int(frame_count / 3):
+                if (is_up == True):
+                    rep_count += 1
+                    print(rep_count)
                 is_up = False
-            up_count = 0
+                up_count = 0
 
     if cv2.waitKey(5) & 0xFF == 27: # esc to quit
       break
