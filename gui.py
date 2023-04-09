@@ -240,12 +240,12 @@ class App:
 
         Week1Label.grid(row=0, column=0, sticky=tk.W, pady=2)
         Week1Content.grid(row=1, column=0, sticky=tk.W, pady=2)
-        Week2Label.grid(row=2, column=0, sticky=tk.W, pady=2)
-        Week2Content.grid(row=3, column=0, sticky=tk.W, pady=2)
-        Week3Label.grid(row=0, column=1, sticky=tk.W, pady=2)
-        Week3Content.grid(row=1, column=1, sticky=tk.W, pady=2)
-        Week4Label.grid(row=2, column=1, sticky=tk.W, pady=2)
-        Week4Content.grid(row=3, column=1, sticky=tk.W, pady=2)
+        Week2Label.grid(row=0, column=1, sticky=tk.W, pady=2)
+        Week2Content.grid(row=1, column=1, sticky=tk.W, pady=2)
+        Week3Label.grid(row=0, column=2, sticky=tk.W, pady=2)
+        Week3Content.grid(row=1, column=2, sticky=tk.W, pady=2)
+        Week4Label.grid(row=0, column=3, sticky=tk.W, pady=2)
+        Week4Content.grid(row=1, column=3, sticky=tk.W, pady=2)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
