@@ -33,6 +33,7 @@ def start(goal):
     mid_pos = 0
     half_rep = False
     half_rep_percent = 0
+    percentage = 0
 
     gif = imageio.mimread('./countdown_images/jumpingjacks_visual.gif', memtest=False)
     gif_frame = 0
@@ -103,7 +104,7 @@ def start(goal):
                     print(countdown)
                     countdown -= 1
         if not start_countdown:
-            gif_image = cv2.cvtColor(gif[gif_frame], cv2.COLOR_BGR2RGB)
+            gif_image = cv2.cvtColor(gif[int(gif_frame)], cv2.COLOR_BGR2RGB)
 
             gif_image = cv2.resize(gif_image, (image.shape[1], image.shape[0]))
 
@@ -150,6 +151,16 @@ def start(goal):
 
             image = cv2.putText(image, goal_text, ((width - text_size_x) // 2, (height - (2 * text_size_y))), font,
                                 font_scale, (255, 255, 255), font_thickness, cv2.LINE_AA)
+
+        length = width * 3 / 4 * percentage / 100
+        top_left = (int((width - length) / 2), int(18 / 20 * height))
+        bottom_right = (int(width - ((width - length) / 2)), int(19 / 20 * height))
+        color = (0, 255, 0)
+        thickness = -1
+
+        if length > 0:
+            image = cv2.rectangle(image, top_left, bottom_right, color, thickness)
+
         cv2.imshow('Main image', image)
 
         gif_frame += 1
@@ -166,7 +177,7 @@ def start(goal):
             left_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value])
             right_shoulder = landmark_coord(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value])
 
-            print(left_wrist, right_wrist)
+            # print(left_wrist, right_wrist)
 
             if (left_wrist[1] < nose[1] and right_wrist[1] < nose[1]):
                 up_count += 1
@@ -212,7 +223,7 @@ def start(goal):
 
         cv2.imshow('Main image', image)
 
-        gif_frame += 1
+        gif_frame += 0.5
         if gif_frame >= len(gif):
             gif_frame = 0
 
@@ -250,6 +261,10 @@ def start(goal):
                     is_mid = False
                     mid_count = 0
                     mid_pos = down_pos
+
+            percentage = (1 - (max(left_wrist[1], right_wrist[1]) - nose[1]) / (down_pos - nose[1])) * 100
+            percentage = max(percentage, 0)
+            percentage = min(percentage, 100)
 
             if left_elbow[1] > left_wrist[1] > nose[1] and right_elbow[1] > right_wrist[1] > nose[1]:
                 mid_count += 1
