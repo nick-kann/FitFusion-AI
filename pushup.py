@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import imageio
-
+import json
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -241,6 +241,13 @@ def start(goal):
 
 
         if cv2.waitKey(5) & 0xFF == 27: # esc to quit
+          with open('results.json', 'r') as f:
+              data = json.load(f)
+              data[0].append(rep_count)
+              data[0].append(goal)
+
+          with open('results.json', 'w') as f:
+              json.dump(data, f)
           break
     cap.release()
     cv2.destroyAllWindows()
