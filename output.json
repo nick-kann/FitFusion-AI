@@ -1,41 +1,36 @@
 {
-    "personal_info": {
-        "weight": "45 pounds",
-        "height": "45 inches",
-        "goal": "bicep muscle development"
+  "personal_info": {
+    "weight": "2 pounds",
+    "height": "2 inches"
+  },
+  "goal": "cardio",
+  "experience": "extensive",
+  "time_available": "3 hours per day",
+  "location": "home",
+  "workout_plan": {
+    "week_1": {
+      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
+      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
+      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
     },
-    "workout_plan": {
-        "week_1": {
-            "Monday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 10 bicep curls with dumbbells, 3 sets of 10 hammer curls with dumbbells, 3 sets of 10 concentration curls with dumbbells, 10 minutes cool-down (stretching)",
-            "Tuesday": "Rest day",
-            "Wednesday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 10 chin-ups, 3 sets of 10 pull-ups, 3 sets of 10 push-ups, 10 minutes cool-down (stretching)",
-            "Thursday": "Rest day",
-            "Friday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 10 bicep curls with resistance bands, 3 sets of 10 hammer curls with resistance bands, 3 sets of 10 concentration curls with resistance bands, 10 minutes cool-down (stretching)"
-        },
-        "week_2": {
-            "Monday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 12 bicep curls with dumbbells, 3 sets of 12 hammer curls with dumbbells, 3 sets of 12 concentration curls with dumbbells, 10 minutes cool-down (stretching)",
-            "Tuesday": "Rest day",
-            "Wednesday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 12 chin-ups, 3 sets of 12 pull-ups, 3 sets of 12 push-ups, 10 minutes cool-down (stretching)",
-            "Thursday": "Rest day",
-            "Friday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 12 bicep curls with resistance bands, 3 sets of 12 hammer curls with resistance bands, 3 sets of 12 concentration curls with resistance bands, 10 minutes cool-down (stretching)"
-        },
-        "week_3": {
-            "Monday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 15 bicep curls with dumbbells, 3 sets of 15 hammer curls with dumbbells, 3 sets of 15 concentration curls with dumbbells, 10 minutes cool-down (stretching)",
-            "Tuesday": "Rest day",
-            "Wednesday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 15 chin-ups, 3 sets of 15 pull-ups, 3 sets of 15 push-ups, 10 minutes cool-down (stretching)",
-            "Thursday": "Rest day",
-            "Friday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 15 bicep curls with resistance bands, 3 sets of 15 hammer curls with resistance bands, 3 sets of 15 concentration curls with resistance bands, 10 minutes cool-down (stretching)"
-        },
-        "week_4": {
-            "Monday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 18 bicep curls with dumbbells, 3 sets of 18 hammer curls with dumbbells, 3 sets of 18 concentration curls with dumbbells, 10 minutes cool-down (stretching)",
-            "Tuesday": "Rest day",
-            "Wednesday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 18 chin-ups, 3 sets of 18 pull-ups, 3 sets of 18 push-ups, 10 minutes cool-down (stretching)",
-            "Thursday": "Rest day",
-            "Friday": "10 minutes warm-up (jumping jacks, high knees, etc.), 3 sets of 18 bicep curls with resistance bands, 3 sets of 18 hammer curls with resistance bands, 3 sets of 18 concentration curls with resistance bands, 10 minutes cool-down (stretching)"
-        }
+    "week_2": {
+      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
+      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
+      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
     },
-    "diet_plan": {
-        "foods_to_eat": ["lean protein sources (chicken, fish, tofu)", "complex carbohydrates (brown rice, quinoa, sweet potatoes)", "healthy fats (avocado, nuts, olive oil)", "fruits and vegetables"],
-        "foods_to_avoid": ["processed foods", "sugary drinks", "fried foods", "highly processed snacks"]
+    "week_3": {
+      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
+      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
+      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
+    },
+    "week_4": {
+      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
+      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
+      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
     }
+  },
+  "diet_plan": {
+    "foods_to_eat": ["lean proteins such as chicken, fish, and tofu", "complex carbohydrates such as brown rice, quinoa, and sweet potatoes", "fruits and vegetables", "healthy fats such as avocado, nuts, and olive oil"],
+    "foods_to_avoid": ["processed foods", "sugary drinks and snacks", "fried foods", "excessive amounts of red meat"]
+  }
 }
