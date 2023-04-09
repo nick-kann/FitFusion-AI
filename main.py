@@ -9,7 +9,6 @@ root.geometry("500x300")
 def test():
     print("meow")
 
-
 frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
