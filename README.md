@@ -9,13 +9,15 @@ Fitfusion is an AI-powered fitness project that offers a personalized workout sc
 
 
 ## ⚙️ How it Works ⚙️
-This website is designed to help users find the best dishes at their favorite restaurants listed on Yelp. By simply inputting a Yelp restaurant link, our website will scrape all the reviews and analyze them using advanced NLP techniques. Specifically, we use named entity recognition (NER) to identify all food entities mentioned in the reviews. We then process this data on our end to ensure that only actual menu items are considered, eliminating ingredients like soup, broth, or spices that are often mentioned in reviews.
+FitFusion AI is an innovative fitness project that utilizes advanced AI and computer vision technology to help you achieve your fitness goals. The project comprises three main components: personalized workout plan, rep tracker, and personalized fitness trainer.
 
-Once we have a list of actual menu items, we analyze each food's sentiment using aspect-based sentiment analysis (ABSA). This approach enables us to determine how much the reviewer enjoyed each dish and attribute a score to it accordingly. Based on this analysis, we add or subtract points to our scoring algorithm for each dish, which helps us determine the top 3 dishes in terms of user rating.
+To create a personalized workout plan, our AI algorithm analyzes a combination of your inputted characteristics, such as weight, height, fitness level, and workout goals. Based on this analysis, the algorithm generates a customized workout plan tailored to your specific needs.
 
-In addition to user ratings, our website also analyzes food popularity among Yelp users. We use a similar process as above, but instead of sentiment analysis, we focus on the frequency of each food item mentioned in reviews. By doing so, we can determine the top 3 dishes in terms of popularity among users.
+Once you select the workout you want to do, you can move onto our rep tracker. Our rep tracker utilizes OpenCV and MediaPipe Pose Landmark Estimation to track multiple body parts and analyze various distances and angles in three dimensions to ensure that you perform each rep with proper form. After each workout, the number of completed reps is stored and can be viewed in a graph displaying your progress over time.
 
-We also understand the importance of healthy eating, and we've incorporated a health score for each dish using data from a national government database. This allows users to view the health scores for the top 3 dishes determined by our website, making it easier for them to choose the healthiest options available at their favorite restaurants and maintain a balanced diet.
+Lastly, we include a personalized fitness trainer is powered by a customized version of GPT3.5-Turbo that is fine-tuned to provide expert advice on any fitness-related questions you may still have. Whether you need guidance on exercise techniques, nutrition, or workout routines, our AI trainer is there to help.
+
+With our cutting-edge technology and personalized approach to fitness, FitFusion AI is the perfect tool to help you achieve your fitness goals.
 
 ## 🚀 Usage 🚀
 <p> To run this project on your own you must do the following steps 
