@@ -789,7 +789,7 @@ class App:
         # print(x_axis)
 
         fig, ax = plt.subplots()
-        ax.set_ylim(0, 100)
+        ax.set_ylim(0, max(y_axis))
         ax.set_xlim(0, len(results_arr))
         exercise_dict = {0: "push-ups", 1: "sit-ups",
                          2: "jumping jacks", 3: "squats"}
