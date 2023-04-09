@@ -134,10 +134,11 @@ class App:
         # AIMessageBoard["fg"] = "#cec9c3"
         # AIMessageBoard["justify"] = "center"
         # AIMessageBoard["text"] = "AI RECOMANDATION ANALYZATION MEOW"
-        #AIMessageBoard.place(x=10, y=70, width=860, height=520)
+        # AIMessageBoard.place(x=10, y=70, width=860, height=520)
 
         canvas.create_window((0, 0), window=AIMessageBoard, anchor=tk.NW)
-        scrollbar = tk.Scrollbar(homeFrame, orient=tk.VERTICAL, command=canvas.yview)
+        scrollbar = tk.Scrollbar(
+            homeFrame, orient=tk.VERTICAL, command=canvas.yview)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         canvas.configure(yscrollcommand=scrollbar.set)
 
@@ -155,9 +156,9 @@ class App:
 
         # Print the weeks and their workout plans
         # for i, week in enumerate(weeks):
-            #print(f"Week {i+1}:")
+            # print(f"Week {i+1}:")
             # for day, workout in week.items():
-            #print(f"\t{day}: {workout}")
+            # print(f"\t{day}: {workout}")
 
         print(weeks[0]['Monday'])
         week1_days = weeks[0].keys()
@@ -239,12 +240,12 @@ class App:
 
         Week1Label.grid(row=0, column=0, sticky=tk.W, pady=2)
         Week1Content.grid(row=1, column=0, sticky=tk.W, pady=2)
-        Week2Label.grid(row=2, column=0, sticky=tk.W, pady=2)
-        Week2Content.grid(row=3, column=0, sticky=tk.W, pady=2)
-        Week3Label.grid(row=0, column=1, sticky=tk.W, pady=2)
-        Week3Content.grid(row=1, column=1, sticky=tk.W, pady=2)
-        Week4Label.grid(row=2, column=1, sticky=tk.W, pady=2)
-        Week4Content.grid(row=3, column=1, sticky=tk.W, pady=2)
+        Week2Label.grid(row=0, column=1, sticky=tk.W, pady=2)
+        Week2Content.grid(row=1, column=1, sticky=tk.W, pady=2)
+        Week3Label.grid(row=0, column=2, sticky=tk.W, pady=2)
+        Week3Content.grid(row=1, column=2, sticky=tk.W, pady=2)
+        Week4Label.grid(row=0, column=3, sticky=tk.W, pady=2)
+        Week4Content.grid(row=1, column=3, sticky=tk.W, pady=2)
 
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
@@ -703,7 +704,7 @@ class App:
         GoalHeader["font"] = ft
         GoalHeader["justify"] = "left"
         GoalHeader["anchor"] = "w"
-        #GoalHeader["text"] = "Goal: " + str(App._goal_val)
+        # GoalHeader["text"] = "Goal: " + str(App._goal_val)
         GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
         GoalHeader.place(x=20, y=20, width=200, height=30)
 
@@ -712,14 +713,14 @@ class App:
         ResultsHeader["font"] = ft
         ResultsHeader["justify"] = "left"
         ResultsHeader["anchor"] = "w"
-        #ResultsHeader["text"] = "Results:  " + str(App._results_val)
+        # ResultsHeader["text"] = "Results:  " + str(App._results_val)
         ResultsHeader["wraplength"] = 250
         ResultsHeader["text"] = "Results: " + str(results) + " reps."
         ResultsHeader.place(x=20, y=100, width=200, height=30)
 
         message = ""
         if results <= 0.8 * t_goal:
-            #print(results < 0.8 * t_goal)
+            # print(results < 0.8 * t_goal)
             message = "Not quite enough- more work is needed!"
         elif results >= 1.2 * t_goal:
             message = "Nice! You exceeded your goal."
@@ -775,9 +776,8 @@ class App:
 
         print(y_axis)
         print(x_axis)
-        #print(len(x_axis))
-        #print(x_axis)
-
+        # print(len(x_axis))
+        # print(x_axis)
 
         fig, ax = plt.subplots()
         ax.set_ylim(0, 100)
@@ -794,15 +794,11 @@ class App:
 
         plt.savefig("graph1.png")
 
-
         test = ImageTk.PhotoImage(Image.open(
             "graph1.png").resize((450, 400), Image.ANTIALIAS))
 
-
-
-        test = ImageTk.PhotoImage(Image.open("graph1.png").resize((450, 400), Image.ANTIALIAS))
-
-
+        test = ImageTk.PhotoImage(Image.open(
+            "graph1.png").resize((450, 400), Image.ANTIALIAS))
 
         label1 = tk.Label(resultsFrame, image=test)
         label1['bg'] = "#333033"
