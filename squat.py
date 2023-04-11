@@ -281,8 +281,8 @@ def start(goal):
             if cv2.waitKey(5) & 0xFF == 27:  # esc to quit
                 with open('results.json', 'r') as f:
                     data = json.load(f)
-                    data[1].append(rep_count)
-                    data[1].append(orig_goal)
+                    data[3].append(rep_count)
+                    data[3].append(orig_goal)
 
                 with open('results.json', 'w') as f:
                     json.dump(data, f)

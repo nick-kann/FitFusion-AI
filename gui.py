@@ -727,7 +727,6 @@ class App:
         ResultsHeader["text"] = "Results: " + str(results) + " reps."
         ResultsHeader.place(x=20, y=100, width=200, height=30)
 
-        message = ""
         if results <= 0.8 * t_goal:
             # print(results < 0.8 * t_goal)
             message = "Not quite enough- more work is needed!"
@@ -736,27 +735,26 @@ class App:
         else:
             message = "Nice! You met your goal."
 
-        # MessageHeader = tk.Label(ResultsLabel)
-        # ft = tkFont.Font(family='Times', size=20)
-        # MessageHeader["font"] = ft
-        # MessageHeader["justify"] = "left"
-        # MessageHeader["anchor"] = "w"
-        # MessageHeader["text"] = message
-        # MessageHeader["wraplength"] = 250
-        # MessageHeader.place(x=20, y=160, width=300, height=100)
-        ResultsHeader = ctk.CTkLabel(
-            ResultsLabel, width=300, height=100, text=message)
-        ResultsHeader.place(x=20, y=160)
+        messageLabel = tk.Label(resultsFrame)
+        ft = tkFont.Font(family='Times', size=10)
+        messageLabel["font"] = ft
+        # ResultsLabel["fg"] = "#333333"
+        messageLabel["justify"] = "center"
+        messageLabel.place(x=440 - 800 / 2, y=420, width=700, height=100)
 
-        # CloseButton = tk.Button(resultsFrame)
-        # CloseButton["bg"] = "#6b6b6b"
-        # ft = tkFont.Font(family='Arial', size=10)
-        # CloseButton["font"] = ft
-        # # CloseButton["fg"] = "#ffffff"
-        # CloseButton["justify"] = "center"
-        # CloseButton["text"] = "close"
-        # CloseButton.place(x=440 - 800/2, y=600, width=80, height=50)
-        # CloseButton["command"] = self.CloseButtonResults_command
+        resultsMessage = tk.Label(messageLabel)
+        ft = tkFont.Font(family='Times', size=18, weight="bold")
+        resultsMessage["font"] = ft
+        resultsMessage["justify"] = "left"
+        resultsMessage["anchor"] = "w"
+        # GoalHeader["text"] = "Goal: " + str(App._goal_val)
+        resultsMessage["text"] = message
+        resultsMessage.place(x=20, y=20, width=700, height=120)
+
+        # ResultsHeader = ctk.CTkLabel(
+        #     ResultsLabel, width=300, height=100, text=message)
+        # ResultsHeader.place(x=20, y=160)
+
         CloseButton = ctk.CTkButton(
             master=resultsFrame, width=80, height=50, command=self.CloseButtonResults_command, text="close")
         CloseButton.place(x=30, y=app._height - 60)

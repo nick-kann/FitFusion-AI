@@ -35,7 +35,7 @@ def start(goal):
     start_text_frames = 0
     percentage = 0
 
-    up_angle = 120
+    up_angle = 125
     mid_angle = 160
     down_angle = 160
     half_rep = False
@@ -223,12 +223,12 @@ def start(goal):
 
             if test_angle <= up_angle:
                 up_count += 1
-                if up_count >= int(fps / 5):
+                if up_count >= int(fps / 6):
                     is_up = True
                     down_count = 0
             if test_angle >= down_angle:
                 down_count += 1
-                if down_count >= int(fps / 5):
+                if down_count >= int(fps / 6):
                     if is_up is True:
                         half_rep = False
                         rep_count += 1
@@ -245,7 +245,7 @@ def start(goal):
             if up_angle < test_angle < down_angle:
                 mid_count += 1
                 mid_angle = min(mid_angle, test_angle)
-                if mid_count >= int(fps / 5):
+                if mid_count >= int(fps / 6):
                     is_mid = True
                     down_count = 0
 
