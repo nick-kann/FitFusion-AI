@@ -45,7 +45,8 @@ git clone https://github.com/butter-my-toast/la-hacks/
 pip install -r requirements.txt
 ```
 
-  <b>3.</b> Then retrieve an API key from [OpenAI](https://platform.openai.com/account/api-keys "OpenAI")
+  <b>3.</b> Then retrieve an API key from [OpenAI](https://platform.openai.com/account/api-keys "OpenAI") \
+  You will need to update the string in `api_key.py` to match your API key
 </p>
 <p>
   <b>4.</b> Finally, you can run the application!
