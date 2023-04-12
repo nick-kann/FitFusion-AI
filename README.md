@@ -1,6 +1,8 @@
 
 <h1> 💪 FitFusion AI 💪 </h1>
 
+###### This project was made for [Los Altos Hacks VII](https://losaltoshacks7.devpost.com/ "Los Altos Hacks VII"), the largest high school hackathon on the West Coast (425 participants), in less than 24 hours and won [3rd place](https://devpost.com/software/fitfusion-ai "FitFusion AI on DevPost").
+
 ## 📝 Overview 📝
 Fitfusion is an AI-powered fitness project that offers a personalized workout schedule and plan based on your characteristics. To enhance each workout, it provides a tracker that uses computer vision to ensure proper form and keeps a record of your workout results so you can track your progress over time. It also includes a personalized AI trainer to answer your fitness questions. Achieve your fitness goals with our cutting-edge technology.
 
@@ -9,7 +11,10 @@ Fitfusion is an AI-powered fitness project that offers a personalized workout sc
 [**Google Slides**](https://docs.google.com/presentation/d/1OXqh9sOShfV5hX5ayfGW8IWrVRSj2gcLwSxL_Wa3PYU/edit?usp=sharing)
 
 ## 🎬 Demo 🎬 
-https://www.youtube.com/watch?v=HikxNeUNo_g&feature=youtu.be
+
+
+https://user-images.githubusercontent.com/103217739/231323008-a9564b20-c10c-4e42-be3b-b3cc7d2495be.mov
+
 
 
 ## ⚙️ How it Works ⚙️
@@ -40,8 +45,7 @@ git clone https://github.com/butter-my-toast/la-hacks/
 pip install -r requirements.txt
 ```
 
-  <b>3.</b> Then retrieve an API key from [OpenAI](https://platform.openai.com/account/api-keys "OpenAI") \
-  You will need to change the string in `api_key.py` to match your API key
+  <b>3.</b> Then retrieve an API key from [OpenAI](https://platform.openai.com/account/api-keys "OpenAI")
 </p>
 <p>
   <b>4.</b> Finally, you can run the application!
@@ -73,7 +77,7 @@ python gui.py
   
 
 ## 🧑‍💻 Authors 🧑‍💻
-Alexander S. Du / [@Mantlemoose](https://github.com/Mantlemoose "Mantlemoose's github page") 
-Prarthan Ghosh / [@coder2003lucky](https://github.com/coder2003lucky "coder2003lucky's github page") 
-Eashan Chatterjee / [@EashanC23](https://github.com/EashanC23 "EashanC23's github page") 
-Nicholas Kann / [@butter-my-toast](https://github.com/butter-my-toast "butter-my-toast's github page")
+Alexander S. Du / [@Mantlemoose](https://github.com/Mantlemoose "Mantlemoose's github page") \
+Prarthan Ghosh / [@coder2003lucky](https://github.com/coder2003lucky "coder2003lucky's github page") \
+Eashan Chatterjee / [@EashanC23](https://github.com/EashanC23 "EashanC23's github page") \
+Nicholas Kann / [@butter-my-toast](https://github.com/butter-my-toast "butter-my-toast's github page") 
