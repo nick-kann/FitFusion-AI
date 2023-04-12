@@ -1,36 +1,35 @@
 {
-  "personal_info": {
-    "weight": "2 pounds",
-    "height": "2 inches"
-  },
-  "goal": "cardio",
-  "experience": "extensive",
-  "time_available": "3 hours per day",
-  "location": "home",
-  "workout_plan": {
-    "week_1": {
-      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
-      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
-      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
+    "personal_info": {
+        "weight": "130 pounds",
+        "height": "5 inches"
     },
-    "week_2": {
-      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
-      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
-      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
+    "goal": "ab development",
+    "experience": "some experience",
+    "time_available": "3 hours per day",
+    "workout_plan": {
+        "week_1": {
+            "Monday": "20 minutes of cardio, 3 sets of 15 crunches, 3 sets of 15 leg raises, 3 sets of 15 Russian twists",
+            "Wednesday": "20 minutes of cardio, 3 sets of 15 bicycle crunches, 3 sets of 15 reverse crunches, 3 sets of 15 plank jacks",
+            "Friday": "20 minutes of cardio, 3 sets of 15 mountain climbers, 3 sets of 15 side plank dips, 3 sets of 15 flutter kicks"
+        },
+        "week_2": {
+            "Monday": "20 minutes of cardio, 3 sets of 20 crunches, 3 sets of 20 leg raises, 3 sets of 20 Russian twists",
+            "Wednesday": "20 minutes of cardio, 3 sets of 20 bicycle crunches, 3 sets of 20 reverse crunches, 3 sets of 20 plank jacks",
+            "Friday": "20 minutes of cardio, 3 sets of 20 mountain climbers, 3 sets of 20 side plank dips, 3 sets of 20 flutter kicks"
+        },
+        "week_3": {
+            "Monday": "20 minutes of cardio, 3 sets of 25 crunches, 3 sets of 25 leg raises, 3 sets of 25 Russian twists",
+            "Wednesday": "20 minutes of cardio, 3 sets of 25 bicycle crunches, 3 sets of 25 reverse crunches, 3 sets of 25 plank jacks",
+            "Friday": "20 minutes of cardio, 3 sets of 25 mountain climbers, 3 sets of 25 side plank dips, 3 sets of 25 flutter kicks"
+        },
+        "week_4": {
+            "Monday": "20 minutes of cardio, 3 sets of 30 crunches, 3 sets of 30 leg raises, 3 sets of 30 Russian twists",
+            "Wednesday": "20 minutes of cardio, 3 sets of 30 bicycle crunches, 3 sets of 30 reverse crunches, 3 sets of 30 plank jacks",
+            "Friday": "20 minutes of cardio, 3 sets of 30 mountain climbers, 3 sets of 30 side plank dips, 3 sets of 30 flutter kicks"
+        }
     },
-    "week_3": {
-      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
-      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
-      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
-    },
-    "week_4": {
-      "Monday": "30 minutes of jumping jacks, 30 minutes of high knees, 30 minutes of jump rope",
-      "Wednesday": "30 minutes of burpees, 30 minutes of mountain climbers, 30 minutes of jumping lunges",
-      "Friday": "30 minutes of stair running, 30 minutes of jumping squats, 30 minutes of box jumps"
+    "food_guide": {
+        "foods_to_eat": ["lean protein sources such as chicken, fish, and tofu", "fruits and vegetables", "whole grains", "healthy fats such as avocado and nuts"],
+        "foods_to_avoid": ["processed foods", "sugary drinks", "fried foods", "excessive amounts of alcohol"]
     }
-  },
-  "food_recommendations": {
-    "eat": ["lean protein", "fruits and vegetables", "whole grains", "healthy fats"],
-    "avoid": ["processed foods", "sugary drinks", "highly refined carbohydrates", "trans fats"]
-  }
 }

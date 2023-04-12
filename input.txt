@@ -1,7 +1,7 @@
-weight: 2
-height: 2
-goal: 2
-experience: 3
+weight: 130
+height: 5
+goal: 3
+experience: 2
 time_available: 3
 location: 2
 days_per_week: 3

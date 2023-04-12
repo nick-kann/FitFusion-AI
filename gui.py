@@ -23,7 +23,7 @@ class App:
 
     def __init__(self, root):
         # setting title
-        root.title("app name")
+        root.title("FitFusion AI")
         App._root = root
         # setting window size
         App._width = 880
@@ -156,12 +156,6 @@ class App:
                 week[day_key] = workout
             weeks.append(week)
 
-        # Print the weeks and their workout plans
-        # for i, week in enumerate(weeks):
-            # print(f"Week {i+1}:")
-            # for day, workout in week.items():
-            # print(f"\t{day}: {workout}")
-
         print(weeks[0]['Monday'])
         App._week1_days = weeks[0].keys()
         App._week2_days = weeks[1].keys()
@@ -260,17 +254,11 @@ class App:
         CurrentWorkoutLabel = tk.Label(homeFrame)
         ft = tkFont.Font(family='Arial', size=10)
         CurrentWorkoutLabel["font"] = ft
-        # CurrentWorkoutLabel["fg"] = "#cec9c3"
         CurrentWorkoutLabel["justify"] = "center"
         CurrentWorkoutLabel["text"] = "label"
 
         AIMessageBoard.update_idletasks()
         canvas.configure(scrollregion=canvas.bbox("all"))
-
-        # CurrentWorkoutLabel.place(x=20, y=60, width=68, height=363)
-
-        # DELETE
-        # self.ShowResultsPage()
 
     def TrainerButton_command(self):
 
@@ -287,15 +275,6 @@ class App:
         trainerFrame.pack(fill="both", expand=True)
         App._trainerFrame = trainerFrame
 
-        # CloseButton = tk.Button(trainerFrame)
-        # CloseButton["bg"] = "#6b6b6b"
-        # ft = tkFont.Font(family='Arial', size=10)
-        # CloseButton["font"] = ft
-        # # CloseButton["fg"] = "#ffffff"
-        # CloseButton["justify"] = "center"
-        # CloseButton["text"] = "close"
-        # CloseButton.place(x=100, y=600, width=80, height=50)
-        # CloseButton["command"] = self.CloseButtonTrainer_command
         CloseButton = ctk.CTkButton(
             master=trainerFrame, width=80, height=50, command=self.CloseButtonTrainer_command, text="close")
         CloseButton.place(x=100, y=600)
@@ -339,16 +318,12 @@ class App:
     def SettingsButton_command(self):
 
         with open('input.txt', 'r') as f:
-            # Initialize an empty dictionary
             my_dict = {}
 
-            # Iterate over each line in the file
             for line in f:
-                # Split the line into key and value pairs
 
                 key, value = line.strip().split(': ')
 
-                # Add the key-value pair to the dictionary
                 my_dict[key] = (int)(value)
 
         settingsFrame = tk.Frame(App._root)
@@ -364,14 +339,6 @@ class App:
         generalEntryWidth = 100
         generalHeight = 30
 
-        # WeightEntry = tk.Entry(settingsFrame)
-        # WeightEntry["borderwidth"] = "1px"
-        # ft = tkFont.Font(family='Times', size=10)
-        # WeightEntry["font"] = ft
-        # # WeightEntry["fg"] = "#333333"
-        # WeightEntry["justify"] = "center"
-        # WeightEntry.place(x=weightEntry_x, y=weight_y,
-        #                   width=generalEntryWidth, height=generalHeight)
         WeightEntry = ctk.CTkEntry(
             master=settingsFrame, width=generalEntryWidth, height=generalHeight)
         WeightEntry.place(x=weightEntry_x, y=weight_y)
@@ -381,28 +348,11 @@ class App:
 
         self._v_weightEntry = WeightEntry
 
-        # WeightLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # WeightLabel["font"] = ft
-        # # WeightLabel["fg"] = "#333333"
-        # WeightLabel["justify"] = "center"
-        # WeightLabel["text"] = "Weight:"
-        # WeightLabel.place(x=labelEntry_x, y=weight_y,
-        #                   width=generalLabelWidth, height=generalHeight)
+
         WeightLabel = ctk.CTkLabel(
             master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Weight (lbs): ")
         WeightLabel.place(x=labelEntry_x, y=weight_y)
-        # WeightEntry.lift()
-        # WeightEntry.focus()
 
-        # HeightEntry = tk.Entry(settingsFrame)
-        # HeightEntry["borderwidth"] = "1px"
-        # ft = tkFont.Font(family='Times', size=10)
-        # HeightEntry["font"] = ft
-        # # HeightEntry["fg"] = "#333333"
-        # HeightEntry["justify"] = "center"
-        # HeightEntry.place(x=weightEntry_x, y=weight_y + 50,
-        #                   width=100, height=generalHeight)
         HeightEntry = ctk.CTkEntry(
             master=settingsFrame, width=generalEntryWidth, height=generalHeight)
         HeightEntry.place(x=weightEntry_x, y=weight_y+50)
@@ -410,26 +360,11 @@ class App:
             HeightEntry.insert(0, my_dict['height'])
         self._v_heightEntry = HeightEntry
 
-        # HeightLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # HeightLabel["font"] = ft
-        # # HeightLabel["fg"] = "#333333"
-        # HeightLabel["justify"] = "center"
-        # HeightLabel["text"] = "Height:"
-        # HeightLabel.place(x=labelEntry_x, y=weight_y + 50,
-        #                   width=150, height=generalHeight)
         HeightLabel = ctk.CTkLabel(
             master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Height (ft): ")
         HeightLabel.place(x=labelEntry_x, y=weight_y+50)
         HeightEntry.lift()
 
-        # r_button_options = {1: "cardio",
-        #  2: "muscle toning",
-        #      3: "ab development",
-        #      4: "bicep muscle development",
-        #      5: "leg muscle development",
-        #      6: "general muscle development"
-        # }
         languages = [("cardio", 1),
                      ("muscle toning", 2),
                      ("ab development", 3),
@@ -466,25 +401,12 @@ class App:
         if(len(my_dict.keys()) == 7):
             goal_rbuttons[my_dict['goal']-1].select()
 
-        # GoalLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # GoalLabel["font"] = ft
-        # # GoalLabel["fg"] = "#333333"
-        # GoalLabel["justify"] = "center"
-        # GoalLabel["text"] = "Goal:"
-        # GoalLabel.place(x=labelEntry_x, y=weight_y + 110, width=150, height=90)
 
         GoalLabel = ctk.CTkLabel(
             master=settingsFrame, width=150, height=90, bg_color="#262626", corner_radius=19, text="Goal: ")
         GoalLabel.place(x=labelEntry_x, y=weight_y+110)
 
-        # ExpLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # ExpLabel["font"] = ft
-        # # ExpLabel["fg"] = "#333333"
-        # ExpLabel["justify"] = "center"
-        # ExpLabel["text"] = "Workout experience:"
-        # ExpLabel.place(x=labelEntry_x, y=weight_y + 220, width=150, height=90)
+
         ExpLabel = ctk.CTkLabel(
             master=settingsFrame, width=150, height=90, bg_color="#262626", corner_radius=19, text="Workout experience: ")
         ExpLabel.place(x=labelEntry_x, y=weight_y+220)
@@ -515,14 +437,6 @@ class App:
         if(len(my_dict.keys()) == 7):
             exp_rbuttons[my_dict['experience']-1].select()
 
-        # TimeEntry = tk.Entry(settingsFrame)
-        # TimeEntry["borderwidth"] = "1px"
-        # ft = tkFont.Font(family='Times', size=10)
-        # TimeEntry["font"] = ft
-        # # TimeEntry["fg"] = "#333333"
-        # TimeEntry["justify"] = "center"
-        # TimeEntry.place(x=weightEntry_x, y=weight_y + 340,
-        #                 width=generalEntryWidth, height=generalHeight)
         TimeEntry = ctk.CTkEntry(
             master=settingsFrame, width=generalEntryWidth, height=generalHeight)
         TimeEntry.place(x=weightEntry_x, y=weight_y+340)
@@ -530,14 +444,6 @@ class App:
             TimeEntry.insert(0, my_dict['time_available'])
         self._v_timeEntry = TimeEntry
 
-        # TimeLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # TimeLabel["font"] = ft
-        # # TimeLabel["fg"] = "#333333"
-        # TimeLabel["justify"] = "center"
-        # TimeLabel["text"] = "Time:"
-        # TimeLabel.place(x=labelEntry_x, y=weight_y + 340,
-        #                 width=generalLabelWidth, height=generalHeight)
 
         TimeLabel = ctk.CTkLabel(
             master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Time per day (hrs): ")
@@ -567,26 +473,10 @@ class App:
         if(len(my_dict.keys()) == 7):
             location_rbuttons[my_dict['location']-1].select()
 
-        # LocationLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # LocationLabel["font"] = ft
-        # # LocationLabel["fg"] = "#333333"
-        # LocationLabel["justify"] = "center"
-        # LocationLabel["text"] = "Location:"
-        # LocationLabel.place(x=labelEntry_x, y=weight_y + 400,
-        #                     width=generalLabelWidth, height=generalHeight*2)
         LocationLabel = ctk.CTkLabel(
             master=settingsFrame, width=generalLabelWidth, height=generalHeight*2, bg_color="#262626", corner_radius=19, text="Location: ")
         LocationLabel.place(x=labelEntry_x, y=weight_y+400)
 
-        # DaysEntry = tk.Entry(settingsFrame)
-        # DaysEntry["borderwidth"] = "1px"
-        # ft = tkFont.Font(family='Times', size=10)
-        # DaysEntry["font"] = ft
-        # # DaysEntry["fg"] = "#333333"
-        # DaysEntry["justify"] = "center"
-        # DaysEntry.place(x=weightEntry_x, y=weight_y + 490,
-        #                 width=generalEntryWidth, height=generalHeight)
         DaysEntry = ctk.CTkEntry(
             master=settingsFrame, width=generalEntryWidth, height=generalHeight)
         DaysEntry.place(x=weightEntry_x, y=weight_y+490)
@@ -594,44 +484,16 @@ class App:
             DaysEntry.insert(0, my_dict['time_available'])
         self._v_daysEntry = DaysEntry
 
-        # DaysLabel = tk.Label(settingsFrame)
-        # ft = tkFont.Font(family='Times', size=10)
-        # DaysLabel["font"] = ft
-        # # DaysLabel["fg"] = "#333333"
-        # DaysLabel["justify"] = "center"
-        # DaysLabel["text"] = "Days per week:"
-        # DaysLabel.place(x=labelEntry_x, y=weight_y + 490,
-        #                 width=generalLabelWidth, height=generalHeight)
         DaysLabel = ctk.CTkLabel(
             master=settingsFrame, width=generalLabelWidth, height=generalHeight, bg_color="#262626", corner_radius=19, text="Max days per week: ")
         DaysLabel.place(x=labelEntry_x, y=weight_y+490)
         DaysEntry.lift()
 
-        # CloseButton = tk.Button(settingsFrame)
-        # CloseButton["bg"] = "#6b6b6b"
-        # ft = tkFont.Font(family='Arial', size=10)
-        # CloseButton["font"] = ft
-        # # CloseButton["fg"] = "#ffffff"
-        # CloseButton["justify"] = "center"
-        # CloseButton["text"] = "close"
-        # CloseButton.place(x=labelEntry_x, y=weight_y +
-        #                   550, width=80, height=50)
-        # CloseButton["command"] = self.CloseButton_command
         CloseButton = ctk.CTkButton(
             master=settingsFrame, command=self.SaveButton_command, width=100, height=50, text="Close")
         CloseButton.place(
             x=labelEntry_x, y=App._height - 60)
 
-        # SaveButton = tk.Button(settingsFrame)
-        # SaveButton["bg"] = "#6b6b6b"
-        # ft = tkFont.Font(family='Arial', size=10)
-        # SaveButton["font"] = ft
-        # # SaveButton["fg"] = "#ffffff"
-        # SaveButton["justify"] = "center"
-        # SaveButton["text"] = "save"
-        # SaveButton.place(x=App._width - (600 - (labelEntry_x + 340 + 140)),
-        #                  y=weight_y + 550, width=80, height=50)
-        # SaveButton["command"] = self.SaveButton_command
         SaveButton = ctk.CTkButton(
             master=settingsFrame, command=self.SaveButton_command, width=100, height=50, text="Save")
         SaveButton.place(
@@ -698,7 +560,6 @@ class App:
         ResultsLabel["justify"] = "center"
         ResultsLabel.place(x=440 - 800/2, y=20, width=800, height=560)
 
-        # results, goal
         with open('results.json', 'r') as f:
             data = json.load(f)
 
@@ -713,7 +574,6 @@ class App:
         GoalHeader["font"] = ft
         GoalHeader["justify"] = "left"
         GoalHeader["anchor"] = "w"
-        # GoalHeader["text"] = "Goal: " + str(App._goal_val)
         GoalHeader["text"] = "Goal: " + str(t_goal) + " reps."
         GoalHeader.place(x=20, y=20, width=200, height=30)
 
@@ -722,13 +582,11 @@ class App:
         ResultsHeader["font"] = ft
         ResultsHeader["justify"] = "left"
         ResultsHeader["anchor"] = "w"
-        # ResultsHeader["text"] = "Results:  " + str(App._results_val)
         ResultsHeader["wraplength"] = 250
         ResultsHeader["text"] = "Results: " + str(results) + " reps."
         ResultsHeader.place(x=20, y=100, width=200, height=30)
 
         if results <= 0.8 * t_goal:
-            # print(results < 0.8 * t_goal)
             message = "Not quite enough- more work is needed!"
         elif results >= 1.2 * t_goal:
             message = "Nice! You exceeded your goal."
@@ -738,7 +596,6 @@ class App:
         messageLabel = tk.Label(resultsFrame)
         ft = tkFont.Font(family='Times', size=10)
         messageLabel["font"] = ft
-        # ResultsLabel["fg"] = "#333333"
         messageLabel["justify"] = "center"
         messageLabel.place(x=440 - 800 / 2, y=420, width=700, height=100)
 
@@ -747,13 +604,8 @@ class App:
         resultsMessage["font"] = ft
         resultsMessage["justify"] = "left"
         resultsMessage["anchor"] = "w"
-        # GoalHeader["text"] = "Goal: " + str(App._goal_val)
         resultsMessage["text"] = message
         resultsMessage.place(x=20, y=20, width=700, height=120)
-
-        # ResultsHeader = ctk.CTkLabel(
-        #     ResultsLabel, width=300, height=100, text=message)
-        # ResultsHeader.place(x=20, y=160)
 
         CloseButton = ctk.CTkButton(
             master=resultsFrame, width=80, height=50, command=self.CloseButtonResults_command, text="close")
@@ -775,17 +627,11 @@ class App:
         for i in range(0, len(results_arr)):
             y_axis.append(results_arr[i]/goals_arr[i]*100)
 
-        # print(len(x_axis))
-        # print(x_axis)
-
         exercise_dict = {0: "push-ups", 1: "sit-ups",
                          2: "jumping jacks", 3: "squats"}
 
         print(y_axis)
         print(x_axis)
-        # print(len(x_axis))
-        # print(x_axis)
-        # asdf
         fig, ax = plt.subplots()
         ax.set_ylim(0, max(y_axis))
         ax.set_xlim(0, len(results_arr))
@@ -811,7 +657,6 @@ class App:
         label1['bg'] = "#333033"
         label1.image = test
 
-        # Position image
         label1.place(x=350, y=40)
 
     def CloseButton_command(self):
@@ -827,19 +672,12 @@ class App:
         App._homeFrame.pack(fill="both", expand=True)
 
     def SaveButton_command(self):
-        # print(self._v_goal.get())
         goal = self._v_goal.get()
-        # print(self._v_workExp.get())
         workExp = self._v_workExp.get()
-        # print(self._v_location.get())
         location = self._v_location.get()
-        # print(self._v_heightEntry.get())
         height = self._v_heightEntry.get()
-        # print(self._v_weightEntry.get())
         weight = self._v_weightEntry.get()
-        # print(self._v_timeEntry.get())
         time = self._v_timeEntry.get()
-        # print(self._v_daysEntry.get())
         days = self._v_daysEntry.get()
         if weight == "" or height == "" or time == "" or workExp == 0 or location == 0 or weight == 0 or days == "":
             print("not valid do not submit try again")
@@ -905,8 +743,6 @@ class App:
                 ind += 1
             
             self.CloseButton_command()
-
-            
 
 
 if __name__ == "__main__":

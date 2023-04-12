@@ -42,6 +42,7 @@ def start(goal):
 
     cap = cv2.VideoCapture(0)
 
+
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     print(cv2.CAP_PROP_FPS)
@@ -67,6 +68,7 @@ def start(goal):
         # pass by reference.
         image.flags.writeable = False
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = cv2.flip(image, 1)
         results = pose.process(image)
 
         if cv2.waitKey(1) == ord(' '):
@@ -81,7 +83,7 @@ def start(goal):
             mp_pose.POSE_CONNECTIONS,
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
 
-        cv2.flip(image, 1)
+
         if start_countdown and not countdown_complete:
             font_scale = 7
             font = cv2.FONT_HERSHEY_SIMPLEX

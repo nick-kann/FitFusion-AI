@@ -18,7 +18,6 @@ def getResponse(user_prompt):
     )
 
     return response['choices'][0]['message']['content']
-    # print("Response {}: {}".format(i+1, response['choices'][0]['message']['content']))
 
 def initialize(question):
     user_prompt = "You are to act as my personal trainer. I will ask you a question about fitness and exercise, and you will respond with a helpful answer. If my question is not about fitness and exercise, you will respond with \"As your personal trainer, I can only answer your fitness related questions.\" Limit your response to 2 to 3 sentences. The question is: " + question
