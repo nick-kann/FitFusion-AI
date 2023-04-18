@@ -57,23 +57,25 @@ python gui.py
 ```
 
 ## 🛠️ Technologies used 🛠️
-  Computer Vision: <b>[OpenCV](https://github.com/opencv/opencv/blob/4.x/LICENSE)</b> 
+  Computer Vision: <b>[OpenCV](https://github.com/opencv/opencv/blob/4.x/LICENSE)</b> \
   Infrastructure for computer vision application 
   
-  Pose Estimation: <b>[MediaPipe](https://github.com/google/mediapipe/blob/master/LICENSE)</b> 
+  Pose Estimation: <b>[MediaPipe](https://github.com/google/mediapipe/blob/master/LICENSE)</b> \
   Used to get the specific landmarks on a human body 
   
-  NLP Model: <b>[OpenAI's GPT3.5-Turbo](https://openai.com/product)</b> 
+  NLP Model: <b>[OpenAI's GPT3.5-Turbo](https://openai.com/product)</b> \
   Used for planning workouts and as a personal trainer 
   
-  GIF Reader: <b>[imageio](https://github.com/imageio/imageio/blob/master/LICENSE)</b> 
+  GIF Reader: <b>[imageio](https://github.com/imageio/imageio/blob/master/LICENSE)</b> \
   Used to convert GIFs into a list of images  
   
-  Linear Algebra Computation: <b>[numpy](https://github.com/numpy/numpy/blob/main/LICENSE.txt)</b> 
+  Linear Algebra Computation: <b>[numpy](https://github.com/numpy/numpy/blob/main/LICENSE.txt)</b> \
   Used to perform linear algebra computations behind the scenes for machine learning models and for our rep checker 
-  Frontend: <b>[Tkinter](https://github.com/PacktPublishing/Python-GUI-Programming-with-Tkinter/blob/master/LICENSE)</b> 
+  
+  Frontend: <b>[Tkinter](https://github.com/PacktPublishing/Python-GUI-Programming-with-Tkinter/blob/master/LICENSE)</b> \
   Used for our frontend framework 
-  Graphing: <b>[matplotlib](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)</b> 
+  
+  Graphing: <b>[matplotlib](https://github.com/matplotlib/matplotlib/blob/main/LICENSE/LICENSE)</b> \
   Used to graph the workout progress
   
 
