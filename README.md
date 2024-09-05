@@ -4,7 +4,7 @@
 ###### This project was made for [Los Altos Hacks VII](https://losaltoshacks7.devpost.com/ "Los Altos Hacks VII"), the largest high school hackathon in the world (425 participants), in less than 24 hours and won [3rd place](https://devpost.com/software/fitfusion-ai "FitFusion AI on DevPost").
 
 ## 📝 Overview 📝
-Fitfusion is an AI-powered fitness project that offers a personalized workout schedule and plan based on your characteristics. To enhance each workout, it provides a tracker that uses computer vision to ensure proper form and keeps a record of your workout results so you can track your progress over time. It also includes a personalized AI trainer to answer your fitness questions. Achieve your fitness goals with our cutting-edge technology.
+FitFusion AI is an AI-powered fitness project that offers a personalized workout schedule and plan based on your characteristics. To enhance each workout, it provides a tracker that uses computer vision to ensure proper form and keeps a record of your workout results so you can track your progress over time. It also includes a personalized AI trainer to answer your fitness questions. Achieve your fitness goals with our cutting-edge technology.
 
 ## 🎯 Initiative 🎯
 
